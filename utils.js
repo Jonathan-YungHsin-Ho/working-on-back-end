@@ -33,7 +33,7 @@ function generateToken(user) {
 }
 
 function getUserID(context) {
-	const Authorization = context.request.get('Authorization');
+	const Authorization = context.req.get('Authorization');
 
 	if (Authorization) {
 		const token = Authorization.replace('Bearer ', '');

@@ -268,6 +268,8 @@ export type ProjectOrderByInput =
   | "wantAssistance_DESC"
   | "deploymentURL_ASC"
   | "deploymentURL_DESC"
+  | "designURL_ASC"
+  | "designURL_DESC"
   | "frontEndRepoURL_ASC"
   | "frontEndRepoURL_DESC"
   | "backEndRepoURL_ASC"
@@ -462,6 +464,7 @@ export interface ProjectUpdateWithoutPostedByDataInput {
   wantFeedback?: Maybe<Boolean>;
   wantAssistance?: Maybe<Boolean>;
   deploymentURL?: Maybe<String>;
+  designURL?: Maybe<String>;
   frontEndRepoURL?: Maybe<String>;
   backEndRepoURL?: Maybe<String>;
   likes?: Maybe<LikeUpdateManyWithoutProjectInput>;
@@ -768,6 +771,7 @@ export interface ProjectUpdateWithoutTagsDataInput {
   wantFeedback?: Maybe<Boolean>;
   wantAssistance?: Maybe<Boolean>;
   deploymentURL?: Maybe<String>;
+  designURL?: Maybe<String>;
   frontEndRepoURL?: Maybe<String>;
   backEndRepoURL?: Maybe<String>;
   likes?: Maybe<LikeUpdateManyWithoutProjectInput>;
@@ -851,6 +855,7 @@ export interface ProjectUpdateWithoutStarredByDataInput {
   wantFeedback?: Maybe<Boolean>;
   wantAssistance?: Maybe<Boolean>;
   deploymentURL?: Maybe<String>;
+  designURL?: Maybe<String>;
   frontEndRepoURL?: Maybe<String>;
   backEndRepoURL?: Maybe<String>;
   likes?: Maybe<LikeUpdateManyWithoutProjectInput>;
@@ -873,6 +878,7 @@ export interface ProjectCreateWithoutLikesInput {
   wantFeedback?: Maybe<Boolean>;
   wantAssistance?: Maybe<Boolean>;
   deploymentURL?: Maybe<String>;
+  designURL?: Maybe<String>;
   frontEndRepoURL?: Maybe<String>;
   backEndRepoURL?: Maybe<String>;
   comments?: Maybe<CommentCreateManyWithoutProjectInput>;
@@ -889,6 +895,7 @@ export interface ProjectCreateInput {
   wantFeedback?: Maybe<Boolean>;
   wantAssistance?: Maybe<Boolean>;
   deploymentURL?: Maybe<String>;
+  designURL?: Maybe<String>;
   frontEndRepoURL?: Maybe<String>;
   backEndRepoURL?: Maybe<String>;
   likes?: Maybe<LikeCreateManyWithoutProjectInput>;
@@ -1425,6 +1432,20 @@ export interface ProjectWhereInput {
   deploymentURL_not_starts_with?: Maybe<String>;
   deploymentURL_ends_with?: Maybe<String>;
   deploymentURL_not_ends_with?: Maybe<String>;
+  designURL?: Maybe<String>;
+  designURL_not?: Maybe<String>;
+  designURL_in?: Maybe<String[] | String>;
+  designURL_not_in?: Maybe<String[] | String>;
+  designURL_lt?: Maybe<String>;
+  designURL_lte?: Maybe<String>;
+  designURL_gt?: Maybe<String>;
+  designURL_gte?: Maybe<String>;
+  designURL_contains?: Maybe<String>;
+  designURL_not_contains?: Maybe<String>;
+  designURL_starts_with?: Maybe<String>;
+  designURL_not_starts_with?: Maybe<String>;
+  designURL_ends_with?: Maybe<String>;
+  designURL_not_ends_with?: Maybe<String>;
   frontEndRepoURL?: Maybe<String>;
   frontEndRepoURL_not?: Maybe<String>;
   frontEndRepoURL_in?: Maybe<String[] | String>;
@@ -1569,6 +1590,7 @@ export interface ProjectCreateWithoutTagsInput {
   wantFeedback?: Maybe<Boolean>;
   wantAssistance?: Maybe<Boolean>;
   deploymentURL?: Maybe<String>;
+  designURL?: Maybe<String>;
   frontEndRepoURL?: Maybe<String>;
   backEndRepoURL?: Maybe<String>;
   likes?: Maybe<LikeCreateManyWithoutProjectInput>;
@@ -1587,6 +1609,7 @@ export interface ProjectUpdateManyMutationInput {
   wantFeedback?: Maybe<Boolean>;
   wantAssistance?: Maybe<Boolean>;
   deploymentURL?: Maybe<String>;
+  designURL?: Maybe<String>;
   frontEndRepoURL?: Maybe<String>;
   backEndRepoURL?: Maybe<String>;
 }
@@ -1688,6 +1711,7 @@ export interface ProjectCreateWithoutStarredByInput {
   wantFeedback?: Maybe<Boolean>;
   wantAssistance?: Maybe<Boolean>;
   deploymentURL?: Maybe<String>;
+  designURL?: Maybe<String>;
   frontEndRepoURL?: Maybe<String>;
   backEndRepoURL?: Maybe<String>;
   likes?: Maybe<LikeCreateManyWithoutProjectInput>;
@@ -1772,6 +1796,7 @@ export interface ProjectCreateWithoutCommentsInput {
   wantFeedback?: Maybe<Boolean>;
   wantAssistance?: Maybe<Boolean>;
   deploymentURL?: Maybe<String>;
+  designURL?: Maybe<String>;
   frontEndRepoURL?: Maybe<String>;
   backEndRepoURL?: Maybe<String>;
   likes?: Maybe<LikeCreateManyWithoutProjectInput>;
@@ -1858,6 +1883,20 @@ export interface ProjectScalarWhereInput {
   deploymentURL_not_starts_with?: Maybe<String>;
   deploymentURL_ends_with?: Maybe<String>;
   deploymentURL_not_ends_with?: Maybe<String>;
+  designURL?: Maybe<String>;
+  designURL_not?: Maybe<String>;
+  designURL_in?: Maybe<String[] | String>;
+  designURL_not_in?: Maybe<String[] | String>;
+  designURL_lt?: Maybe<String>;
+  designURL_lte?: Maybe<String>;
+  designURL_gt?: Maybe<String>;
+  designURL_gte?: Maybe<String>;
+  designURL_contains?: Maybe<String>;
+  designURL_not_contains?: Maybe<String>;
+  designURL_starts_with?: Maybe<String>;
+  designURL_not_starts_with?: Maybe<String>;
+  designURL_ends_with?: Maybe<String>;
+  designURL_not_ends_with?: Maybe<String>;
   frontEndRepoURL?: Maybe<String>;
   frontEndRepoURL_not?: Maybe<String>;
   frontEndRepoURL_in?: Maybe<String[] | String>;
@@ -1932,6 +1971,7 @@ export interface ProjectUpdateManyDataInput {
   wantFeedback?: Maybe<Boolean>;
   wantAssistance?: Maybe<Boolean>;
   deploymentURL?: Maybe<String>;
+  designURL?: Maybe<String>;
   frontEndRepoURL?: Maybe<String>;
   backEndRepoURL?: Maybe<String>;
 }
@@ -1945,6 +1985,7 @@ export interface ProjectUpdateWithoutLikesDataInput {
   wantFeedback?: Maybe<Boolean>;
   wantAssistance?: Maybe<Boolean>;
   deploymentURL?: Maybe<String>;
+  designURL?: Maybe<String>;
   frontEndRepoURL?: Maybe<String>;
   backEndRepoURL?: Maybe<String>;
   comments?: Maybe<CommentUpdateManyWithoutProjectInput>;
@@ -1966,6 +2007,7 @@ export interface ProjectCreateWithoutPostedByInput {
   wantFeedback?: Maybe<Boolean>;
   wantAssistance?: Maybe<Boolean>;
   deploymentURL?: Maybe<String>;
+  designURL?: Maybe<String>;
   frontEndRepoURL?: Maybe<String>;
   backEndRepoURL?: Maybe<String>;
   likes?: Maybe<LikeCreateManyWithoutProjectInput>;
@@ -2040,6 +2082,7 @@ export interface ProjectUpdateInput {
   wantFeedback?: Maybe<Boolean>;
   wantAssistance?: Maybe<Boolean>;
   deploymentURL?: Maybe<String>;
+  designURL?: Maybe<String>;
   frontEndRepoURL?: Maybe<String>;
   backEndRepoURL?: Maybe<String>;
   likes?: Maybe<LikeUpdateManyWithoutProjectInput>;
@@ -2070,6 +2113,7 @@ export interface ProjectUpdateWithoutCommentsDataInput {
   wantFeedback?: Maybe<Boolean>;
   wantAssistance?: Maybe<Boolean>;
   deploymentURL?: Maybe<String>;
+  designURL?: Maybe<String>;
   frontEndRepoURL?: Maybe<String>;
   backEndRepoURL?: Maybe<String>;
   likes?: Maybe<LikeUpdateManyWithoutProjectInput>;
@@ -2893,6 +2937,7 @@ export interface ProjectPreviousValues {
   wantFeedback?: Boolean;
   wantAssistance?: Boolean;
   deploymentURL?: String;
+  designURL?: String;
   frontEndRepoURL?: String;
   backEndRepoURL?: String;
   createdAt: DateTimeOutput;
@@ -2909,6 +2954,7 @@ export interface ProjectPreviousValuesPromise
   wantFeedback: () => Promise<Boolean>;
   wantAssistance: () => Promise<Boolean>;
   deploymentURL: () => Promise<String>;
+  designURL: () => Promise<String>;
   frontEndRepoURL: () => Promise<String>;
   backEndRepoURL: () => Promise<String>;
   createdAt: () => Promise<DateTimeOutput>;
@@ -2925,6 +2971,7 @@ export interface ProjectPreviousValuesSubscription
   wantFeedback: () => Promise<AsyncIterator<Boolean>>;
   wantAssistance: () => Promise<AsyncIterator<Boolean>>;
   deploymentURL: () => Promise<AsyncIterator<String>>;
+  designURL: () => Promise<AsyncIterator<String>>;
   frontEndRepoURL: () => Promise<AsyncIterator<String>>;
   backEndRepoURL: () => Promise<AsyncIterator<String>>;
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
@@ -2964,6 +3011,7 @@ export interface Project {
   wantFeedback?: Boolean;
   wantAssistance?: Boolean;
   deploymentURL?: String;
+  designURL?: String;
   frontEndRepoURL?: String;
   backEndRepoURL?: String;
   createdAt: DateTimeOutput;
@@ -2988,6 +3036,7 @@ export interface ProjectPromise extends Promise<Project>, Fragmentable {
   wantFeedback: () => Promise<Boolean>;
   wantAssistance: () => Promise<Boolean>;
   deploymentURL: () => Promise<String>;
+  designURL: () => Promise<String>;
   frontEndRepoURL: () => Promise<String>;
   backEndRepoURL: () => Promise<String>;
   likes: <T = FragmentableArray<Like>>(args?: {
@@ -3041,6 +3090,7 @@ export interface ProjectSubscription
   wantFeedback: () => Promise<AsyncIterator<Boolean>>;
   wantAssistance: () => Promise<AsyncIterator<Boolean>>;
   deploymentURL: () => Promise<AsyncIterator<String>>;
+  designURL: () => Promise<AsyncIterator<String>>;
   frontEndRepoURL: () => Promise<AsyncIterator<String>>;
   backEndRepoURL: () => Promise<AsyncIterator<String>>;
   likes: <T = Promise<AsyncIterator<LikeSubscription>>>(args?: {
@@ -3094,6 +3144,7 @@ export interface ProjectNullablePromise
   wantFeedback: () => Promise<Boolean>;
   wantAssistance: () => Promise<Boolean>;
   deploymentURL: () => Promise<String>;
+  designURL: () => Promise<String>;
   frontEndRepoURL: () => Promise<String>;
   backEndRepoURL: () => Promise<String>;
   likes: <T = FragmentableArray<Like>>(args?: {

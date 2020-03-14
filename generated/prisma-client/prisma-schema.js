@@ -434,6 +434,7 @@ type Project {
   wantFeedback: Boolean
   wantAssistance: Boolean
   deploymentURL: String
+  designURL: String
   frontEndRepoURL: String
   backEndRepoURL: String
   likes(where: LikeWhereInput, orderBy: LikeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Like!]
@@ -459,6 +460,7 @@ input ProjectCreateInput {
   wantFeedback: Boolean
   wantAssistance: Boolean
   deploymentURL: String
+  designURL: String
   frontEndRepoURL: String
   backEndRepoURL: String
   likes: LikeCreateManyWithoutProjectInput
@@ -501,6 +503,7 @@ input ProjectCreateWithoutCommentsInput {
   wantFeedback: Boolean
   wantAssistance: Boolean
   deploymentURL: String
+  designURL: String
   frontEndRepoURL: String
   backEndRepoURL: String
   likes: LikeCreateManyWithoutProjectInput
@@ -517,6 +520,7 @@ input ProjectCreateWithoutLikesInput {
   wantFeedback: Boolean
   wantAssistance: Boolean
   deploymentURL: String
+  designURL: String
   frontEndRepoURL: String
   backEndRepoURL: String
   comments: CommentCreateManyWithoutProjectInput
@@ -532,6 +536,7 @@ input ProjectCreateWithoutPostedByInput {
   wantFeedback: Boolean
   wantAssistance: Boolean
   deploymentURL: String
+  designURL: String
   frontEndRepoURL: String
   backEndRepoURL: String
   likes: LikeCreateManyWithoutProjectInput
@@ -548,6 +553,7 @@ input ProjectCreateWithoutStarredByInput {
   wantFeedback: Boolean
   wantAssistance: Boolean
   deploymentURL: String
+  designURL: String
   frontEndRepoURL: String
   backEndRepoURL: String
   likes: LikeCreateManyWithoutProjectInput
@@ -565,6 +571,7 @@ input ProjectCreateWithoutTagsInput {
   wantFeedback: Boolean
   wantAssistance: Boolean
   deploymentURL: String
+  designURL: String
   frontEndRepoURL: String
   backEndRepoURL: String
   likes: LikeCreateManyWithoutProjectInput
@@ -591,6 +598,8 @@ enum ProjectOrderByInput {
   wantAssistance_DESC
   deploymentURL_ASC
   deploymentURL_DESC
+  designURL_ASC
+  designURL_DESC
   frontEndRepoURL_ASC
   frontEndRepoURL_DESC
   backEndRepoURL_ASC
@@ -609,6 +618,7 @@ type ProjectPreviousValues {
   wantFeedback: Boolean
   wantAssistance: Boolean
   deploymentURL: String
+  designURL: String
   frontEndRepoURL: String
   backEndRepoURL: String
   createdAt: DateTime!
@@ -678,6 +688,20 @@ input ProjectScalarWhereInput {
   deploymentURL_not_starts_with: String
   deploymentURL_ends_with: String
   deploymentURL_not_ends_with: String
+  designURL: String
+  designURL_not: String
+  designURL_in: [String!]
+  designURL_not_in: [String!]
+  designURL_lt: String
+  designURL_lte: String
+  designURL_gt: String
+  designURL_gte: String
+  designURL_contains: String
+  designURL_not_contains: String
+  designURL_starts_with: String
+  designURL_not_starts_with: String
+  designURL_ends_with: String
+  designURL_not_ends_with: String
   frontEndRepoURL: String
   frontEndRepoURL_not: String
   frontEndRepoURL_in: [String!]
@@ -754,6 +778,7 @@ input ProjectUpdateInput {
   wantFeedback: Boolean
   wantAssistance: Boolean
   deploymentURL: String
+  designURL: String
   frontEndRepoURL: String
   backEndRepoURL: String
   likes: LikeUpdateManyWithoutProjectInput
@@ -768,6 +793,7 @@ input ProjectUpdateManyDataInput {
   wantFeedback: Boolean
   wantAssistance: Boolean
   deploymentURL: String
+  designURL: String
   frontEndRepoURL: String
   backEndRepoURL: String
 }
@@ -779,6 +805,7 @@ input ProjectUpdateManyMutationInput {
   wantFeedback: Boolean
   wantAssistance: Boolean
   deploymentURL: String
+  designURL: String
   frontEndRepoURL: String
   backEndRepoURL: String
 }
@@ -847,6 +874,7 @@ input ProjectUpdateWithoutCommentsDataInput {
   wantFeedback: Boolean
   wantAssistance: Boolean
   deploymentURL: String
+  designURL: String
   frontEndRepoURL: String
   backEndRepoURL: String
   likes: LikeUpdateManyWithoutProjectInput
@@ -862,6 +890,7 @@ input ProjectUpdateWithoutLikesDataInput {
   wantFeedback: Boolean
   wantAssistance: Boolean
   deploymentURL: String
+  designURL: String
   frontEndRepoURL: String
   backEndRepoURL: String
   comments: CommentUpdateManyWithoutProjectInput
@@ -876,6 +905,7 @@ input ProjectUpdateWithoutPostedByDataInput {
   wantFeedback: Boolean
   wantAssistance: Boolean
   deploymentURL: String
+  designURL: String
   frontEndRepoURL: String
   backEndRepoURL: String
   likes: LikeUpdateManyWithoutProjectInput
@@ -891,6 +921,7 @@ input ProjectUpdateWithoutStarredByDataInput {
   wantFeedback: Boolean
   wantAssistance: Boolean
   deploymentURL: String
+  designURL: String
   frontEndRepoURL: String
   backEndRepoURL: String
   likes: LikeUpdateManyWithoutProjectInput
@@ -907,6 +938,7 @@ input ProjectUpdateWithoutTagsDataInput {
   wantFeedback: Boolean
   wantAssistance: Boolean
   deploymentURL: String
+  designURL: String
   frontEndRepoURL: String
   backEndRepoURL: String
   likes: LikeUpdateManyWithoutProjectInput
@@ -1023,6 +1055,20 @@ input ProjectWhereInput {
   deploymentURL_not_starts_with: String
   deploymentURL_ends_with: String
   deploymentURL_not_ends_with: String
+  designURL: String
+  designURL_not: String
+  designURL_in: [String!]
+  designURL_not_in: [String!]
+  designURL_lt: String
+  designURL_lte: String
+  designURL_gt: String
+  designURL_gte: String
+  designURL_contains: String
+  designURL_not_contains: String
+  designURL_starts_with: String
+  designURL_not_starts_with: String
+  designURL_ends_with: String
+  designURL_not_ends_with: String
   frontEndRepoURL: String
   frontEndRepoURL_not: String
   frontEndRepoURL_in: [String!]

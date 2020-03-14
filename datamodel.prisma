@@ -28,6 +28,7 @@ type Project {
   wantFeedback: Boolean @default(value: false)
   wantAssistance: Boolean @default(value: false)
   deploymentURL: String
+  designURL: String
   frontEndRepoURL: String
   backEndRepoURL: String
   likes: [Like!]!

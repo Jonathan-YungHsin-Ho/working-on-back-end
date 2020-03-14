@@ -1,10 +1,12 @@
-const { getUserId, validToken } = require('../utils');
+const { getUserID, validToken } = require('../utils');
 
 module.exports = {
 	info,
 	user,
 	me,
 	checkToken,
+	allProjects,
+	allUsers,
 };
 
 function info() {
@@ -16,9 +18,17 @@ async function user(_parent, args, context, _info) {
 }
 
 async function me(_parent, _args, context, _info) {
-	return await context.prisma.user({ id: getUserId(context) });
+	return await context.prisma.user({ id: getUserID(context) });
 }
 
 function checkToken(_parent, _args, context, _info) {
 	return validToken(context);
+}
+
+async function allProjects(_parent, _args, context, _info) {
+	return await context.prisma.projects();
+}
+
+async function allUsers(_parent, _args, context, _info) {
+	return await context.prisma.users();
 }

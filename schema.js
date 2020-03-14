@@ -8,11 +8,13 @@ typeDefs = gql`
 		user(id: ID!): User!
 		me: User!
 		checkToken: LoginStatus!
+		allProjects: [Project!]!
+		allUsers: [User!]!
 	}
 
 	type Mutation {
 		signup(email: String!, username: String!, password: String!): AuthPayload!
-		login(username: String!, password: String!): AuthPayload!
+		login(email: String!, password: String!): AuthPayload!
 		updateUser(
 			username: String
 			password: String
@@ -33,25 +35,28 @@ typeDefs = gql`
 			status: String
 			wantFeedback: Boolean
 			wantAssistance: Boolean
+			designURL: String
 			deploymentURL: String
 			frontEndRepoURL: String
 			backEndRepoURL: String
 		): Project!
 		updateProject(
+			id: String!
 			name: String
 			private: Boolean
 			status: String
 			wantFeedback: Boolean
 			wantAssistance: Boolean
+			designURL: String
 			deploymentURL: String
 			frontEndRepoURL: String
 			backEndRepoURL: String
 		): Project!
-		deleteProject: Project!
+		deleteProject(id: String!): Project!
 		createLike(projectID: String!): Project!
-		deleteLike: Project!
+		deleteLike(id: String!): Project!
 		createComment(projectID: String!, text: String!): Comment!
-		deleteComment: Comment!
+		deleteComment(id: String!): Comment!
 	}
 
 	type User {
@@ -77,12 +82,14 @@ typeDefs = gql`
 	type Project {
 		id: ID!
 		postedBy: User!
+		starredBy: [User!]!
 		name: String!
 		private: Boolean!
 		status: String
 		wantFeedback: Boolean
 		wantAssistance: Boolean
 		deploymentURL: String
+		designURL: String
 		frontEndRepoURL: String
 		backEndRepoURL: String
 		likes: [Like!]!

@@ -1,4 +1,8 @@
-module.exports = { likes, comments };
+module.exports = { postedBy, likes, comments };
+
+async function postedBy(parent, _args, context, _info) {
+	return await context.prisma.project({ id: parent.id }).postedBy();
+}
 
 async function likes(parent, _args, context, _info) {
 	return await context.prisma.likes({ where: { id: parent.id } });
