@@ -1301,7 +1301,7 @@ type User {
   username: String!
   password: String!
   name: String
-  email: String
+  email: String!
   bio: String
   techStack: String
   avatarURL: String
@@ -1327,7 +1327,7 @@ input UserCreateInput {
   username: String!
   password: String!
   name: String
-  email: String
+  email: String!
   bio: String
   techStack: String
   avatarURL: String
@@ -1371,7 +1371,7 @@ input UserCreateWithoutFollowersInput {
   username: String!
   password: String!
   name: String
-  email: String
+  email: String!
   bio: String
   techStack: String
   avatarURL: String
@@ -1389,7 +1389,7 @@ input UserCreateWithoutFollowingInput {
   username: String!
   password: String!
   name: String
-  email: String
+  email: String!
   bio: String
   techStack: String
   avatarURL: String
@@ -1407,7 +1407,7 @@ input UserCreateWithoutProjectsInput {
   username: String!
   password: String!
   name: String
-  email: String
+  email: String!
   bio: String
   techStack: String
   avatarURL: String
@@ -1425,7 +1425,7 @@ input UserCreateWithoutStarredProjectsInput {
   username: String!
   password: String!
   name: String
-  email: String
+  email: String!
   bio: String
   techStack: String
   avatarURL: String
@@ -1477,7 +1477,7 @@ type UserPreviousValues {
   username: String!
   password: String!
   name: String
-  email: String
+  email: String!
   bio: String
   techStack: String
   avatarURL: String
@@ -2115,6 +2115,7 @@ input UserWhereInput {
 input UserWhereUniqueInput {
   id: ID
   username: String
+  email: String
 }
 `
       }

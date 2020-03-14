@@ -14,18 +14,18 @@ module.exports = {
 	login,
 	updateUser,
 	deleteUser,
-	createProject,
-	updateProject,
-	deleteProject,
-	createLike,
+	// createProject,
+	// updateProject,
+	// deleteProject,
+	// createLike,
 	deleteLike,
-	createComment,
+	// createComment,
 	deleteComment,
 };
 
 async function signup(_parent, args, context, _info) {
-	const { username, password } = args;
-	checkFields({ username, password });
+	const { email, username, password } = args;
+	checkFields({ email, username, password });
 	const hash = bcrypt.hashSync(args.password, 10);
 	args.password = hash;
 
@@ -57,21 +57,24 @@ async function deleteUser(_parent, _args, context, _info) {
 	return await context.prisma.deleteUser({ id });
 }
 
-async function createProject(parent, args, context, info) {}
+// async function createProject(parent, args, context, info) {}
 
-async function updateProject(parent, args, context, info) {}
+// async function updateProject(parent, args, context, info) {}
 
-async function deleteProject(_parent, args, context, _info) {
-	// return await context.prisma.deleteProject({ id: args.id });
-}
+// async function deleteProject(_parent, args, context, _info) {
+// 	// const id = getUserID(context);
+// 	// return await context.prisma.deleteProject({ id: args.id });
+// }
 
-async function createLike(parent, args, context, info) {}
+// async function createLike(parent, args, context, info) {}
 
 async function deleteLike(_parent, args, context, _info) {
 	return await context.prisma.deleteLike({ id: args.id });
 }
 
-async function createComment(parent, args, context, info) {}
+// async function createComment(parent, args, context, info) {
+// 	const { projectID, text } = args;
+// }
 
 async function deleteComment(_parent, args, context, _info) {
 	return await context.prisma.deleteComment({ id: args.id });

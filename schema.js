@@ -11,7 +11,7 @@ typeDefs = gql`
 	}
 
 	type Mutation {
-		signup(username: String!, password: String!): AuthPayload!
+		signup(email: String!, username: String!, password: String!): AuthPayload!
 		login(username: String!, password: String!): AuthPayload!
 		updateUser(
 			username: String

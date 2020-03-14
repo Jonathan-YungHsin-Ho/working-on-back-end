@@ -916,6 +916,7 @@ export interface UserUpdateWithoutProjectsDataInput {
 export type UserWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
   username?: Maybe<String>;
+  email?: Maybe<String>;
 }>;
 
 export interface UserUpdateManyWithoutFollowingInput {
@@ -1636,7 +1637,7 @@ export interface UserCreateInput {
   username: String;
   password: String;
   name?: Maybe<String>;
-  email?: Maybe<String>;
+  email: String;
   bio?: Maybe<String>;
   techStack?: Maybe<String>;
   avatarURL?: Maybe<String>;
@@ -1659,7 +1660,7 @@ export interface UserCreateWithoutStarredProjectsInput {
   username: String;
   password: String;
   name?: Maybe<String>;
-  email?: Maybe<String>;
+  email: String;
   bio?: Maybe<String>;
   techStack?: Maybe<String>;
   avatarURL?: Maybe<String>;
@@ -1733,7 +1734,7 @@ export interface UserCreateWithoutFollowingInput {
   username: String;
   password: String;
   name?: Maybe<String>;
-  email?: Maybe<String>;
+  email: String;
   bio?: Maybe<String>;
   techStack?: Maybe<String>;
   avatarURL?: Maybe<String>;
@@ -1983,7 +1984,7 @@ export interface UserCreateWithoutProjectsInput {
   username: String;
   password: String;
   name?: Maybe<String>;
-  email?: Maybe<String>;
+  email: String;
   bio?: Maybe<String>;
   techStack?: Maybe<String>;
   avatarURL?: Maybe<String>;
@@ -2159,7 +2160,7 @@ export interface UserCreateWithoutFollowersInput {
   username: String;
   password: String;
   name?: Maybe<String>;
-  email?: Maybe<String>;
+  email: String;
   bio?: Maybe<String>;
   techStack?: Maybe<String>;
   avatarURL?: Maybe<String>;
@@ -2181,7 +2182,7 @@ export interface UserPreviousValues {
   username: String;
   password: String;
   name?: String;
-  email?: String;
+  email: String;
   bio?: String;
   techStack?: String;
   avatarURL?: String;
@@ -2421,7 +2422,7 @@ export interface User {
   username: String;
   password: String;
   name?: String;
-  email?: String;
+  email: String;
   bio?: String;
   techStack?: String;
   avatarURL?: String;
