@@ -4,7 +4,29 @@ typeDefs = gql`
 	scalar DateTime
 
 	type Query {
-		info: String
+		info: String!
+		user(id: ID!): User!
+		me: User!
+		checkToken: LoginStatus!
+	}
+
+	type Mutation {
+		signup(username: String!, password: String!): AuthPayload!
+		login(username: String!, password: String!): AuthPayload!
+		updateUser(
+			username: String
+			password: String
+			name: String
+			email: String
+			bio: String
+			techStack: String
+			avatarURL: String
+			githubURL: String
+			linkedinURL: String
+			portfolioURL: String
+			twitterURL: String
+		): User!
+		deleteUser: User!
 	}
 
 	type User {
@@ -12,6 +34,7 @@ typeDefs = gql`
 		username: String!
 		password: String!
 		name: String
+		email: String
 		bio: String
 		techStack: String
 		avatarURL: String
@@ -51,6 +74,16 @@ typeDefs = gql`
 		text: String!
 		project: Project!
 		createdAt: DateTime!
+	}
+
+	type AuthPayload {
+		token: String!
+		user: User!
+	}
+
+	type LoginStatus {
+		token: String
+		valid: Boolean!
 	}
 `;
 
