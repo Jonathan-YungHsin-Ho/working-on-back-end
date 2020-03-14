@@ -1,8 +1,27 @@
 const bcrypt = require('bcryptjs');
 
-const { generateToken, checkFields, getUserID } = require('../utils');
+const {
+	generateToken,
+	checkFields,
+	getUserID,
+	addNewTags,
+	splitAndTrimTags,
+	deleteDisconnectedTags,
+} = require('../utils');
 
-module.exports = { signup, login, updateUser, deleteUser };
+module.exports = {
+	signup,
+	login,
+	updateUser,
+	deleteUser,
+	createProject,
+	updateProject,
+	deleteProject,
+	createLike,
+	deleteLike,
+	createComment,
+	deleteComment,
+};
 
 async function signup(_parent, args, context, _info) {
 	const { username, password } = args;
@@ -36,4 +55,24 @@ async function deleteUser(_parent, _args, context, _info) {
 	const id = getUserID(context);
 
 	return await context.prisma.deleteUser({ id });
+}
+
+async function createProject(parent, args, context, info) {}
+
+async function updateProject(parent, args, context, info) {}
+
+async function deleteProject(_parent, args, context, _info) {
+	// return await context.prisma.deleteProject({ id: args.id });
+}
+
+async function createLike(parent, args, context, info) {}
+
+async function deleteLike(_parent, args, context, _info) {
+	return await context.prisma.deleteLike({ id: args.id });
+}
+
+async function createComment(parent, args, context, info) {}
+
+async function deleteComment(_parent, args, context, _info) {
+	return await context.prisma.deleteComment({ id: args.id });
 }

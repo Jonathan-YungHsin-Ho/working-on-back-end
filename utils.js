@@ -6,6 +6,9 @@ module.exports = {
 	getUserID,
 	checkAdmin,
 	validToken,
+	addNewTags,
+	splitAndTrimTags,
+	deleteDisconnectedTags,
 };
 
 const JWT_SECRET = process.env.JWT_SECRET;
@@ -68,4 +71,37 @@ function validToken(context) {
 	}
 
 	throw new Error('Not Authenticated');
+}
+
+function addNewTags(array, context) {
+	return array.map(async tag => {
+		return await context.prisma.upsertTag({
+			where: { name: tag.name },
+			create: { name: tag.name },
+			update: { name: tag.name },
+		});
+	});
+}
+
+function splitAndTrimTags(tagString) {
+	const tagArray = tagString.split(',');
+
+	return tagArray.map(tag => {
+		return { name: tag.trim() };
+	});
+}
+
+function deleteDisconnectedTags(context, tags) {
+	return Promise.all(
+		tags.map(async tag => {
+			if (
+				(await context.prisma
+					.projectsConnection({ where: { tags_some: { id: tag.id } } })
+					.aggregate()
+					.count()) === 0
+			) {
+				return await context.prisma.deleteTag({ id: tag.id });
+			}
+		}),
+	);
 }

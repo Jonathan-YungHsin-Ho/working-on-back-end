@@ -27,6 +27,31 @@ typeDefs = gql`
 			twitterURL: String
 		): User!
 		deleteUser: User!
+		createProject(
+			name: String!
+			private: Boolean!
+			status: String
+			wantFeedback: Boolean
+			wantAssistance: Boolean
+			deploymentURL: String
+			frontEndRepoURL: String
+			backEndRepoURL: String
+		): Project!
+		updateProject(
+			name: String
+			private: Boolean
+			status: String
+			wantFeedback: Boolean
+			wantAssistance: Boolean
+			deploymentURL: String
+			frontEndRepoURL: String
+			backEndRepoURL: String
+		): Project!
+		deleteProject: Project!
+		createLike(projectID: String!): Project!
+		deleteLike: Project!
+		createComment(projectID: String!, text: String!): Comment!
+		deleteComment: Comment!
 	}
 
 	type User {
@@ -43,6 +68,7 @@ typeDefs = gql`
 		portfolioURL: String
 		twitterURL: String
 		projects: [Project!]!
+		starredProjects: [Project!]!
 		followers: [User!]!
 		following: [User!]!
 		createdAt: DateTime!
@@ -61,6 +87,7 @@ typeDefs = gql`
 		backEndRepoURL: String
 		likes: [Like!]!
 		comments: [Comment!]!
+		tags: [Tag!]!
 		createdAt: DateTime!
 		lastUpdated: DateTime!
 	}
@@ -77,6 +104,12 @@ typeDefs = gql`
 		text: String!
 		project: Project!
 		createdAt: DateTime!
+	}
+
+	type Tag {
+		id: ID!
+		name: String!
+		projects: [Project!]!
 	}
 
 	type AuthPayload {
