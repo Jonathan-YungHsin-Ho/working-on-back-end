@@ -21,9 +21,11 @@
 	"homepage": "https://github.com/Jonathan-YungHsin-Ho/working-on-back-end#readme",
 	"dependencies": {
 		"apollo-server": "^2.11.0",
+		"bcryptjs": "^2.4.3",
 		"cors": "^2.8.5",
 		"dotenv": "^8.2.0",
 		"graphql": "^14.6.0",
+		"jsonwebtoken": "^8.5.1",
 		"prisma-client-lib": "^1.34.10"
 	},
 	"devDependencies": {

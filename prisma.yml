@@ -1,4 +1,4 @@
-endpoint: https://working-on-server-480fc2dc8c.herokuapp.com/working-on-back-end/dev
+endpoint: ${env:ENDPOINT}
 datamodel: datamodel.prisma
 
 generate:

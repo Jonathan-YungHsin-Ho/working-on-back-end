@@ -1,8 +1,9 @@
 type User {
   id: ID! @id
-  username: String!
+  username: String! @unique
   password: String!
   name: String
+  email: String
   bio: String
   techStack: String
   avatarURL: String

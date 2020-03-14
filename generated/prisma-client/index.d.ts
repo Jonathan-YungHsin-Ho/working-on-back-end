@@ -257,6 +257,8 @@ export type UserOrderByInput =
   | "password_DESC"
   | "name_ASC"
   | "name_DESC"
+  | "email_ASC"
+  | "email_DESC"
   | "bio_ASC"
   | "bio_DESC"
   | "techStack_ASC"
@@ -515,6 +517,7 @@ export interface UserUpdateManyMutationInput {
   username?: Maybe<String>;
   password?: Maybe<String>;
   name?: Maybe<String>;
+  email?: Maybe<String>;
   bio?: Maybe<String>;
   techStack?: Maybe<String>;
   avatarURL?: Maybe<String>;
@@ -592,6 +595,7 @@ export interface UserUpdateDataInput {
   username?: Maybe<String>;
   password?: Maybe<String>;
   name?: Maybe<String>;
+  email?: Maybe<String>;
   bio?: Maybe<String>;
   techStack?: Maybe<String>;
   avatarURL?: Maybe<String>;
@@ -741,6 +745,20 @@ export interface UserWhereInput {
   name_not_starts_with?: Maybe<String>;
   name_ends_with?: Maybe<String>;
   name_not_ends_with?: Maybe<String>;
+  email?: Maybe<String>;
+  email_not?: Maybe<String>;
+  email_in?: Maybe<String[] | String>;
+  email_not_in?: Maybe<String[] | String>;
+  email_lt?: Maybe<String>;
+  email_lte?: Maybe<String>;
+  email_gt?: Maybe<String>;
+  email_gte?: Maybe<String>;
+  email_contains?: Maybe<String>;
+  email_not_contains?: Maybe<String>;
+  email_starts_with?: Maybe<String>;
+  email_not_starts_with?: Maybe<String>;
+  email_ends_with?: Maybe<String>;
+  email_not_ends_with?: Maybe<String>;
   bio?: Maybe<String>;
   bio_not?: Maybe<String>;
   bio_in?: Maybe<String[] | String>;
@@ -925,6 +943,7 @@ export interface UserUpdateInput {
   username?: Maybe<String>;
   password?: Maybe<String>;
   name?: Maybe<String>;
+  email?: Maybe<String>;
   bio?: Maybe<String>;
   techStack?: Maybe<String>;
   avatarURL?: Maybe<String>;
@@ -993,6 +1012,7 @@ export interface CommentUpdateWithWhereUniqueWithoutProjectInput {
 
 export type UserWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
+  username?: Maybe<String>;
 }>;
 
 export interface CommentUpdateWithoutProjectDataInput {
@@ -1018,6 +1038,7 @@ export interface UserCreateInput {
   username: String;
   password: String;
   name?: Maybe<String>;
+  email?: Maybe<String>;
   bio?: Maybe<String>;
   techStack?: Maybe<String>;
   avatarURL?: Maybe<String>;
@@ -1270,6 +1291,7 @@ export interface UserPreviousValues {
   username: String;
   password: String;
   name?: String;
+  email?: String;
   bio?: String;
   techStack?: String;
   avatarURL?: String;
@@ -1287,6 +1309,7 @@ export interface UserPreviousValuesPromise
   username: () => Promise<String>;
   password: () => Promise<String>;
   name: () => Promise<String>;
+  email: () => Promise<String>;
   bio: () => Promise<String>;
   techStack: () => Promise<String>;
   avatarURL: () => Promise<String>;
@@ -1304,6 +1327,7 @@ export interface UserPreviousValuesSubscription
   username: () => Promise<AsyncIterator<String>>;
   password: () => Promise<AsyncIterator<String>>;
   name: () => Promise<AsyncIterator<String>>;
+  email: () => Promise<AsyncIterator<String>>;
   bio: () => Promise<AsyncIterator<String>>;
   techStack: () => Promise<AsyncIterator<String>>;
   avatarURL: () => Promise<AsyncIterator<String>>;
@@ -1895,6 +1919,7 @@ export interface User {
   username: String;
   password: String;
   name?: String;
+  email?: String;
   bio?: String;
   techStack?: String;
   avatarURL?: String;
@@ -1910,6 +1935,7 @@ export interface UserPromise extends Promise<User>, Fragmentable {
   username: () => Promise<String>;
   password: () => Promise<String>;
   name: () => Promise<String>;
+  email: () => Promise<String>;
   bio: () => Promise<String>;
   techStack: () => Promise<String>;
   avatarURL: () => Promise<String>;
@@ -1936,6 +1962,7 @@ export interface UserSubscription
   username: () => Promise<AsyncIterator<String>>;
   password: () => Promise<AsyncIterator<String>>;
   name: () => Promise<AsyncIterator<String>>;
+  email: () => Promise<AsyncIterator<String>>;
   bio: () => Promise<AsyncIterator<String>>;
   techStack: () => Promise<AsyncIterator<String>>;
   avatarURL: () => Promise<AsyncIterator<String>>;
@@ -1962,6 +1989,7 @@ export interface UserNullablePromise
   username: () => Promise<String>;
   password: () => Promise<String>;
   name: () => Promise<String>;
+  email: () => Promise<String>;
   bio: () => Promise<String>;
   techStack: () => Promise<String>;
   avatarURL: () => Promise<String>;
