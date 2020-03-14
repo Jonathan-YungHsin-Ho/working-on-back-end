@@ -8,11 +8,13 @@ typeDefs = gql`
 		user(id: ID!): User!
 		me: User!
 		checkToken: LoginStatus!
+		allProjects: [Project!]!
+		allUsers: [User!]!
 	}
 
 	type Mutation {
-		signup(username: String!, password: String!): AuthPayload!
-		login(username: String!, password: String!): AuthPayload!
+		signup(email: String!, username: String!, password: String!): AuthPayload!
+		login(email: String!, password: String!): AuthPayload!
 		updateUser(
 			username: String
 			password: String
@@ -27,6 +29,34 @@ typeDefs = gql`
 			twitterURL: String
 		): User!
 		deleteUser: User!
+		createProject(
+			name: String!
+			private: Boolean!
+			status: String
+			wantFeedback: Boolean
+			wantAssistance: Boolean
+			designURL: String
+			deploymentURL: String
+			frontEndRepoURL: String
+			backEndRepoURL: String
+		): Project!
+		updateProject(
+			id: String!
+			name: String
+			private: Boolean
+			status: String
+			wantFeedback: Boolean
+			wantAssistance: Boolean
+			designURL: String
+			deploymentURL: String
+			frontEndRepoURL: String
+			backEndRepoURL: String
+		): Project!
+		deleteProject(id: String!): Project!
+		createLike(projectID: String!): Project!
+		deleteLike(id: String!): Project!
+		createComment(projectID: String!, text: String!): Comment!
+		deleteComment(id: String!): Comment!
 	}
 
 	type User {
@@ -43,6 +73,7 @@ typeDefs = gql`
 		portfolioURL: String
 		twitterURL: String
 		projects: [Project!]!
+		starredProjects: [Project!]!
 		followers: [User!]!
 		following: [User!]!
 		createdAt: DateTime!
@@ -51,16 +82,19 @@ typeDefs = gql`
 	type Project {
 		id: ID!
 		postedBy: User!
+		starredBy: [User!]!
 		name: String!
 		private: Boolean!
 		status: String
 		wantFeedback: Boolean
 		wantAssistance: Boolean
 		deploymentURL: String
+		designURL: String
 		frontEndRepoURL: String
 		backEndRepoURL: String
 		likes: [Like!]!
 		comments: [Comment!]!
+		tags: [Tag!]!
 		createdAt: DateTime!
 		lastUpdated: DateTime!
 	}
@@ -77,6 +111,12 @@ typeDefs = gql`
 		text: String!
 		project: Project!
 		createdAt: DateTime!
+	}
+
+	type Tag {
+		id: ID!
+		name: String!
+		projects: [Project!]!
 	}
 
 	type AuthPayload {

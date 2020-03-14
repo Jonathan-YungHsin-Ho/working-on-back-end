@@ -7,8 +7,8 @@ const {
 	Mutation,
 	User,
 	Project,
-	Like,
-	Comment,
+	// Like,
+	// Comment,
 } = require('./resolvers');
 
 const resolvers = {
@@ -16,8 +16,8 @@ const resolvers = {
 	Mutation,
 	User,
 	Project,
-	Like,
-	Comment,
+	// Like,
+	// Comment,
 };
 
 const server = new ApolloServer({

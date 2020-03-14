@@ -3,7 +3,7 @@ type User {
   username: String! @unique
   password: String!
   name: String
-  email: String
+  email: String! @unique
   bio: String
   techStack: String
   avatarURL: String
@@ -11,7 +11,8 @@ type User {
   linkedinURL: String
   portfolioURL: String
   twitterURL: String
-  projects: [Project!]!
+  projects: [Project!]! @relation(name: "PersonalProjects", onDelete: CASCADE)
+  starredProjects: [Project!]! @relation(name: "StarredProjects", onDelete: CASCADE)
   followers: [User!]! @relation(name: "Followers")
   following: [User!]! @relation(name: "Following")
   createdAt: DateTime! @createdAt
@@ -19,17 +20,20 @@ type User {
 
 type Project {
   id: ID! @id
-  postedBy: User!
+  postedBy: User! @relation(name: "PersonalProjects", onDelete: SET_NULL)
+  starredBy: [User!]! @relation(name: "StarredProjects", onDelete: SET_NULL)
   name: String!
   private: Boolean! @default(value: false)
   status: String
   wantFeedback: Boolean @default(value: false)
   wantAssistance: Boolean @default(value: false)
   deploymentURL: String
+  designURL: String
   frontEndRepoURL: String
   backEndRepoURL: String
   likes: [Like!]!
   comments: [Comment!]!
+  tags: [Tag!]!
   createdAt: DateTime! @createdAt
   lastUpdated: DateTime! @updatedAt
 }
@@ -46,4 +50,10 @@ type Comment {
   text: String!
   project: Project!
   createdAt: DateTime! @createdAt
+}
+
+type Tag {
+  id: ID! @id
+  name: String! @unique
+  projects: [Project!]!
 }
