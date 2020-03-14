@@ -43,11 +43,14 @@ typeDefs = gql`
 		portfolioURL: String
 		twitterURL: String
 		projects: [Project!]!
+		followers: [User!]!
+		following: [User!]!
 		createdAt: DateTime!
 	}
 
 	type Project {
 		id: ID!
+		postedBy: User!
 		name: String!
 		private: Boolean!
 		status: String

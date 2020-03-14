@@ -12,11 +12,14 @@ type User {
   portfolioURL: String
   twitterURL: String
   projects: [Project!]!
+  followers: [User!]! @relation(name: "Followers")
+  following: [User!]! @relation(name: "Following")
   createdAt: DateTime! @createdAt
 }
 
 type Project {
   id: ID! @id
+  postedBy: User!
   name: String!
   private: Boolean! @default(value: false)
   status: String

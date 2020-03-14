@@ -416,6 +416,7 @@ type PageInfo {
 
 type Project {
   id: ID!
+  postedBy: User!
   name: String!
   private: Boolean!
   status: String
@@ -438,6 +439,7 @@ type ProjectConnection {
 
 input ProjectCreateInput {
   id: ID
+  postedBy: UserCreateOneWithoutProjectsInput!
   name: String!
   private: Boolean
   status: String
@@ -450,8 +452,8 @@ input ProjectCreateInput {
   comments: CommentCreateManyWithoutProjectInput
 }
 
-input ProjectCreateManyInput {
-  create: [ProjectCreateInput!]
+input ProjectCreateManyWithoutPostedByInput {
+  create: [ProjectCreateWithoutPostedByInput!]
   connect: [ProjectWhereUniqueInput!]
 }
 
@@ -467,6 +469,7 @@ input ProjectCreateOneWithoutLikesInput {
 
 input ProjectCreateWithoutCommentsInput {
   id: ID
+  postedBy: UserCreateOneWithoutProjectsInput!
   name: String!
   private: Boolean
   status: String
@@ -480,6 +483,7 @@ input ProjectCreateWithoutCommentsInput {
 
 input ProjectCreateWithoutLikesInput {
   id: ID
+  postedBy: UserCreateOneWithoutProjectsInput!
   name: String!
   private: Boolean
   status: String
@@ -488,6 +492,20 @@ input ProjectCreateWithoutLikesInput {
   deploymentURL: String
   frontEndRepoURL: String
   backEndRepoURL: String
+  comments: CommentCreateManyWithoutProjectInput
+}
+
+input ProjectCreateWithoutPostedByInput {
+  id: ID
+  name: String!
+  private: Boolean
+  status: String
+  wantFeedback: Boolean
+  wantAssistance: Boolean
+  deploymentURL: String
+  frontEndRepoURL: String
+  backEndRepoURL: String
+  likes: LikeCreateManyWithoutProjectInput
   comments: CommentCreateManyWithoutProjectInput
 }
 
@@ -665,20 +683,8 @@ input ProjectSubscriptionWhereInput {
   NOT: [ProjectSubscriptionWhereInput!]
 }
 
-input ProjectUpdateDataInput {
-  name: String
-  private: Boolean
-  status: String
-  wantFeedback: Boolean
-  wantAssistance: Boolean
-  deploymentURL: String
-  frontEndRepoURL: String
-  backEndRepoURL: String
-  likes: LikeUpdateManyWithoutProjectInput
-  comments: CommentUpdateManyWithoutProjectInput
-}
-
 input ProjectUpdateInput {
+  postedBy: UserUpdateOneRequiredWithoutProjectsInput
   name: String
   private: Boolean
   status: String
@@ -702,18 +708,6 @@ input ProjectUpdateManyDataInput {
   backEndRepoURL: String
 }
 
-input ProjectUpdateManyInput {
-  create: [ProjectCreateInput!]
-  update: [ProjectUpdateWithWhereUniqueNestedInput!]
-  upsert: [ProjectUpsertWithWhereUniqueNestedInput!]
-  delete: [ProjectWhereUniqueInput!]
-  connect: [ProjectWhereUniqueInput!]
-  set: [ProjectWhereUniqueInput!]
-  disconnect: [ProjectWhereUniqueInput!]
-  deleteMany: [ProjectScalarWhereInput!]
-  updateMany: [ProjectUpdateManyWithWhereNestedInput!]
-}
-
 input ProjectUpdateManyMutationInput {
   name: String
   private: Boolean
@@ -723,6 +717,18 @@ input ProjectUpdateManyMutationInput {
   deploymentURL: String
   frontEndRepoURL: String
   backEndRepoURL: String
+}
+
+input ProjectUpdateManyWithoutPostedByInput {
+  create: [ProjectCreateWithoutPostedByInput!]
+  delete: [ProjectWhereUniqueInput!]
+  connect: [ProjectWhereUniqueInput!]
+  set: [ProjectWhereUniqueInput!]
+  disconnect: [ProjectWhereUniqueInput!]
+  update: [ProjectUpdateWithWhereUniqueWithoutPostedByInput!]
+  upsert: [ProjectUpsertWithWhereUniqueWithoutPostedByInput!]
+  deleteMany: [ProjectScalarWhereInput!]
+  updateMany: [ProjectUpdateManyWithWhereNestedInput!]
 }
 
 input ProjectUpdateManyWithWhereNestedInput {
@@ -745,6 +751,7 @@ input ProjectUpdateOneRequiredWithoutLikesInput {
 }
 
 input ProjectUpdateWithoutCommentsDataInput {
+  postedBy: UserUpdateOneRequiredWithoutProjectsInput
   name: String
   private: Boolean
   status: String
@@ -757,6 +764,7 @@ input ProjectUpdateWithoutCommentsDataInput {
 }
 
 input ProjectUpdateWithoutLikesDataInput {
+  postedBy: UserUpdateOneRequiredWithoutProjectsInput
   name: String
   private: Boolean
   status: String
@@ -768,9 +776,22 @@ input ProjectUpdateWithoutLikesDataInput {
   comments: CommentUpdateManyWithoutProjectInput
 }
 
-input ProjectUpdateWithWhereUniqueNestedInput {
+input ProjectUpdateWithoutPostedByDataInput {
+  name: String
+  private: Boolean
+  status: String
+  wantFeedback: Boolean
+  wantAssistance: Boolean
+  deploymentURL: String
+  frontEndRepoURL: String
+  backEndRepoURL: String
+  likes: LikeUpdateManyWithoutProjectInput
+  comments: CommentUpdateManyWithoutProjectInput
+}
+
+input ProjectUpdateWithWhereUniqueWithoutPostedByInput {
   where: ProjectWhereUniqueInput!
-  data: ProjectUpdateDataInput!
+  data: ProjectUpdateWithoutPostedByDataInput!
 }
 
 input ProjectUpsertWithoutCommentsInput {
@@ -783,10 +804,10 @@ input ProjectUpsertWithoutLikesInput {
   create: ProjectCreateWithoutLikesInput!
 }
 
-input ProjectUpsertWithWhereUniqueNestedInput {
+input ProjectUpsertWithWhereUniqueWithoutPostedByInput {
   where: ProjectWhereUniqueInput!
-  update: ProjectUpdateDataInput!
-  create: ProjectCreateInput!
+  update: ProjectUpdateWithoutPostedByDataInput!
+  create: ProjectCreateWithoutPostedByInput!
 }
 
 input ProjectWhereInput {
@@ -804,6 +825,7 @@ input ProjectWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
+  postedBy: UserWhereInput
   name: String
   name_not: String
   name_in: [String!]
@@ -948,6 +970,8 @@ type User {
   portfolioURL: String
   twitterURL: String
   projects(where: ProjectWhereInput, orderBy: ProjectOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Project!]
+  followers(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
+  following(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
   createdAt: DateTime!
 }
 
@@ -970,12 +994,80 @@ input UserCreateInput {
   linkedinURL: String
   portfolioURL: String
   twitterURL: String
-  projects: ProjectCreateManyInput
+  projects: ProjectCreateManyWithoutPostedByInput
+  followers: UserCreateManyWithoutFollowersInput
+  following: UserCreateManyWithoutFollowingInput
+}
+
+input UserCreateManyWithoutFollowersInput {
+  create: [UserCreateWithoutFollowersInput!]
+  connect: [UserWhereUniqueInput!]
+}
+
+input UserCreateManyWithoutFollowingInput {
+  create: [UserCreateWithoutFollowingInput!]
+  connect: [UserWhereUniqueInput!]
 }
 
 input UserCreateOneInput {
   create: UserCreateInput
   connect: UserWhereUniqueInput
+}
+
+input UserCreateOneWithoutProjectsInput {
+  create: UserCreateWithoutProjectsInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateWithoutFollowersInput {
+  id: ID
+  username: String!
+  password: String!
+  name: String
+  email: String
+  bio: String
+  techStack: String
+  avatarURL: String
+  githubURL: String
+  linkedinURL: String
+  portfolioURL: String
+  twitterURL: String
+  projects: ProjectCreateManyWithoutPostedByInput
+  following: UserCreateManyWithoutFollowingInput
+}
+
+input UserCreateWithoutFollowingInput {
+  id: ID
+  username: String!
+  password: String!
+  name: String
+  email: String
+  bio: String
+  techStack: String
+  avatarURL: String
+  githubURL: String
+  linkedinURL: String
+  portfolioURL: String
+  twitterURL: String
+  projects: ProjectCreateManyWithoutPostedByInput
+  followers: UserCreateManyWithoutFollowersInput
+}
+
+input UserCreateWithoutProjectsInput {
+  id: ID
+  username: String!
+  password: String!
+  name: String
+  email: String
+  bio: String
+  techStack: String
+  avatarURL: String
+  githubURL: String
+  linkedinURL: String
+  portfolioURL: String
+  twitterURL: String
+  followers: UserCreateManyWithoutFollowersInput
+  following: UserCreateManyWithoutFollowingInput
 }
 
 type UserEdge {
@@ -1028,6 +1120,188 @@ type UserPreviousValues {
   createdAt: DateTime!
 }
 
+input UserScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  username: String
+  username_not: String
+  username_in: [String!]
+  username_not_in: [String!]
+  username_lt: String
+  username_lte: String
+  username_gt: String
+  username_gte: String
+  username_contains: String
+  username_not_contains: String
+  username_starts_with: String
+  username_not_starts_with: String
+  username_ends_with: String
+  username_not_ends_with: String
+  password: String
+  password_not: String
+  password_in: [String!]
+  password_not_in: [String!]
+  password_lt: String
+  password_lte: String
+  password_gt: String
+  password_gte: String
+  password_contains: String
+  password_not_contains: String
+  password_starts_with: String
+  password_not_starts_with: String
+  password_ends_with: String
+  password_not_ends_with: String
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  email: String
+  email_not: String
+  email_in: [String!]
+  email_not_in: [String!]
+  email_lt: String
+  email_lte: String
+  email_gt: String
+  email_gte: String
+  email_contains: String
+  email_not_contains: String
+  email_starts_with: String
+  email_not_starts_with: String
+  email_ends_with: String
+  email_not_ends_with: String
+  bio: String
+  bio_not: String
+  bio_in: [String!]
+  bio_not_in: [String!]
+  bio_lt: String
+  bio_lte: String
+  bio_gt: String
+  bio_gte: String
+  bio_contains: String
+  bio_not_contains: String
+  bio_starts_with: String
+  bio_not_starts_with: String
+  bio_ends_with: String
+  bio_not_ends_with: String
+  techStack: String
+  techStack_not: String
+  techStack_in: [String!]
+  techStack_not_in: [String!]
+  techStack_lt: String
+  techStack_lte: String
+  techStack_gt: String
+  techStack_gte: String
+  techStack_contains: String
+  techStack_not_contains: String
+  techStack_starts_with: String
+  techStack_not_starts_with: String
+  techStack_ends_with: String
+  techStack_not_ends_with: String
+  avatarURL: String
+  avatarURL_not: String
+  avatarURL_in: [String!]
+  avatarURL_not_in: [String!]
+  avatarURL_lt: String
+  avatarURL_lte: String
+  avatarURL_gt: String
+  avatarURL_gte: String
+  avatarURL_contains: String
+  avatarURL_not_contains: String
+  avatarURL_starts_with: String
+  avatarURL_not_starts_with: String
+  avatarURL_ends_with: String
+  avatarURL_not_ends_with: String
+  githubURL: String
+  githubURL_not: String
+  githubURL_in: [String!]
+  githubURL_not_in: [String!]
+  githubURL_lt: String
+  githubURL_lte: String
+  githubURL_gt: String
+  githubURL_gte: String
+  githubURL_contains: String
+  githubURL_not_contains: String
+  githubURL_starts_with: String
+  githubURL_not_starts_with: String
+  githubURL_ends_with: String
+  githubURL_not_ends_with: String
+  linkedinURL: String
+  linkedinURL_not: String
+  linkedinURL_in: [String!]
+  linkedinURL_not_in: [String!]
+  linkedinURL_lt: String
+  linkedinURL_lte: String
+  linkedinURL_gt: String
+  linkedinURL_gte: String
+  linkedinURL_contains: String
+  linkedinURL_not_contains: String
+  linkedinURL_starts_with: String
+  linkedinURL_not_starts_with: String
+  linkedinURL_ends_with: String
+  linkedinURL_not_ends_with: String
+  portfolioURL: String
+  portfolioURL_not: String
+  portfolioURL_in: [String!]
+  portfolioURL_not_in: [String!]
+  portfolioURL_lt: String
+  portfolioURL_lte: String
+  portfolioURL_gt: String
+  portfolioURL_gte: String
+  portfolioURL_contains: String
+  portfolioURL_not_contains: String
+  portfolioURL_starts_with: String
+  portfolioURL_not_starts_with: String
+  portfolioURL_ends_with: String
+  portfolioURL_not_ends_with: String
+  twitterURL: String
+  twitterURL_not: String
+  twitterURL_in: [String!]
+  twitterURL_not_in: [String!]
+  twitterURL_lt: String
+  twitterURL_lte: String
+  twitterURL_gt: String
+  twitterURL_gte: String
+  twitterURL_contains: String
+  twitterURL_not_contains: String
+  twitterURL_starts_with: String
+  twitterURL_not_starts_with: String
+  twitterURL_ends_with: String
+  twitterURL_not_ends_with: String
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  AND: [UserScalarWhereInput!]
+  OR: [UserScalarWhereInput!]
+  NOT: [UserScalarWhereInput!]
+}
+
 type UserSubscriptionPayload {
   mutation: MutationType!
   node: User
@@ -1058,7 +1332,9 @@ input UserUpdateDataInput {
   linkedinURL: String
   portfolioURL: String
   twitterURL: String
-  projects: ProjectUpdateManyInput
+  projects: ProjectUpdateManyWithoutPostedByInput
+  followers: UserUpdateManyWithoutFollowersInput
+  following: UserUpdateManyWithoutFollowingInput
 }
 
 input UserUpdateInput {
@@ -1073,7 +1349,23 @@ input UserUpdateInput {
   linkedinURL: String
   portfolioURL: String
   twitterURL: String
-  projects: ProjectUpdateManyInput
+  projects: ProjectUpdateManyWithoutPostedByInput
+  followers: UserUpdateManyWithoutFollowersInput
+  following: UserUpdateManyWithoutFollowingInput
+}
+
+input UserUpdateManyDataInput {
+  username: String
+  password: String
+  name: String
+  email: String
+  bio: String
+  techStack: String
+  avatarURL: String
+  githubURL: String
+  linkedinURL: String
+  portfolioURL: String
+  twitterURL: String
 }
 
 input UserUpdateManyMutationInput {
@@ -1090,6 +1382,35 @@ input UserUpdateManyMutationInput {
   twitterURL: String
 }
 
+input UserUpdateManyWithoutFollowersInput {
+  create: [UserCreateWithoutFollowersInput!]
+  delete: [UserWhereUniqueInput!]
+  connect: [UserWhereUniqueInput!]
+  set: [UserWhereUniqueInput!]
+  disconnect: [UserWhereUniqueInput!]
+  update: [UserUpdateWithWhereUniqueWithoutFollowersInput!]
+  upsert: [UserUpsertWithWhereUniqueWithoutFollowersInput!]
+  deleteMany: [UserScalarWhereInput!]
+  updateMany: [UserUpdateManyWithWhereNestedInput!]
+}
+
+input UserUpdateManyWithoutFollowingInput {
+  create: [UserCreateWithoutFollowingInput!]
+  delete: [UserWhereUniqueInput!]
+  connect: [UserWhereUniqueInput!]
+  set: [UserWhereUniqueInput!]
+  disconnect: [UserWhereUniqueInput!]
+  update: [UserUpdateWithWhereUniqueWithoutFollowingInput!]
+  upsert: [UserUpsertWithWhereUniqueWithoutFollowingInput!]
+  deleteMany: [UserScalarWhereInput!]
+  updateMany: [UserUpdateManyWithWhereNestedInput!]
+}
+
+input UserUpdateManyWithWhereNestedInput {
+  where: UserScalarWhereInput!
+  data: UserUpdateManyDataInput!
+}
+
 input UserUpdateOneRequiredInput {
   create: UserCreateInput
   update: UserUpdateDataInput
@@ -1097,9 +1418,91 @@ input UserUpdateOneRequiredInput {
   connect: UserWhereUniqueInput
 }
 
+input UserUpdateOneRequiredWithoutProjectsInput {
+  create: UserCreateWithoutProjectsInput
+  update: UserUpdateWithoutProjectsDataInput
+  upsert: UserUpsertWithoutProjectsInput
+  connect: UserWhereUniqueInput
+}
+
+input UserUpdateWithoutFollowersDataInput {
+  username: String
+  password: String
+  name: String
+  email: String
+  bio: String
+  techStack: String
+  avatarURL: String
+  githubURL: String
+  linkedinURL: String
+  portfolioURL: String
+  twitterURL: String
+  projects: ProjectUpdateManyWithoutPostedByInput
+  following: UserUpdateManyWithoutFollowingInput
+}
+
+input UserUpdateWithoutFollowingDataInput {
+  username: String
+  password: String
+  name: String
+  email: String
+  bio: String
+  techStack: String
+  avatarURL: String
+  githubURL: String
+  linkedinURL: String
+  portfolioURL: String
+  twitterURL: String
+  projects: ProjectUpdateManyWithoutPostedByInput
+  followers: UserUpdateManyWithoutFollowersInput
+}
+
+input UserUpdateWithoutProjectsDataInput {
+  username: String
+  password: String
+  name: String
+  email: String
+  bio: String
+  techStack: String
+  avatarURL: String
+  githubURL: String
+  linkedinURL: String
+  portfolioURL: String
+  twitterURL: String
+  followers: UserUpdateManyWithoutFollowersInput
+  following: UserUpdateManyWithoutFollowingInput
+}
+
+input UserUpdateWithWhereUniqueWithoutFollowersInput {
+  where: UserWhereUniqueInput!
+  data: UserUpdateWithoutFollowersDataInput!
+}
+
+input UserUpdateWithWhereUniqueWithoutFollowingInput {
+  where: UserWhereUniqueInput!
+  data: UserUpdateWithoutFollowingDataInput!
+}
+
 input UserUpsertNestedInput {
   update: UserUpdateDataInput!
   create: UserCreateInput!
+}
+
+input UserUpsertWithoutProjectsInput {
+  update: UserUpdateWithoutProjectsDataInput!
+  create: UserCreateWithoutProjectsInput!
+}
+
+input UserUpsertWithWhereUniqueWithoutFollowersInput {
+  where: UserWhereUniqueInput!
+  update: UserUpdateWithoutFollowersDataInput!
+  create: UserCreateWithoutFollowersInput!
+}
+
+input UserUpsertWithWhereUniqueWithoutFollowingInput {
+  where: UserWhereUniqueInput!
+  update: UserUpdateWithoutFollowingDataInput!
+  create: UserCreateWithoutFollowingInput!
 }
 
 input UserWhereInput {
@@ -1274,6 +1677,12 @@ input UserWhereInput {
   projects_every: ProjectWhereInput
   projects_some: ProjectWhereInput
   projects_none: ProjectWhereInput
+  followers_every: UserWhereInput
+  followers_some: UserWhereInput
+  followers_none: UserWhereInput
+  following_every: UserWhereInput
+  following_some: UserWhereInput
+  following_none: UserWhereInput
   createdAt: DateTime
   createdAt_not: DateTime
   createdAt_in: [DateTime!]

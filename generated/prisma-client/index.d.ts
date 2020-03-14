@@ -278,37 +278,69 @@ export type UserOrderByInput =
 
 export type MutationType = "CREATED" | "UPDATED" | "DELETED";
 
-export interface ProjectUpdateManyInput {
-  create?: Maybe<ProjectCreateInput[] | ProjectCreateInput>;
-  update?: Maybe<
-    | ProjectUpdateWithWhereUniqueNestedInput[]
-    | ProjectUpdateWithWhereUniqueNestedInput
-  >;
-  upsert?: Maybe<
-    | ProjectUpsertWithWhereUniqueNestedInput[]
-    | ProjectUpsertWithWhereUniqueNestedInput
-  >;
-  delete?: Maybe<ProjectWhereUniqueInput[] | ProjectWhereUniqueInput>;
-  connect?: Maybe<ProjectWhereUniqueInput[] | ProjectWhereUniqueInput>;
-  set?: Maybe<ProjectWhereUniqueInput[] | ProjectWhereUniqueInput>;
-  disconnect?: Maybe<ProjectWhereUniqueInput[] | ProjectWhereUniqueInput>;
-  deleteMany?: Maybe<ProjectScalarWhereInput[] | ProjectScalarWhereInput>;
-  updateMany?: Maybe<
-    | ProjectUpdateManyWithWhereNestedInput[]
-    | ProjectUpdateManyWithWhereNestedInput
-  >;
+export interface LikeUpdateWithoutProjectDataInput {
+  user?: Maybe<UserUpdateOneRequiredInput>;
 }
 
 export type CommentWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
 }>;
 
-export interface LikeUpdateWithWhereUniqueWithoutProjectInput {
-  where: LikeWhereUniqueInput;
-  data: LikeUpdateWithoutProjectDataInput;
+export interface ProjectCreateOneWithoutCommentsInput {
+  create?: Maybe<ProjectCreateWithoutCommentsInput>;
+  connect?: Maybe<ProjectWhereUniqueInput>;
 }
 
-export interface LikeWhereInput {
+export interface UserUpdateOneRequiredWithoutProjectsInput {
+  create?: Maybe<UserCreateWithoutProjectsInput>;
+  update?: Maybe<UserUpdateWithoutProjectsDataInput>;
+  upsert?: Maybe<UserUpsertWithoutProjectsInput>;
+  connect?: Maybe<UserWhereUniqueInput>;
+}
+
+export interface ProjectCreateWithoutCommentsInput {
+  id?: Maybe<ID_Input>;
+  postedBy: UserCreateOneWithoutProjectsInput;
+  name: String;
+  private?: Maybe<Boolean>;
+  status?: Maybe<String>;
+  wantFeedback?: Maybe<Boolean>;
+  wantAssistance?: Maybe<Boolean>;
+  deploymentURL?: Maybe<String>;
+  frontEndRepoURL?: Maybe<String>;
+  backEndRepoURL?: Maybe<String>;
+  likes?: Maybe<LikeCreateManyWithoutProjectInput>;
+}
+
+export interface CommentUpdateManyWithoutProjectInput {
+  create?: Maybe<
+    CommentCreateWithoutProjectInput[] | CommentCreateWithoutProjectInput
+  >;
+  delete?: Maybe<CommentWhereUniqueInput[] | CommentWhereUniqueInput>;
+  connect?: Maybe<CommentWhereUniqueInput[] | CommentWhereUniqueInput>;
+  set?: Maybe<CommentWhereUniqueInput[] | CommentWhereUniqueInput>;
+  disconnect?: Maybe<CommentWhereUniqueInput[] | CommentWhereUniqueInput>;
+  update?: Maybe<
+    | CommentUpdateWithWhereUniqueWithoutProjectInput[]
+    | CommentUpdateWithWhereUniqueWithoutProjectInput
+  >;
+  upsert?: Maybe<
+    | CommentUpsertWithWhereUniqueWithoutProjectInput[]
+    | CommentUpsertWithWhereUniqueWithoutProjectInput
+  >;
+  deleteMany?: Maybe<CommentScalarWhereInput[] | CommentScalarWhereInput>;
+  updateMany?: Maybe<
+    | CommentUpdateManyWithWhereNestedInput[]
+    | CommentUpdateManyWithWhereNestedInput
+  >;
+}
+
+export interface UserCreateOneWithoutProjectsInput {
+  create?: Maybe<UserCreateWithoutProjectsInput>;
+  connect?: Maybe<UserWhereUniqueInput>;
+}
+
+export interface CommentWhereInput {
   id?: Maybe<ID_Input>;
   id_not?: Maybe<ID_Input>;
   id_in?: Maybe<ID_Input[] | ID_Input>;
@@ -323,70 +355,67 @@ export interface LikeWhereInput {
   id_not_starts_with?: Maybe<ID_Input>;
   id_ends_with?: Maybe<ID_Input>;
   id_not_ends_with?: Maybe<ID_Input>;
-  project?: Maybe<ProjectWhereInput>;
   user?: Maybe<UserWhereInput>;
-  AND?: Maybe<LikeWhereInput[] | LikeWhereInput>;
-  OR?: Maybe<LikeWhereInput[] | LikeWhereInput>;
-  NOT?: Maybe<LikeWhereInput[] | LikeWhereInput>;
+  text?: Maybe<String>;
+  text_not?: Maybe<String>;
+  text_in?: Maybe<String[] | String>;
+  text_not_in?: Maybe<String[] | String>;
+  text_lt?: Maybe<String>;
+  text_lte?: Maybe<String>;
+  text_gt?: Maybe<String>;
+  text_gte?: Maybe<String>;
+  text_contains?: Maybe<String>;
+  text_not_contains?: Maybe<String>;
+  text_starts_with?: Maybe<String>;
+  text_not_starts_with?: Maybe<String>;
+  text_ends_with?: Maybe<String>;
+  text_not_ends_with?: Maybe<String>;
+  project?: Maybe<ProjectWhereInput>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  AND?: Maybe<CommentWhereInput[] | CommentWhereInput>;
+  OR?: Maybe<CommentWhereInput[] | CommentWhereInput>;
+  NOT?: Maybe<CommentWhereInput[] | CommentWhereInput>;
 }
 
-export interface ProjectCreateInput {
+export interface UserCreateWithoutProjectsInput {
   id?: Maybe<ID_Input>;
-  name: String;
-  private?: Maybe<Boolean>;
-  status?: Maybe<String>;
-  wantFeedback?: Maybe<Boolean>;
-  wantAssistance?: Maybe<Boolean>;
-  deploymentURL?: Maybe<String>;
-  frontEndRepoURL?: Maybe<String>;
-  backEndRepoURL?: Maybe<String>;
-  likes?: Maybe<LikeCreateManyWithoutProjectInput>;
-  comments?: Maybe<CommentCreateManyWithoutProjectInput>;
-}
-
-export interface ProjectUpdateManyDataInput {
+  username: String;
+  password: String;
   name?: Maybe<String>;
-  private?: Maybe<Boolean>;
-  status?: Maybe<String>;
-  wantFeedback?: Maybe<Boolean>;
-  wantAssistance?: Maybe<Boolean>;
-  deploymentURL?: Maybe<String>;
-  frontEndRepoURL?: Maybe<String>;
-  backEndRepoURL?: Maybe<String>;
+  email?: Maybe<String>;
+  bio?: Maybe<String>;
+  techStack?: Maybe<String>;
+  avatarURL?: Maybe<String>;
+  githubURL?: Maybe<String>;
+  linkedinURL?: Maybe<String>;
+  portfolioURL?: Maybe<String>;
+  twitterURL?: Maybe<String>;
+  followers?: Maybe<UserCreateManyWithoutFollowersInput>;
+  following?: Maybe<UserCreateManyWithoutFollowingInput>;
 }
 
-export interface LikeCreateManyWithoutProjectInput {
-  create?: Maybe<
-    LikeCreateWithoutProjectInput[] | LikeCreateWithoutProjectInput
-  >;
-  connect?: Maybe<LikeWhereUniqueInput[] | LikeWhereUniqueInput>;
-}
-
-export interface LikeUpdateWithoutProjectDataInput {
-  user?: Maybe<UserUpdateOneRequiredInput>;
-}
-
-export interface LikeCreateWithoutProjectInput {
-  id?: Maybe<ID_Input>;
-  user: UserCreateOneInput;
-}
-
-export interface ProjectSubscriptionWhereInput {
+export interface UserSubscriptionWhereInput {
   mutation_in?: Maybe<MutationType[] | MutationType>;
   updatedFields_contains?: Maybe<String>;
   updatedFields_contains_every?: Maybe<String[] | String>;
   updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<ProjectWhereInput>;
-  AND?: Maybe<ProjectSubscriptionWhereInput[] | ProjectSubscriptionWhereInput>;
-  OR?: Maybe<ProjectSubscriptionWhereInput[] | ProjectSubscriptionWhereInput>;
-  NOT?: Maybe<ProjectSubscriptionWhereInput[] | ProjectSubscriptionWhereInput>;
+  node?: Maybe<UserWhereInput>;
+  AND?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
+  OR?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
+  NOT?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
 }
 
-export interface CommentCreateManyWithoutProjectInput {
-  create?: Maybe<
-    CommentCreateWithoutProjectInput[] | CommentCreateWithoutProjectInput
-  >;
-  connect?: Maybe<CommentWhereUniqueInput[] | CommentWhereUniqueInput>;
+export interface CommentUpdateInput {
+  user?: Maybe<UserUpdateOneRequiredInput>;
+  text?: Maybe<String>;
+  project?: Maybe<ProjectUpdateOneRequiredWithoutCommentsInput>;
 }
 
 export interface ProjectWhereInput {
@@ -404,6 +433,7 @@ export interface ProjectWhereInput {
   id_not_starts_with?: Maybe<ID_Input>;
   id_ends_with?: Maybe<ID_Input>;
   id_not_ends_with?: Maybe<ID_Input>;
+  postedBy?: Maybe<UserWhereInput>;
   name?: Maybe<String>;
   name_not?: Maybe<String>;
   name_in?: Maybe<String[] | String>;
@@ -507,78 +537,6 @@ export interface ProjectWhereInput {
   NOT?: Maybe<ProjectWhereInput[] | ProjectWhereInput>;
 }
 
-export interface CommentCreateWithoutProjectInput {
-  id?: Maybe<ID_Input>;
-  user: UserCreateOneInput;
-  text: String;
-}
-
-export interface UserUpdateManyMutationInput {
-  username?: Maybe<String>;
-  password?: Maybe<String>;
-  name?: Maybe<String>;
-  email?: Maybe<String>;
-  bio?: Maybe<String>;
-  techStack?: Maybe<String>;
-  avatarURL?: Maybe<String>;
-  githubURL?: Maybe<String>;
-  linkedinURL?: Maybe<String>;
-  portfolioURL?: Maybe<String>;
-  twitterURL?: Maybe<String>;
-}
-
-export interface ProjectCreateOneWithoutCommentsInput {
-  create?: Maybe<ProjectCreateWithoutCommentsInput>;
-  connect?: Maybe<ProjectWhereUniqueInput>;
-}
-
-export interface ProjectUpdateManyMutationInput {
-  name?: Maybe<String>;
-  private?: Maybe<Boolean>;
-  status?: Maybe<String>;
-  wantFeedback?: Maybe<Boolean>;
-  wantAssistance?: Maybe<Boolean>;
-  deploymentURL?: Maybe<String>;
-  frontEndRepoURL?: Maybe<String>;
-  backEndRepoURL?: Maybe<String>;
-}
-
-export interface ProjectCreateWithoutCommentsInput {
-  id?: Maybe<ID_Input>;
-  name: String;
-  private?: Maybe<Boolean>;
-  status?: Maybe<String>;
-  wantFeedback?: Maybe<Boolean>;
-  wantAssistance?: Maybe<Boolean>;
-  deploymentURL?: Maybe<String>;
-  frontEndRepoURL?: Maybe<String>;
-  backEndRepoURL?: Maybe<String>;
-  likes?: Maybe<LikeCreateManyWithoutProjectInput>;
-}
-
-export interface ProjectUpsertWithoutLikesInput {
-  update: ProjectUpdateWithoutLikesDataInput;
-  create: ProjectCreateWithoutLikesInput;
-}
-
-export interface CommentUpdateInput {
-  user?: Maybe<UserUpdateOneRequiredInput>;
-  text?: Maybe<String>;
-  project?: Maybe<ProjectUpdateOneRequiredWithoutCommentsInput>;
-}
-
-export interface ProjectUpdateWithoutLikesDataInput {
-  name?: Maybe<String>;
-  private?: Maybe<Boolean>;
-  status?: Maybe<String>;
-  wantFeedback?: Maybe<Boolean>;
-  wantAssistance?: Maybe<Boolean>;
-  deploymentURL?: Maybe<String>;
-  frontEndRepoURL?: Maybe<String>;
-  backEndRepoURL?: Maybe<String>;
-  comments?: Maybe<CommentUpdateManyWithoutProjectInput>;
-}
-
 export interface UserUpdateOneRequiredInput {
   create?: Maybe<UserCreateInput>;
   update?: Maybe<UserUpdateDataInput>;
@@ -586,9 +544,15 @@ export interface UserUpdateOneRequiredInput {
   connect?: Maybe<UserWhereUniqueInput>;
 }
 
-export interface LikeUpdateInput {
-  project?: Maybe<ProjectUpdateOneRequiredWithoutLikesInput>;
-  user?: Maybe<UserUpdateOneRequiredInput>;
+export interface CommentSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<CommentWhereInput>;
+  AND?: Maybe<CommentSubscriptionWhereInput[] | CommentSubscriptionWhereInput>;
+  OR?: Maybe<CommentSubscriptionWhereInput[] | CommentSubscriptionWhereInput>;
+  NOT?: Maybe<CommentSubscriptionWhereInput[] | CommentSubscriptionWhereInput>;
 }
 
 export interface UserUpdateDataInput {
@@ -603,43 +567,53 @@ export interface UserUpdateDataInput {
   linkedinURL?: Maybe<String>;
   portfolioURL?: Maybe<String>;
   twitterURL?: Maybe<String>;
-  projects?: Maybe<ProjectUpdateManyInput>;
+  projects?: Maybe<ProjectUpdateManyWithoutPostedByInput>;
+  followers?: Maybe<UserUpdateManyWithoutFollowersInput>;
+  following?: Maybe<UserUpdateManyWithoutFollowingInput>;
 }
 
-export interface ProjectCreateWithoutLikesInput {
-  id?: Maybe<ID_Input>;
-  name: String;
-  private?: Maybe<Boolean>;
-  status?: Maybe<String>;
-  wantFeedback?: Maybe<Boolean>;
-  wantAssistance?: Maybe<Boolean>;
-  deploymentURL?: Maybe<String>;
-  frontEndRepoURL?: Maybe<String>;
-  backEndRepoURL?: Maybe<String>;
-  comments?: Maybe<CommentCreateManyWithoutProjectInput>;
+export interface UserUpdateInput {
+  username?: Maybe<String>;
+  password?: Maybe<String>;
+  name?: Maybe<String>;
+  email?: Maybe<String>;
+  bio?: Maybe<String>;
+  techStack?: Maybe<String>;
+  avatarURL?: Maybe<String>;
+  githubURL?: Maybe<String>;
+  linkedinURL?: Maybe<String>;
+  portfolioURL?: Maybe<String>;
+  twitterURL?: Maybe<String>;
+  projects?: Maybe<ProjectUpdateManyWithoutPostedByInput>;
+  followers?: Maybe<UserUpdateManyWithoutFollowersInput>;
+  following?: Maybe<UserUpdateManyWithoutFollowingInput>;
 }
 
-export interface UserUpsertNestedInput {
-  update: UserUpdateDataInput;
-  create: UserCreateInput;
+export interface ProjectUpdateManyWithoutPostedByInput {
+  create?: Maybe<
+    ProjectCreateWithoutPostedByInput[] | ProjectCreateWithoutPostedByInput
+  >;
+  delete?: Maybe<ProjectWhereUniqueInput[] | ProjectWhereUniqueInput>;
+  connect?: Maybe<ProjectWhereUniqueInput[] | ProjectWhereUniqueInput>;
+  set?: Maybe<ProjectWhereUniqueInput[] | ProjectWhereUniqueInput>;
+  disconnect?: Maybe<ProjectWhereUniqueInput[] | ProjectWhereUniqueInput>;
+  update?: Maybe<
+    | ProjectUpdateWithWhereUniqueWithoutPostedByInput[]
+    | ProjectUpdateWithWhereUniqueWithoutPostedByInput
+  >;
+  upsert?: Maybe<
+    | ProjectUpsertWithWhereUniqueWithoutPostedByInput[]
+    | ProjectUpsertWithWhereUniqueWithoutPostedByInput
+  >;
+  deleteMany?: Maybe<ProjectScalarWhereInput[] | ProjectScalarWhereInput>;
+  updateMany?: Maybe<
+    | ProjectUpdateManyWithWhereNestedInput[]
+    | ProjectUpdateManyWithWhereNestedInput
+  >;
 }
 
-export interface LikeCreateInput {
-  id?: Maybe<ID_Input>;
-  project: ProjectCreateOneWithoutLikesInput;
-  user: UserCreateOneInput;
-}
-
-export interface ProjectUpdateWithWhereUniqueNestedInput {
-  where: ProjectWhereUniqueInput;
-  data: ProjectUpdateDataInput;
-}
-
-export interface CommentUpdateManyMutationInput {
-  text?: Maybe<String>;
-}
-
-export interface ProjectUpdateDataInput {
+export interface ProjectUpdateInput {
+  postedBy?: Maybe<UserUpdateOneRequiredWithoutProjectsInput>;
   name?: Maybe<String>;
   private?: Maybe<Boolean>;
   status?: Maybe<String>;
@@ -652,7 +626,16 @@ export interface ProjectUpdateDataInput {
   comments?: Maybe<CommentUpdateManyWithoutProjectInput>;
 }
 
-export interface ProjectUpdateWithoutCommentsDataInput {
+export interface ProjectUpdateWithWhereUniqueWithoutPostedByInput {
+  where: ProjectWhereUniqueInput;
+  data: ProjectUpdateWithoutPostedByDataInput;
+}
+
+export type LikeWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+}>;
+
+export interface ProjectUpdateWithoutPostedByDataInput {
   name?: Maybe<String>;
   private?: Maybe<Boolean>;
   status?: Maybe<String>;
@@ -662,6 +645,20 @@ export interface ProjectUpdateWithoutCommentsDataInput {
   frontEndRepoURL?: Maybe<String>;
   backEndRepoURL?: Maybe<String>;
   likes?: Maybe<LikeUpdateManyWithoutProjectInput>;
+  comments?: Maybe<CommentUpdateManyWithoutProjectInput>;
+}
+
+export interface ProjectUpdateWithoutLikesDataInput {
+  postedBy?: Maybe<UserUpdateOneRequiredWithoutProjectsInput>;
+  name?: Maybe<String>;
+  private?: Maybe<Boolean>;
+  status?: Maybe<String>;
+  wantFeedback?: Maybe<Boolean>;
+  wantAssistance?: Maybe<Boolean>;
+  deploymentURL?: Maybe<String>;
+  frontEndRepoURL?: Maybe<String>;
+  backEndRepoURL?: Maybe<String>;
+  comments?: Maybe<CommentUpdateManyWithoutProjectInput>;
 }
 
 export interface LikeUpdateManyWithoutProjectInput {
@@ -683,9 +680,513 @@ export interface LikeUpdateManyWithoutProjectInput {
   deleteMany?: Maybe<LikeScalarWhereInput[] | LikeScalarWhereInput>;
 }
 
+export type ProjectWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+}>;
+
+export interface LikeUpdateWithWhereUniqueWithoutProjectInput {
+  where: LikeWhereUniqueInput;
+  data: LikeUpdateWithoutProjectDataInput;
+}
+
+export interface ProjectCreateWithoutLikesInput {
+  id?: Maybe<ID_Input>;
+  postedBy: UserCreateOneWithoutProjectsInput;
+  name: String;
+  private?: Maybe<Boolean>;
+  status?: Maybe<String>;
+  wantFeedback?: Maybe<Boolean>;
+  wantAssistance?: Maybe<Boolean>;
+  deploymentURL?: Maybe<String>;
+  frontEndRepoURL?: Maybe<String>;
+  backEndRepoURL?: Maybe<String>;
+  comments?: Maybe<CommentCreateManyWithoutProjectInput>;
+}
+
+export interface UserUpsertWithoutProjectsInput {
+  update: UserUpdateWithoutProjectsDataInput;
+  create: UserCreateWithoutProjectsInput;
+}
+
+export type UserWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+  username?: Maybe<String>;
+}>;
+
+export interface LikeUpsertWithWhereUniqueWithoutProjectInput {
+  where: LikeWhereUniqueInput;
+  update: LikeUpdateWithoutProjectDataInput;
+  create: LikeCreateWithoutProjectInput;
+}
+
+export interface CommentUpdateManyMutationInput {
+  text?: Maybe<String>;
+}
+
+export interface LikeScalarWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  AND?: Maybe<LikeScalarWhereInput[] | LikeScalarWhereInput>;
+  OR?: Maybe<LikeScalarWhereInput[] | LikeScalarWhereInput>;
+  NOT?: Maybe<LikeScalarWhereInput[] | LikeScalarWhereInput>;
+}
+
 export interface UserCreateOneInput {
   create?: Maybe<UserCreateInput>;
   connect?: Maybe<UserWhereUniqueInput>;
+}
+
+export interface UserUpdateWithoutProjectsDataInput {
+  username?: Maybe<String>;
+  password?: Maybe<String>;
+  name?: Maybe<String>;
+  email?: Maybe<String>;
+  bio?: Maybe<String>;
+  techStack?: Maybe<String>;
+  avatarURL?: Maybe<String>;
+  githubURL?: Maybe<String>;
+  linkedinURL?: Maybe<String>;
+  portfolioURL?: Maybe<String>;
+  twitterURL?: Maybe<String>;
+  followers?: Maybe<UserUpdateManyWithoutFollowersInput>;
+  following?: Maybe<UserUpdateManyWithoutFollowingInput>;
+}
+
+export interface ProjectCreateManyWithoutPostedByInput {
+  create?: Maybe<
+    ProjectCreateWithoutPostedByInput[] | ProjectCreateWithoutPostedByInput
+  >;
+  connect?: Maybe<ProjectWhereUniqueInput[] | ProjectWhereUniqueInput>;
+}
+
+export interface CommentUpdateWithWhereUniqueWithoutProjectInput {
+  where: CommentWhereUniqueInput;
+  data: CommentUpdateWithoutProjectDataInput;
+}
+
+export interface LikeCreateManyWithoutProjectInput {
+  create?: Maybe<
+    LikeCreateWithoutProjectInput[] | LikeCreateWithoutProjectInput
+  >;
+  connect?: Maybe<LikeWhereUniqueInput[] | LikeWhereUniqueInput>;
+}
+
+export interface CommentUpdateWithoutProjectDataInput {
+  user?: Maybe<UserUpdateOneRequiredInput>;
+  text?: Maybe<String>;
+}
+
+export interface CommentCreateManyWithoutProjectInput {
+  create?: Maybe<
+    CommentCreateWithoutProjectInput[] | CommentCreateWithoutProjectInput
+  >;
+  connect?: Maybe<CommentWhereUniqueInput[] | CommentWhereUniqueInput>;
+}
+
+export interface CommentUpsertWithWhereUniqueWithoutProjectInput {
+  where: CommentWhereUniqueInput;
+  update: CommentUpdateWithoutProjectDataInput;
+  create: CommentCreateWithoutProjectInput;
+}
+
+export interface UserCreateManyWithoutFollowersInput {
+  create?: Maybe<
+    UserCreateWithoutFollowersInput[] | UserCreateWithoutFollowersInput
+  >;
+  connect?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
+}
+
+export interface CommentScalarWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  text?: Maybe<String>;
+  text_not?: Maybe<String>;
+  text_in?: Maybe<String[] | String>;
+  text_not_in?: Maybe<String[] | String>;
+  text_lt?: Maybe<String>;
+  text_lte?: Maybe<String>;
+  text_gt?: Maybe<String>;
+  text_gte?: Maybe<String>;
+  text_contains?: Maybe<String>;
+  text_not_contains?: Maybe<String>;
+  text_starts_with?: Maybe<String>;
+  text_not_starts_with?: Maybe<String>;
+  text_ends_with?: Maybe<String>;
+  text_not_ends_with?: Maybe<String>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  AND?: Maybe<CommentScalarWhereInput[] | CommentScalarWhereInput>;
+  OR?: Maybe<CommentScalarWhereInput[] | CommentScalarWhereInput>;
+  NOT?: Maybe<CommentScalarWhereInput[] | CommentScalarWhereInput>;
+}
+
+export interface UserCreateManyWithoutFollowingInput {
+  create?: Maybe<
+    UserCreateWithoutFollowingInput[] | UserCreateWithoutFollowingInput
+  >;
+  connect?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
+}
+
+export interface CommentUpdateManyWithWhereNestedInput {
+  where: CommentScalarWhereInput;
+  data: CommentUpdateManyDataInput;
+}
+
+export interface LikeWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  project?: Maybe<ProjectWhereInput>;
+  user?: Maybe<UserWhereInput>;
+  AND?: Maybe<LikeWhereInput[] | LikeWhereInput>;
+  OR?: Maybe<LikeWhereInput[] | LikeWhereInput>;
+  NOT?: Maybe<LikeWhereInput[] | LikeWhereInput>;
+}
+
+export interface CommentUpdateManyDataInput {
+  text?: Maybe<String>;
+}
+
+export interface ProjectSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<ProjectWhereInput>;
+  AND?: Maybe<ProjectSubscriptionWhereInput[] | ProjectSubscriptionWhereInput>;
+  OR?: Maybe<ProjectSubscriptionWhereInput[] | ProjectSubscriptionWhereInput>;
+  NOT?: Maybe<ProjectSubscriptionWhereInput[] | ProjectSubscriptionWhereInput>;
+}
+
+export interface ProjectUpsertWithWhereUniqueWithoutPostedByInput {
+  where: ProjectWhereUniqueInput;
+  update: ProjectUpdateWithoutPostedByDataInput;
+  create: ProjectCreateWithoutPostedByInput;
+}
+
+export interface UserUpdateManyMutationInput {
+  username?: Maybe<String>;
+  password?: Maybe<String>;
+  name?: Maybe<String>;
+  email?: Maybe<String>;
+  bio?: Maybe<String>;
+  techStack?: Maybe<String>;
+  avatarURL?: Maybe<String>;
+  githubURL?: Maybe<String>;
+  linkedinURL?: Maybe<String>;
+  portfolioURL?: Maybe<String>;
+  twitterURL?: Maybe<String>;
+}
+
+export interface ProjectScalarWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  name?: Maybe<String>;
+  name_not?: Maybe<String>;
+  name_in?: Maybe<String[] | String>;
+  name_not_in?: Maybe<String[] | String>;
+  name_lt?: Maybe<String>;
+  name_lte?: Maybe<String>;
+  name_gt?: Maybe<String>;
+  name_gte?: Maybe<String>;
+  name_contains?: Maybe<String>;
+  name_not_contains?: Maybe<String>;
+  name_starts_with?: Maybe<String>;
+  name_not_starts_with?: Maybe<String>;
+  name_ends_with?: Maybe<String>;
+  name_not_ends_with?: Maybe<String>;
+  private?: Maybe<Boolean>;
+  private_not?: Maybe<Boolean>;
+  status?: Maybe<String>;
+  status_not?: Maybe<String>;
+  status_in?: Maybe<String[] | String>;
+  status_not_in?: Maybe<String[] | String>;
+  status_lt?: Maybe<String>;
+  status_lte?: Maybe<String>;
+  status_gt?: Maybe<String>;
+  status_gte?: Maybe<String>;
+  status_contains?: Maybe<String>;
+  status_not_contains?: Maybe<String>;
+  status_starts_with?: Maybe<String>;
+  status_not_starts_with?: Maybe<String>;
+  status_ends_with?: Maybe<String>;
+  status_not_ends_with?: Maybe<String>;
+  wantFeedback?: Maybe<Boolean>;
+  wantFeedback_not?: Maybe<Boolean>;
+  wantAssistance?: Maybe<Boolean>;
+  wantAssistance_not?: Maybe<Boolean>;
+  deploymentURL?: Maybe<String>;
+  deploymentURL_not?: Maybe<String>;
+  deploymentURL_in?: Maybe<String[] | String>;
+  deploymentURL_not_in?: Maybe<String[] | String>;
+  deploymentURL_lt?: Maybe<String>;
+  deploymentURL_lte?: Maybe<String>;
+  deploymentURL_gt?: Maybe<String>;
+  deploymentURL_gte?: Maybe<String>;
+  deploymentURL_contains?: Maybe<String>;
+  deploymentURL_not_contains?: Maybe<String>;
+  deploymentURL_starts_with?: Maybe<String>;
+  deploymentURL_not_starts_with?: Maybe<String>;
+  deploymentURL_ends_with?: Maybe<String>;
+  deploymentURL_not_ends_with?: Maybe<String>;
+  frontEndRepoURL?: Maybe<String>;
+  frontEndRepoURL_not?: Maybe<String>;
+  frontEndRepoURL_in?: Maybe<String[] | String>;
+  frontEndRepoURL_not_in?: Maybe<String[] | String>;
+  frontEndRepoURL_lt?: Maybe<String>;
+  frontEndRepoURL_lte?: Maybe<String>;
+  frontEndRepoURL_gt?: Maybe<String>;
+  frontEndRepoURL_gte?: Maybe<String>;
+  frontEndRepoURL_contains?: Maybe<String>;
+  frontEndRepoURL_not_contains?: Maybe<String>;
+  frontEndRepoURL_starts_with?: Maybe<String>;
+  frontEndRepoURL_not_starts_with?: Maybe<String>;
+  frontEndRepoURL_ends_with?: Maybe<String>;
+  frontEndRepoURL_not_ends_with?: Maybe<String>;
+  backEndRepoURL?: Maybe<String>;
+  backEndRepoURL_not?: Maybe<String>;
+  backEndRepoURL_in?: Maybe<String[] | String>;
+  backEndRepoURL_not_in?: Maybe<String[] | String>;
+  backEndRepoURL_lt?: Maybe<String>;
+  backEndRepoURL_lte?: Maybe<String>;
+  backEndRepoURL_gt?: Maybe<String>;
+  backEndRepoURL_gte?: Maybe<String>;
+  backEndRepoURL_contains?: Maybe<String>;
+  backEndRepoURL_not_contains?: Maybe<String>;
+  backEndRepoURL_starts_with?: Maybe<String>;
+  backEndRepoURL_not_starts_with?: Maybe<String>;
+  backEndRepoURL_ends_with?: Maybe<String>;
+  backEndRepoURL_not_ends_with?: Maybe<String>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  lastUpdated?: Maybe<DateTimeInput>;
+  lastUpdated_not?: Maybe<DateTimeInput>;
+  lastUpdated_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  lastUpdated_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  lastUpdated_lt?: Maybe<DateTimeInput>;
+  lastUpdated_lte?: Maybe<DateTimeInput>;
+  lastUpdated_gt?: Maybe<DateTimeInput>;
+  lastUpdated_gte?: Maybe<DateTimeInput>;
+  AND?: Maybe<ProjectScalarWhereInput[] | ProjectScalarWhereInput>;
+  OR?: Maybe<ProjectScalarWhereInput[] | ProjectScalarWhereInput>;
+  NOT?: Maybe<ProjectScalarWhereInput[] | ProjectScalarWhereInput>;
+}
+
+export interface ProjectCreateInput {
+  id?: Maybe<ID_Input>;
+  postedBy: UserCreateOneWithoutProjectsInput;
+  name: String;
+  private?: Maybe<Boolean>;
+  status?: Maybe<String>;
+  wantFeedback?: Maybe<Boolean>;
+  wantAssistance?: Maybe<Boolean>;
+  deploymentURL?: Maybe<String>;
+  frontEndRepoURL?: Maybe<String>;
+  backEndRepoURL?: Maybe<String>;
+  likes?: Maybe<LikeCreateManyWithoutProjectInput>;
+  comments?: Maybe<CommentCreateManyWithoutProjectInput>;
+}
+
+export interface ProjectUpdateManyWithWhereNestedInput {
+  where: ProjectScalarWhereInput;
+  data: ProjectUpdateManyDataInput;
+}
+
+export interface ProjectUpdateOneRequiredWithoutLikesInput {
+  create?: Maybe<ProjectCreateWithoutLikesInput>;
+  update?: Maybe<ProjectUpdateWithoutLikesDataInput>;
+  upsert?: Maybe<ProjectUpsertWithoutLikesInput>;
+  connect?: Maybe<ProjectWhereUniqueInput>;
+}
+
+export interface ProjectUpdateManyDataInput {
+  name?: Maybe<String>;
+  private?: Maybe<Boolean>;
+  status?: Maybe<String>;
+  wantFeedback?: Maybe<Boolean>;
+  wantAssistance?: Maybe<Boolean>;
+  deploymentURL?: Maybe<String>;
+  frontEndRepoURL?: Maybe<String>;
+  backEndRepoURL?: Maybe<String>;
+}
+
+export interface ProjectCreateOneWithoutLikesInput {
+  create?: Maybe<ProjectCreateWithoutLikesInput>;
+  connect?: Maybe<ProjectWhereUniqueInput>;
+}
+
+export interface UserUpdateManyWithoutFollowersInput {
+  create?: Maybe<
+    UserCreateWithoutFollowersInput[] | UserCreateWithoutFollowersInput
+  >;
+  delete?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
+  connect?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
+  set?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
+  disconnect?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
+  update?: Maybe<
+    | UserUpdateWithWhereUniqueWithoutFollowersInput[]
+    | UserUpdateWithWhereUniqueWithoutFollowersInput
+  >;
+  upsert?: Maybe<
+    | UserUpsertWithWhereUniqueWithoutFollowersInput[]
+    | UserUpsertWithWhereUniqueWithoutFollowersInput
+  >;
+  deleteMany?: Maybe<UserScalarWhereInput[] | UserScalarWhereInput>;
+  updateMany?: Maybe<
+    UserUpdateManyWithWhereNestedInput[] | UserUpdateManyWithWhereNestedInput
+  >;
+}
+
+export interface ProjectUpsertWithoutCommentsInput {
+  update: ProjectUpdateWithoutCommentsDataInput;
+  create: ProjectCreateWithoutCommentsInput;
+}
+
+export interface UserUpdateWithWhereUniqueWithoutFollowersInput {
+  where: UserWhereUniqueInput;
+  data: UserUpdateWithoutFollowersDataInput;
+}
+
+export interface UserCreateInput {
+  id?: Maybe<ID_Input>;
+  username: String;
+  password: String;
+  name?: Maybe<String>;
+  email?: Maybe<String>;
+  bio?: Maybe<String>;
+  techStack?: Maybe<String>;
+  avatarURL?: Maybe<String>;
+  githubURL?: Maybe<String>;
+  linkedinURL?: Maybe<String>;
+  portfolioURL?: Maybe<String>;
+  twitterURL?: Maybe<String>;
+  projects?: Maybe<ProjectCreateManyWithoutPostedByInput>;
+  followers?: Maybe<UserCreateManyWithoutFollowersInput>;
+  following?: Maybe<UserCreateManyWithoutFollowingInput>;
+}
+
+export interface UserUpdateWithoutFollowersDataInput {
+  username?: Maybe<String>;
+  password?: Maybe<String>;
+  name?: Maybe<String>;
+  email?: Maybe<String>;
+  bio?: Maybe<String>;
+  techStack?: Maybe<String>;
+  avatarURL?: Maybe<String>;
+  githubURL?: Maybe<String>;
+  linkedinURL?: Maybe<String>;
+  portfolioURL?: Maybe<String>;
+  twitterURL?: Maybe<String>;
+  projects?: Maybe<ProjectUpdateManyWithoutPostedByInput>;
+  following?: Maybe<UserUpdateManyWithoutFollowingInput>;
+}
+
+export interface LikeCreateWithoutProjectInput {
+  id?: Maybe<ID_Input>;
+  user: UserCreateOneInput;
+}
+
+export interface UserUpdateManyWithoutFollowingInput {
+  create?: Maybe<
+    UserCreateWithoutFollowingInput[] | UserCreateWithoutFollowingInput
+  >;
+  delete?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
+  connect?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
+  set?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
+  disconnect?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
+  update?: Maybe<
+    | UserUpdateWithWhereUniqueWithoutFollowingInput[]
+    | UserUpdateWithWhereUniqueWithoutFollowingInput
+  >;
+  upsert?: Maybe<
+    | UserUpsertWithWhereUniqueWithoutFollowingInput[]
+    | UserUpsertWithWhereUniqueWithoutFollowingInput
+  >;
+  deleteMany?: Maybe<UserScalarWhereInput[] | UserScalarWhereInput>;
+  updateMany?: Maybe<
+    UserUpdateManyWithWhereNestedInput[] | UserUpdateManyWithWhereNestedInput
+  >;
+}
+
+export interface UserCreateWithoutFollowersInput {
+  id?: Maybe<ID_Input>;
+  username: String;
+  password: String;
+  name?: Maybe<String>;
+  email?: Maybe<String>;
+  bio?: Maybe<String>;
+  techStack?: Maybe<String>;
+  avatarURL?: Maybe<String>;
+  githubURL?: Maybe<String>;
+  linkedinURL?: Maybe<String>;
+  portfolioURL?: Maybe<String>;
+  twitterURL?: Maybe<String>;
+  projects?: Maybe<ProjectCreateManyWithoutPostedByInput>;
+  following?: Maybe<UserCreateManyWithoutFollowingInput>;
+}
+
+export interface UserUpdateWithWhereUniqueWithoutFollowingInput {
+  where: UserWhereUniqueInput;
+  data: UserUpdateWithoutFollowingDataInput;
 }
 
 export interface UserWhereInput {
@@ -860,6 +1361,12 @@ export interface UserWhereInput {
   projects_every?: Maybe<ProjectWhereInput>;
   projects_some?: Maybe<ProjectWhereInput>;
   projects_none?: Maybe<ProjectWhereInput>;
+  followers_every?: Maybe<UserWhereInput>;
+  followers_some?: Maybe<UserWhereInput>;
+  followers_none?: Maybe<UserWhereInput>;
+  following_every?: Maybe<UserWhereInput>;
+  following_some?: Maybe<UserWhereInput>;
+  following_none?: Maybe<UserWhereInput>;
   createdAt?: Maybe<DateTimeInput>;
   createdAt_not?: Maybe<DateTimeInput>;
   createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
@@ -873,73 +1380,7 @@ export interface UserWhereInput {
   NOT?: Maybe<UserWhereInput[] | UserWhereInput>;
 }
 
-export interface ProjectCreateManyInput {
-  create?: Maybe<ProjectCreateInput[] | ProjectCreateInput>;
-  connect?: Maybe<ProjectWhereUniqueInput[] | ProjectWhereUniqueInput>;
-}
-
-export interface CommentWhereInput {
-  id?: Maybe<ID_Input>;
-  id_not?: Maybe<ID_Input>;
-  id_in?: Maybe<ID_Input[] | ID_Input>;
-  id_not_in?: Maybe<ID_Input[] | ID_Input>;
-  id_lt?: Maybe<ID_Input>;
-  id_lte?: Maybe<ID_Input>;
-  id_gt?: Maybe<ID_Input>;
-  id_gte?: Maybe<ID_Input>;
-  id_contains?: Maybe<ID_Input>;
-  id_not_contains?: Maybe<ID_Input>;
-  id_starts_with?: Maybe<ID_Input>;
-  id_not_starts_with?: Maybe<ID_Input>;
-  id_ends_with?: Maybe<ID_Input>;
-  id_not_ends_with?: Maybe<ID_Input>;
-  user?: Maybe<UserWhereInput>;
-  text?: Maybe<String>;
-  text_not?: Maybe<String>;
-  text_in?: Maybe<String[] | String>;
-  text_not_in?: Maybe<String[] | String>;
-  text_lt?: Maybe<String>;
-  text_lte?: Maybe<String>;
-  text_gt?: Maybe<String>;
-  text_gte?: Maybe<String>;
-  text_contains?: Maybe<String>;
-  text_not_contains?: Maybe<String>;
-  text_starts_with?: Maybe<String>;
-  text_not_starts_with?: Maybe<String>;
-  text_ends_with?: Maybe<String>;
-  text_not_ends_with?: Maybe<String>;
-  project?: Maybe<ProjectWhereInput>;
-  createdAt?: Maybe<DateTimeInput>;
-  createdAt_not?: Maybe<DateTimeInput>;
-  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  createdAt_lt?: Maybe<DateTimeInput>;
-  createdAt_lte?: Maybe<DateTimeInput>;
-  createdAt_gt?: Maybe<DateTimeInput>;
-  createdAt_gte?: Maybe<DateTimeInput>;
-  AND?: Maybe<CommentWhereInput[] | CommentWhereInput>;
-  OR?: Maybe<CommentWhereInput[] | CommentWhereInput>;
-  NOT?: Maybe<CommentWhereInput[] | CommentWhereInput>;
-}
-
-export interface LikeSubscriptionWhereInput {
-  mutation_in?: Maybe<MutationType[] | MutationType>;
-  updatedFields_contains?: Maybe<String>;
-  updatedFields_contains_every?: Maybe<String[] | String>;
-  updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<LikeWhereInput>;
-  AND?: Maybe<LikeSubscriptionWhereInput[] | LikeSubscriptionWhereInput>;
-  OR?: Maybe<LikeSubscriptionWhereInput[] | LikeSubscriptionWhereInput>;
-  NOT?: Maybe<LikeSubscriptionWhereInput[] | LikeSubscriptionWhereInput>;
-}
-
-export interface LikeUpsertWithWhereUniqueWithoutProjectInput {
-  where: LikeWhereUniqueInput;
-  update: LikeUpdateWithoutProjectDataInput;
-  create: LikeCreateWithoutProjectInput;
-}
-
-export interface UserUpdateInput {
+export interface UserUpdateWithoutFollowingDataInput {
   username?: Maybe<String>;
   password?: Maybe<String>;
   name?: Maybe<String>;
@@ -951,105 +1392,33 @@ export interface UserUpdateInput {
   linkedinURL?: Maybe<String>;
   portfolioURL?: Maybe<String>;
   twitterURL?: Maybe<String>;
-  projects?: Maybe<ProjectUpdateManyInput>;
+  projects?: Maybe<ProjectUpdateManyWithoutPostedByInput>;
+  followers?: Maybe<UserUpdateManyWithoutFollowersInput>;
 }
 
-export interface LikeScalarWhereInput {
-  id?: Maybe<ID_Input>;
-  id_not?: Maybe<ID_Input>;
-  id_in?: Maybe<ID_Input[] | ID_Input>;
-  id_not_in?: Maybe<ID_Input[] | ID_Input>;
-  id_lt?: Maybe<ID_Input>;
-  id_lte?: Maybe<ID_Input>;
-  id_gt?: Maybe<ID_Input>;
-  id_gte?: Maybe<ID_Input>;
-  id_contains?: Maybe<ID_Input>;
-  id_not_contains?: Maybe<ID_Input>;
-  id_starts_with?: Maybe<ID_Input>;
-  id_not_starts_with?: Maybe<ID_Input>;
-  id_ends_with?: Maybe<ID_Input>;
-  id_not_ends_with?: Maybe<ID_Input>;
-  AND?: Maybe<LikeScalarWhereInput[] | LikeScalarWhereInput>;
-  OR?: Maybe<LikeScalarWhereInput[] | LikeScalarWhereInput>;
-  NOT?: Maybe<LikeScalarWhereInput[] | LikeScalarWhereInput>;
-}
-
-export type LikeWhereUniqueInput = AtLeastOne<{
-  id: Maybe<ID_Input>;
-}>;
-
-export interface CommentUpdateManyWithoutProjectInput {
-  create?: Maybe<
-    CommentCreateWithoutProjectInput[] | CommentCreateWithoutProjectInput
-  >;
-  delete?: Maybe<CommentWhereUniqueInput[] | CommentWhereUniqueInput>;
-  connect?: Maybe<CommentWhereUniqueInput[] | CommentWhereUniqueInput>;
-  set?: Maybe<CommentWhereUniqueInput[] | CommentWhereUniqueInput>;
-  disconnect?: Maybe<CommentWhereUniqueInput[] | CommentWhereUniqueInput>;
-  update?: Maybe<
-    | CommentUpdateWithWhereUniqueWithoutProjectInput[]
-    | CommentUpdateWithWhereUniqueWithoutProjectInput
-  >;
-  upsert?: Maybe<
-    | CommentUpsertWithWhereUniqueWithoutProjectInput[]
-    | CommentUpsertWithWhereUniqueWithoutProjectInput
-  >;
-  deleteMany?: Maybe<CommentScalarWhereInput[] | CommentScalarWhereInput>;
-  updateMany?: Maybe<
-    | CommentUpdateManyWithWhereNestedInput[]
-    | CommentUpdateManyWithWhereNestedInput
-  >;
-}
-
-export type ProjectWhereUniqueInput = AtLeastOne<{
-  id: Maybe<ID_Input>;
-}>;
-
-export interface CommentUpdateWithWhereUniqueWithoutProjectInput {
-  where: CommentWhereUniqueInput;
-  data: CommentUpdateWithoutProjectDataInput;
-}
-
-export type UserWhereUniqueInput = AtLeastOne<{
-  id: Maybe<ID_Input>;
-  username?: Maybe<String>;
-}>;
-
-export interface CommentUpdateWithoutProjectDataInput {
-  user?: Maybe<UserUpdateOneRequiredInput>;
-  text?: Maybe<String>;
-}
-
-export interface ProjectUpdateOneRequiredWithoutCommentsInput {
-  create?: Maybe<ProjectCreateWithoutCommentsInput>;
-  update?: Maybe<ProjectUpdateWithoutCommentsDataInput>;
-  upsert?: Maybe<ProjectUpsertWithoutCommentsInput>;
-  connect?: Maybe<ProjectWhereUniqueInput>;
-}
-
-export interface CommentUpsertWithWhereUniqueWithoutProjectInput {
-  where: CommentWhereUniqueInput;
-  update: CommentUpdateWithoutProjectDataInput;
-  create: CommentCreateWithoutProjectInput;
-}
-
-export interface UserCreateInput {
-  id?: Maybe<ID_Input>;
-  username: String;
-  password: String;
+export interface ProjectUpdateManyMutationInput {
   name?: Maybe<String>;
-  email?: Maybe<String>;
-  bio?: Maybe<String>;
-  techStack?: Maybe<String>;
-  avatarURL?: Maybe<String>;
-  githubURL?: Maybe<String>;
-  linkedinURL?: Maybe<String>;
-  portfolioURL?: Maybe<String>;
-  twitterURL?: Maybe<String>;
-  projects?: Maybe<ProjectCreateManyInput>;
+  private?: Maybe<Boolean>;
+  status?: Maybe<String>;
+  wantFeedback?: Maybe<Boolean>;
+  wantAssistance?: Maybe<Boolean>;
+  deploymentURL?: Maybe<String>;
+  frontEndRepoURL?: Maybe<String>;
+  backEndRepoURL?: Maybe<String>;
 }
 
-export interface CommentScalarWhereInput {
+export interface UserUpsertWithWhereUniqueWithoutFollowingInput {
+  where: UserWhereUniqueInput;
+  update: UserUpdateWithoutFollowingDataInput;
+  create: UserCreateWithoutFollowingInput;
+}
+
+export interface LikeUpdateInput {
+  project?: Maybe<ProjectUpdateOneRequiredWithoutLikesInput>;
+  user?: Maybe<UserUpdateOneRequiredInput>;
+}
+
+export interface UserScalarWhereInput {
   id?: Maybe<ID_Input>;
   id_not?: Maybe<ID_Input>;
   id_in?: Maybe<ID_Input[] | ID_Input>;
@@ -1064,76 +1433,34 @@ export interface CommentScalarWhereInput {
   id_not_starts_with?: Maybe<ID_Input>;
   id_ends_with?: Maybe<ID_Input>;
   id_not_ends_with?: Maybe<ID_Input>;
-  text?: Maybe<String>;
-  text_not?: Maybe<String>;
-  text_in?: Maybe<String[] | String>;
-  text_not_in?: Maybe<String[] | String>;
-  text_lt?: Maybe<String>;
-  text_lte?: Maybe<String>;
-  text_gt?: Maybe<String>;
-  text_gte?: Maybe<String>;
-  text_contains?: Maybe<String>;
-  text_not_contains?: Maybe<String>;
-  text_starts_with?: Maybe<String>;
-  text_not_starts_with?: Maybe<String>;
-  text_ends_with?: Maybe<String>;
-  text_not_ends_with?: Maybe<String>;
-  createdAt?: Maybe<DateTimeInput>;
-  createdAt_not?: Maybe<DateTimeInput>;
-  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  createdAt_lt?: Maybe<DateTimeInput>;
-  createdAt_lte?: Maybe<DateTimeInput>;
-  createdAt_gt?: Maybe<DateTimeInput>;
-  createdAt_gte?: Maybe<DateTimeInput>;
-  AND?: Maybe<CommentScalarWhereInput[] | CommentScalarWhereInput>;
-  OR?: Maybe<CommentScalarWhereInput[] | CommentScalarWhereInput>;
-  NOT?: Maybe<CommentScalarWhereInput[] | CommentScalarWhereInput>;
-}
-
-export interface CommentSubscriptionWhereInput {
-  mutation_in?: Maybe<MutationType[] | MutationType>;
-  updatedFields_contains?: Maybe<String>;
-  updatedFields_contains_every?: Maybe<String[] | String>;
-  updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<CommentWhereInput>;
-  AND?: Maybe<CommentSubscriptionWhereInput[] | CommentSubscriptionWhereInput>;
-  OR?: Maybe<CommentSubscriptionWhereInput[] | CommentSubscriptionWhereInput>;
-  NOT?: Maybe<CommentSubscriptionWhereInput[] | CommentSubscriptionWhereInput>;
-}
-
-export interface CommentUpdateManyWithWhereNestedInput {
-  where: CommentScalarWhereInput;
-  data: CommentUpdateManyDataInput;
-}
-
-export interface ProjectUpdateOneRequiredWithoutLikesInput {
-  create?: Maybe<ProjectCreateWithoutLikesInput>;
-  update?: Maybe<ProjectUpdateWithoutLikesDataInput>;
-  upsert?: Maybe<ProjectUpsertWithoutLikesInput>;
-  connect?: Maybe<ProjectWhereUniqueInput>;
-}
-
-export interface ProjectUpdateManyWithWhereNestedInput {
-  where: ProjectScalarWhereInput;
-  data: ProjectUpdateManyDataInput;
-}
-
-export interface ProjectScalarWhereInput {
-  id?: Maybe<ID_Input>;
-  id_not?: Maybe<ID_Input>;
-  id_in?: Maybe<ID_Input[] | ID_Input>;
-  id_not_in?: Maybe<ID_Input[] | ID_Input>;
-  id_lt?: Maybe<ID_Input>;
-  id_lte?: Maybe<ID_Input>;
-  id_gt?: Maybe<ID_Input>;
-  id_gte?: Maybe<ID_Input>;
-  id_contains?: Maybe<ID_Input>;
-  id_not_contains?: Maybe<ID_Input>;
-  id_starts_with?: Maybe<ID_Input>;
-  id_not_starts_with?: Maybe<ID_Input>;
-  id_ends_with?: Maybe<ID_Input>;
-  id_not_ends_with?: Maybe<ID_Input>;
+  username?: Maybe<String>;
+  username_not?: Maybe<String>;
+  username_in?: Maybe<String[] | String>;
+  username_not_in?: Maybe<String[] | String>;
+  username_lt?: Maybe<String>;
+  username_lte?: Maybe<String>;
+  username_gt?: Maybe<String>;
+  username_gte?: Maybe<String>;
+  username_contains?: Maybe<String>;
+  username_not_contains?: Maybe<String>;
+  username_starts_with?: Maybe<String>;
+  username_not_starts_with?: Maybe<String>;
+  username_ends_with?: Maybe<String>;
+  username_not_ends_with?: Maybe<String>;
+  password?: Maybe<String>;
+  password_not?: Maybe<String>;
+  password_in?: Maybe<String[] | String>;
+  password_not_in?: Maybe<String[] | String>;
+  password_lt?: Maybe<String>;
+  password_lte?: Maybe<String>;
+  password_gt?: Maybe<String>;
+  password_gte?: Maybe<String>;
+  password_contains?: Maybe<String>;
+  password_not_contains?: Maybe<String>;
+  password_starts_with?: Maybe<String>;
+  password_not_starts_with?: Maybe<String>;
+  password_ends_with?: Maybe<String>;
+  password_not_ends_with?: Maybe<String>;
   name?: Maybe<String>;
   name_not?: Maybe<String>;
   name_in?: Maybe<String[] | String>;
@@ -1148,68 +1475,118 @@ export interface ProjectScalarWhereInput {
   name_not_starts_with?: Maybe<String>;
   name_ends_with?: Maybe<String>;
   name_not_ends_with?: Maybe<String>;
-  private?: Maybe<Boolean>;
-  private_not?: Maybe<Boolean>;
-  status?: Maybe<String>;
-  status_not?: Maybe<String>;
-  status_in?: Maybe<String[] | String>;
-  status_not_in?: Maybe<String[] | String>;
-  status_lt?: Maybe<String>;
-  status_lte?: Maybe<String>;
-  status_gt?: Maybe<String>;
-  status_gte?: Maybe<String>;
-  status_contains?: Maybe<String>;
-  status_not_contains?: Maybe<String>;
-  status_starts_with?: Maybe<String>;
-  status_not_starts_with?: Maybe<String>;
-  status_ends_with?: Maybe<String>;
-  status_not_ends_with?: Maybe<String>;
-  wantFeedback?: Maybe<Boolean>;
-  wantFeedback_not?: Maybe<Boolean>;
-  wantAssistance?: Maybe<Boolean>;
-  wantAssistance_not?: Maybe<Boolean>;
-  deploymentURL?: Maybe<String>;
-  deploymentURL_not?: Maybe<String>;
-  deploymentURL_in?: Maybe<String[] | String>;
-  deploymentURL_not_in?: Maybe<String[] | String>;
-  deploymentURL_lt?: Maybe<String>;
-  deploymentURL_lte?: Maybe<String>;
-  deploymentURL_gt?: Maybe<String>;
-  deploymentURL_gte?: Maybe<String>;
-  deploymentURL_contains?: Maybe<String>;
-  deploymentURL_not_contains?: Maybe<String>;
-  deploymentURL_starts_with?: Maybe<String>;
-  deploymentURL_not_starts_with?: Maybe<String>;
-  deploymentURL_ends_with?: Maybe<String>;
-  deploymentURL_not_ends_with?: Maybe<String>;
-  frontEndRepoURL?: Maybe<String>;
-  frontEndRepoURL_not?: Maybe<String>;
-  frontEndRepoURL_in?: Maybe<String[] | String>;
-  frontEndRepoURL_not_in?: Maybe<String[] | String>;
-  frontEndRepoURL_lt?: Maybe<String>;
-  frontEndRepoURL_lte?: Maybe<String>;
-  frontEndRepoURL_gt?: Maybe<String>;
-  frontEndRepoURL_gte?: Maybe<String>;
-  frontEndRepoURL_contains?: Maybe<String>;
-  frontEndRepoURL_not_contains?: Maybe<String>;
-  frontEndRepoURL_starts_with?: Maybe<String>;
-  frontEndRepoURL_not_starts_with?: Maybe<String>;
-  frontEndRepoURL_ends_with?: Maybe<String>;
-  frontEndRepoURL_not_ends_with?: Maybe<String>;
-  backEndRepoURL?: Maybe<String>;
-  backEndRepoURL_not?: Maybe<String>;
-  backEndRepoURL_in?: Maybe<String[] | String>;
-  backEndRepoURL_not_in?: Maybe<String[] | String>;
-  backEndRepoURL_lt?: Maybe<String>;
-  backEndRepoURL_lte?: Maybe<String>;
-  backEndRepoURL_gt?: Maybe<String>;
-  backEndRepoURL_gte?: Maybe<String>;
-  backEndRepoURL_contains?: Maybe<String>;
-  backEndRepoURL_not_contains?: Maybe<String>;
-  backEndRepoURL_starts_with?: Maybe<String>;
-  backEndRepoURL_not_starts_with?: Maybe<String>;
-  backEndRepoURL_ends_with?: Maybe<String>;
-  backEndRepoURL_not_ends_with?: Maybe<String>;
+  email?: Maybe<String>;
+  email_not?: Maybe<String>;
+  email_in?: Maybe<String[] | String>;
+  email_not_in?: Maybe<String[] | String>;
+  email_lt?: Maybe<String>;
+  email_lte?: Maybe<String>;
+  email_gt?: Maybe<String>;
+  email_gte?: Maybe<String>;
+  email_contains?: Maybe<String>;
+  email_not_contains?: Maybe<String>;
+  email_starts_with?: Maybe<String>;
+  email_not_starts_with?: Maybe<String>;
+  email_ends_with?: Maybe<String>;
+  email_not_ends_with?: Maybe<String>;
+  bio?: Maybe<String>;
+  bio_not?: Maybe<String>;
+  bio_in?: Maybe<String[] | String>;
+  bio_not_in?: Maybe<String[] | String>;
+  bio_lt?: Maybe<String>;
+  bio_lte?: Maybe<String>;
+  bio_gt?: Maybe<String>;
+  bio_gte?: Maybe<String>;
+  bio_contains?: Maybe<String>;
+  bio_not_contains?: Maybe<String>;
+  bio_starts_with?: Maybe<String>;
+  bio_not_starts_with?: Maybe<String>;
+  bio_ends_with?: Maybe<String>;
+  bio_not_ends_with?: Maybe<String>;
+  techStack?: Maybe<String>;
+  techStack_not?: Maybe<String>;
+  techStack_in?: Maybe<String[] | String>;
+  techStack_not_in?: Maybe<String[] | String>;
+  techStack_lt?: Maybe<String>;
+  techStack_lte?: Maybe<String>;
+  techStack_gt?: Maybe<String>;
+  techStack_gte?: Maybe<String>;
+  techStack_contains?: Maybe<String>;
+  techStack_not_contains?: Maybe<String>;
+  techStack_starts_with?: Maybe<String>;
+  techStack_not_starts_with?: Maybe<String>;
+  techStack_ends_with?: Maybe<String>;
+  techStack_not_ends_with?: Maybe<String>;
+  avatarURL?: Maybe<String>;
+  avatarURL_not?: Maybe<String>;
+  avatarURL_in?: Maybe<String[] | String>;
+  avatarURL_not_in?: Maybe<String[] | String>;
+  avatarURL_lt?: Maybe<String>;
+  avatarURL_lte?: Maybe<String>;
+  avatarURL_gt?: Maybe<String>;
+  avatarURL_gte?: Maybe<String>;
+  avatarURL_contains?: Maybe<String>;
+  avatarURL_not_contains?: Maybe<String>;
+  avatarURL_starts_with?: Maybe<String>;
+  avatarURL_not_starts_with?: Maybe<String>;
+  avatarURL_ends_with?: Maybe<String>;
+  avatarURL_not_ends_with?: Maybe<String>;
+  githubURL?: Maybe<String>;
+  githubURL_not?: Maybe<String>;
+  githubURL_in?: Maybe<String[] | String>;
+  githubURL_not_in?: Maybe<String[] | String>;
+  githubURL_lt?: Maybe<String>;
+  githubURL_lte?: Maybe<String>;
+  githubURL_gt?: Maybe<String>;
+  githubURL_gte?: Maybe<String>;
+  githubURL_contains?: Maybe<String>;
+  githubURL_not_contains?: Maybe<String>;
+  githubURL_starts_with?: Maybe<String>;
+  githubURL_not_starts_with?: Maybe<String>;
+  githubURL_ends_with?: Maybe<String>;
+  githubURL_not_ends_with?: Maybe<String>;
+  linkedinURL?: Maybe<String>;
+  linkedinURL_not?: Maybe<String>;
+  linkedinURL_in?: Maybe<String[] | String>;
+  linkedinURL_not_in?: Maybe<String[] | String>;
+  linkedinURL_lt?: Maybe<String>;
+  linkedinURL_lte?: Maybe<String>;
+  linkedinURL_gt?: Maybe<String>;
+  linkedinURL_gte?: Maybe<String>;
+  linkedinURL_contains?: Maybe<String>;
+  linkedinURL_not_contains?: Maybe<String>;
+  linkedinURL_starts_with?: Maybe<String>;
+  linkedinURL_not_starts_with?: Maybe<String>;
+  linkedinURL_ends_with?: Maybe<String>;
+  linkedinURL_not_ends_with?: Maybe<String>;
+  portfolioURL?: Maybe<String>;
+  portfolioURL_not?: Maybe<String>;
+  portfolioURL_in?: Maybe<String[] | String>;
+  portfolioURL_not_in?: Maybe<String[] | String>;
+  portfolioURL_lt?: Maybe<String>;
+  portfolioURL_lte?: Maybe<String>;
+  portfolioURL_gt?: Maybe<String>;
+  portfolioURL_gte?: Maybe<String>;
+  portfolioURL_contains?: Maybe<String>;
+  portfolioURL_not_contains?: Maybe<String>;
+  portfolioURL_starts_with?: Maybe<String>;
+  portfolioURL_not_starts_with?: Maybe<String>;
+  portfolioURL_ends_with?: Maybe<String>;
+  portfolioURL_not_ends_with?: Maybe<String>;
+  twitterURL?: Maybe<String>;
+  twitterURL_not?: Maybe<String>;
+  twitterURL_in?: Maybe<String[] | String>;
+  twitterURL_not_in?: Maybe<String[] | String>;
+  twitterURL_lt?: Maybe<String>;
+  twitterURL_lte?: Maybe<String>;
+  twitterURL_gt?: Maybe<String>;
+  twitterURL_gte?: Maybe<String>;
+  twitterURL_contains?: Maybe<String>;
+  twitterURL_not_contains?: Maybe<String>;
+  twitterURL_starts_with?: Maybe<String>;
+  twitterURL_not_starts_with?: Maybe<String>;
+  twitterURL_ends_with?: Maybe<String>;
+  twitterURL_not_ends_with?: Maybe<String>;
   createdAt?: Maybe<DateTimeInput>;
   createdAt_not?: Maybe<DateTimeInput>;
   createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
@@ -1218,56 +1595,9 @@ export interface ProjectScalarWhereInput {
   createdAt_lte?: Maybe<DateTimeInput>;
   createdAt_gt?: Maybe<DateTimeInput>;
   createdAt_gte?: Maybe<DateTimeInput>;
-  lastUpdated?: Maybe<DateTimeInput>;
-  lastUpdated_not?: Maybe<DateTimeInput>;
-  lastUpdated_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  lastUpdated_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  lastUpdated_lt?: Maybe<DateTimeInput>;
-  lastUpdated_lte?: Maybe<DateTimeInput>;
-  lastUpdated_gt?: Maybe<DateTimeInput>;
-  lastUpdated_gte?: Maybe<DateTimeInput>;
-  AND?: Maybe<ProjectScalarWhereInput[] | ProjectScalarWhereInput>;
-  OR?: Maybe<ProjectScalarWhereInput[] | ProjectScalarWhereInput>;
-  NOT?: Maybe<ProjectScalarWhereInput[] | ProjectScalarWhereInput>;
-}
-
-export interface ProjectUpsertWithWhereUniqueNestedInput {
-  where: ProjectWhereUniqueInput;
-  update: ProjectUpdateDataInput;
-  create: ProjectCreateInput;
-}
-
-export interface CommentUpdateManyDataInput {
-  text?: Maybe<String>;
-}
-
-export interface ProjectCreateOneWithoutLikesInput {
-  create?: Maybe<ProjectCreateWithoutLikesInput>;
-  connect?: Maybe<ProjectWhereUniqueInput>;
-}
-
-export interface ProjectUpdateInput {
-  name?: Maybe<String>;
-  private?: Maybe<Boolean>;
-  status?: Maybe<String>;
-  wantFeedback?: Maybe<Boolean>;
-  wantAssistance?: Maybe<Boolean>;
-  deploymentURL?: Maybe<String>;
-  frontEndRepoURL?: Maybe<String>;
-  backEndRepoURL?: Maybe<String>;
-  likes?: Maybe<LikeUpdateManyWithoutProjectInput>;
-  comments?: Maybe<CommentUpdateManyWithoutProjectInput>;
-}
-
-export interface UserSubscriptionWhereInput {
-  mutation_in?: Maybe<MutationType[] | MutationType>;
-  updatedFields_contains?: Maybe<String>;
-  updatedFields_contains_every?: Maybe<String[] | String>;
-  updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<UserWhereInput>;
-  AND?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
-  OR?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
-  NOT?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
+  AND?: Maybe<UserScalarWhereInput[] | UserScalarWhereInput>;
+  OR?: Maybe<UserScalarWhereInput[] | UserScalarWhereInput>;
+  NOT?: Maybe<UserScalarWhereInput[] | UserScalarWhereInput>;
 }
 
 export interface CommentCreateInput {
@@ -1277,9 +1607,113 @@ export interface CommentCreateInput {
   project: ProjectCreateOneWithoutCommentsInput;
 }
 
-export interface ProjectUpsertWithoutCommentsInput {
-  update: ProjectUpdateWithoutCommentsDataInput;
-  create: ProjectCreateWithoutCommentsInput;
+export interface UserUpdateManyWithWhereNestedInput {
+  where: UserScalarWhereInput;
+  data: UserUpdateManyDataInput;
+}
+
+export interface CommentCreateWithoutProjectInput {
+  id?: Maybe<ID_Input>;
+  user: UserCreateOneInput;
+  text: String;
+}
+
+export interface UserUpdateManyDataInput {
+  username?: Maybe<String>;
+  password?: Maybe<String>;
+  name?: Maybe<String>;
+  email?: Maybe<String>;
+  bio?: Maybe<String>;
+  techStack?: Maybe<String>;
+  avatarURL?: Maybe<String>;
+  githubURL?: Maybe<String>;
+  linkedinURL?: Maybe<String>;
+  portfolioURL?: Maybe<String>;
+  twitterURL?: Maybe<String>;
+}
+
+export interface LikeSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<LikeWhereInput>;
+  AND?: Maybe<LikeSubscriptionWhereInput[] | LikeSubscriptionWhereInput>;
+  OR?: Maybe<LikeSubscriptionWhereInput[] | LikeSubscriptionWhereInput>;
+  NOT?: Maybe<LikeSubscriptionWhereInput[] | LikeSubscriptionWhereInput>;
+}
+
+export interface ProjectUpdateWithoutCommentsDataInput {
+  postedBy?: Maybe<UserUpdateOneRequiredWithoutProjectsInput>;
+  name?: Maybe<String>;
+  private?: Maybe<Boolean>;
+  status?: Maybe<String>;
+  wantFeedback?: Maybe<Boolean>;
+  wantAssistance?: Maybe<Boolean>;
+  deploymentURL?: Maybe<String>;
+  frontEndRepoURL?: Maybe<String>;
+  backEndRepoURL?: Maybe<String>;
+  likes?: Maybe<LikeUpdateManyWithoutProjectInput>;
+}
+
+export interface ProjectUpdateOneRequiredWithoutCommentsInput {
+  create?: Maybe<ProjectCreateWithoutCommentsInput>;
+  update?: Maybe<ProjectUpdateWithoutCommentsDataInput>;
+  upsert?: Maybe<ProjectUpsertWithoutCommentsInput>;
+  connect?: Maybe<ProjectWhereUniqueInput>;
+}
+
+export interface UserUpsertNestedInput {
+  update: UserUpdateDataInput;
+  create: UserCreateInput;
+}
+
+export interface UserUpsertWithWhereUniqueWithoutFollowersInput {
+  where: UserWhereUniqueInput;
+  update: UserUpdateWithoutFollowersDataInput;
+  create: UserCreateWithoutFollowersInput;
+}
+
+export interface ProjectUpsertWithoutLikesInput {
+  update: ProjectUpdateWithoutLikesDataInput;
+  create: ProjectCreateWithoutLikesInput;
+}
+
+export interface UserCreateWithoutFollowingInput {
+  id?: Maybe<ID_Input>;
+  username: String;
+  password: String;
+  name?: Maybe<String>;
+  email?: Maybe<String>;
+  bio?: Maybe<String>;
+  techStack?: Maybe<String>;
+  avatarURL?: Maybe<String>;
+  githubURL?: Maybe<String>;
+  linkedinURL?: Maybe<String>;
+  portfolioURL?: Maybe<String>;
+  twitterURL?: Maybe<String>;
+  projects?: Maybe<ProjectCreateManyWithoutPostedByInput>;
+  followers?: Maybe<UserCreateManyWithoutFollowersInput>;
+}
+
+export interface ProjectCreateWithoutPostedByInput {
+  id?: Maybe<ID_Input>;
+  name: String;
+  private?: Maybe<Boolean>;
+  status?: Maybe<String>;
+  wantFeedback?: Maybe<Boolean>;
+  wantAssistance?: Maybe<Boolean>;
+  deploymentURL?: Maybe<String>;
+  frontEndRepoURL?: Maybe<String>;
+  backEndRepoURL?: Maybe<String>;
+  likes?: Maybe<LikeCreateManyWithoutProjectInput>;
+  comments?: Maybe<CommentCreateManyWithoutProjectInput>;
+}
+
+export interface LikeCreateInput {
+  id?: Maybe<ID_Input>;
+  project: ProjectCreateOneWithoutLikesInput;
+  user: UserCreateOneInput;
 }
 
 export interface NodeNode {
@@ -1354,29 +1788,121 @@ export interface AggregateCommentSubscription
   count: () => Promise<AsyncIterator<Int>>;
 }
 
-export interface ProjectSubscriptionPayload {
-  mutation: MutationType;
-  node: Project;
-  updatedFields: String[];
-  previousValues: ProjectPreviousValues;
+export interface Project {
+  id: ID_Output;
+  name: String;
+  private: Boolean;
+  status?: String;
+  wantFeedback?: Boolean;
+  wantAssistance?: Boolean;
+  deploymentURL?: String;
+  frontEndRepoURL?: String;
+  backEndRepoURL?: String;
+  createdAt: DateTimeOutput;
+  lastUpdated: DateTimeOutput;
 }
 
-export interface ProjectSubscriptionPayloadPromise
-  extends Promise<ProjectSubscriptionPayload>,
-    Fragmentable {
-  mutation: () => Promise<MutationType>;
-  node: <T = ProjectPromise>() => T;
-  updatedFields: () => Promise<String[]>;
-  previousValues: <T = ProjectPreviousValuesPromise>() => T;
+export interface ProjectPromise extends Promise<Project>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  postedBy: <T = UserPromise>() => T;
+  name: () => Promise<String>;
+  private: () => Promise<Boolean>;
+  status: () => Promise<String>;
+  wantFeedback: () => Promise<Boolean>;
+  wantAssistance: () => Promise<Boolean>;
+  deploymentURL: () => Promise<String>;
+  frontEndRepoURL: () => Promise<String>;
+  backEndRepoURL: () => Promise<String>;
+  likes: <T = FragmentableArray<Like>>(args?: {
+    where?: LikeWhereInput;
+    orderBy?: LikeOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  comments: <T = FragmentableArray<Comment>>(args?: {
+    where?: CommentWhereInput;
+    orderBy?: CommentOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  createdAt: () => Promise<DateTimeOutput>;
+  lastUpdated: () => Promise<DateTimeOutput>;
 }
 
-export interface ProjectSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<ProjectSubscriptionPayload>>,
+export interface ProjectSubscription
+  extends Promise<AsyncIterator<Project>>,
     Fragmentable {
-  mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = ProjectSubscription>() => T;
-  updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = ProjectPreviousValuesSubscription>() => T;
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  postedBy: <T = UserSubscription>() => T;
+  name: () => Promise<AsyncIterator<String>>;
+  private: () => Promise<AsyncIterator<Boolean>>;
+  status: () => Promise<AsyncIterator<String>>;
+  wantFeedback: () => Promise<AsyncIterator<Boolean>>;
+  wantAssistance: () => Promise<AsyncIterator<Boolean>>;
+  deploymentURL: () => Promise<AsyncIterator<String>>;
+  frontEndRepoURL: () => Promise<AsyncIterator<String>>;
+  backEndRepoURL: () => Promise<AsyncIterator<String>>;
+  likes: <T = Promise<AsyncIterator<LikeSubscription>>>(args?: {
+    where?: LikeWhereInput;
+    orderBy?: LikeOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  comments: <T = Promise<AsyncIterator<CommentSubscription>>>(args?: {
+    where?: CommentWhereInput;
+    orderBy?: CommentOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  lastUpdated: () => Promise<AsyncIterator<DateTimeOutput>>;
+}
+
+export interface ProjectNullablePromise
+  extends Promise<Project | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  postedBy: <T = UserPromise>() => T;
+  name: () => Promise<String>;
+  private: () => Promise<Boolean>;
+  status: () => Promise<String>;
+  wantFeedback: () => Promise<Boolean>;
+  wantAssistance: () => Promise<Boolean>;
+  deploymentURL: () => Promise<String>;
+  frontEndRepoURL: () => Promise<String>;
+  backEndRepoURL: () => Promise<String>;
+  likes: <T = FragmentableArray<Like>>(args?: {
+    where?: LikeWhereInput;
+    orderBy?: LikeOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  comments: <T = FragmentableArray<Comment>>(args?: {
+    where?: CommentWhereInput;
+    orderBy?: CommentOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  createdAt: () => Promise<DateTimeOutput>;
+  lastUpdated: () => Promise<DateTimeOutput>;
 }
 
 export interface CommentEdge {
@@ -1417,80 +1943,6 @@ export interface PageInfoSubscription
   hasPreviousPage: () => Promise<AsyncIterator<Boolean>>;
   startCursor: () => Promise<AsyncIterator<String>>;
   endCursor: () => Promise<AsyncIterator<String>>;
-}
-
-export interface AggregateUser {
-  count: Int;
-}
-
-export interface AggregateUserPromise
-  extends Promise<AggregateUser>,
-    Fragmentable {
-  count: () => Promise<Int>;
-}
-
-export interface AggregateUserSubscription
-  extends Promise<AsyncIterator<AggregateUser>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface UserConnection {
-  pageInfo: PageInfo;
-  edges: UserEdge[];
-}
-
-export interface UserConnectionPromise
-  extends Promise<UserConnection>,
-    Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<UserEdge>>() => T;
-  aggregate: <T = AggregateUserPromise>() => T;
-}
-
-export interface UserConnectionSubscription
-  extends Promise<AsyncIterator<UserConnection>>,
-    Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<UserEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateUserSubscription>() => T;
-}
-
-export interface CommentConnection {
-  pageInfo: PageInfo;
-  edges: CommentEdge[];
-}
-
-export interface CommentConnectionPromise
-  extends Promise<CommentConnection>,
-    Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<CommentEdge>>() => T;
-  aggregate: <T = AggregateCommentPromise>() => T;
-}
-
-export interface CommentConnectionSubscription
-  extends Promise<AsyncIterator<CommentConnection>>,
-    Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<CommentEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateCommentSubscription>() => T;
-}
-
-export interface BatchPayload {
-  count: Long;
-}
-
-export interface BatchPayloadPromise
-  extends Promise<BatchPayload>,
-    Fragmentable {
-  count: () => Promise<Long>;
-}
-
-export interface BatchPayloadSubscription
-  extends Promise<AsyncIterator<BatchPayload>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Long>>;
 }
 
 export interface ProjectPreviousValues {
@@ -1539,6 +1991,218 @@ export interface ProjectPreviousValuesSubscription
   lastUpdated: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
 
+export interface UserEdge {
+  node: User;
+  cursor: String;
+}
+
+export interface UserEdgePromise extends Promise<UserEdge>, Fragmentable {
+  node: <T = UserPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface UserEdgeSubscription
+  extends Promise<AsyncIterator<UserEdge>>,
+    Fragmentable {
+  node: <T = UserSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface CommentConnection {
+  pageInfo: PageInfo;
+  edges: CommentEdge[];
+}
+
+export interface CommentConnectionPromise
+  extends Promise<CommentConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<CommentEdge>>() => T;
+  aggregate: <T = AggregateCommentPromise>() => T;
+}
+
+export interface CommentConnectionSubscription
+  extends Promise<AsyncIterator<CommentConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<CommentEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateCommentSubscription>() => T;
+}
+
+export interface UserSubscriptionPayload {
+  mutation: MutationType;
+  node: User;
+  updatedFields: String[];
+  previousValues: UserPreviousValues;
+}
+
+export interface UserSubscriptionPayloadPromise
+  extends Promise<UserSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = UserPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = UserPreviousValuesPromise>() => T;
+}
+
+export interface UserSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<UserSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = UserSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = UserPreviousValuesSubscription>() => T;
+}
+
+export interface User {
+  id: ID_Output;
+  username: String;
+  password: String;
+  name?: String;
+  email?: String;
+  bio?: String;
+  techStack?: String;
+  avatarURL?: String;
+  githubURL?: String;
+  linkedinURL?: String;
+  portfolioURL?: String;
+  twitterURL?: String;
+  createdAt: DateTimeOutput;
+}
+
+export interface UserPromise extends Promise<User>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  username: () => Promise<String>;
+  password: () => Promise<String>;
+  name: () => Promise<String>;
+  email: () => Promise<String>;
+  bio: () => Promise<String>;
+  techStack: () => Promise<String>;
+  avatarURL: () => Promise<String>;
+  githubURL: () => Promise<String>;
+  linkedinURL: () => Promise<String>;
+  portfolioURL: () => Promise<String>;
+  twitterURL: () => Promise<String>;
+  projects: <T = FragmentableArray<Project>>(args?: {
+    where?: ProjectWhereInput;
+    orderBy?: ProjectOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  followers: <T = FragmentableArray<User>>(args?: {
+    where?: UserWhereInput;
+    orderBy?: UserOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  following: <T = FragmentableArray<User>>(args?: {
+    where?: UserWhereInput;
+    orderBy?: UserOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  createdAt: () => Promise<DateTimeOutput>;
+}
+
+export interface UserSubscription
+  extends Promise<AsyncIterator<User>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  username: () => Promise<AsyncIterator<String>>;
+  password: () => Promise<AsyncIterator<String>>;
+  name: () => Promise<AsyncIterator<String>>;
+  email: () => Promise<AsyncIterator<String>>;
+  bio: () => Promise<AsyncIterator<String>>;
+  techStack: () => Promise<AsyncIterator<String>>;
+  avatarURL: () => Promise<AsyncIterator<String>>;
+  githubURL: () => Promise<AsyncIterator<String>>;
+  linkedinURL: () => Promise<AsyncIterator<String>>;
+  portfolioURL: () => Promise<AsyncIterator<String>>;
+  twitterURL: () => Promise<AsyncIterator<String>>;
+  projects: <T = Promise<AsyncIterator<ProjectSubscription>>>(args?: {
+    where?: ProjectWhereInput;
+    orderBy?: ProjectOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  followers: <T = Promise<AsyncIterator<UserSubscription>>>(args?: {
+    where?: UserWhereInput;
+    orderBy?: UserOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  following: <T = Promise<AsyncIterator<UserSubscription>>>(args?: {
+    where?: UserWhereInput;
+    orderBy?: UserOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+}
+
+export interface UserNullablePromise
+  extends Promise<User | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  username: () => Promise<String>;
+  password: () => Promise<String>;
+  name: () => Promise<String>;
+  email: () => Promise<String>;
+  bio: () => Promise<String>;
+  techStack: () => Promise<String>;
+  avatarURL: () => Promise<String>;
+  githubURL: () => Promise<String>;
+  linkedinURL: () => Promise<String>;
+  portfolioURL: () => Promise<String>;
+  twitterURL: () => Promise<String>;
+  projects: <T = FragmentableArray<Project>>(args?: {
+    where?: ProjectWhereInput;
+    orderBy?: ProjectOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  followers: <T = FragmentableArray<User>>(args?: {
+    where?: UserWhereInput;
+    orderBy?: UserOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  following: <T = FragmentableArray<User>>(args?: {
+    where?: UserWhereInput;
+    orderBy?: UserOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  createdAt: () => Promise<DateTimeOutput>;
+}
+
 export interface AggregateProject {
   count: Int;
 }
@@ -1555,30 +2219,29 @@ export interface AggregateProjectSubscription
   count: () => Promise<AsyncIterator<Int>>;
 }
 
-export interface Like {
-  id: ID_Output;
+export interface ProjectSubscriptionPayload {
+  mutation: MutationType;
+  node: Project;
+  updatedFields: String[];
+  previousValues: ProjectPreviousValues;
 }
 
-export interface LikePromise extends Promise<Like>, Fragmentable {
-  id: () => Promise<ID_Output>;
-  project: <T = ProjectPromise>() => T;
-  user: <T = UserPromise>() => T;
-}
-
-export interface LikeSubscription
-  extends Promise<AsyncIterator<Like>>,
+export interface ProjectSubscriptionPayloadPromise
+  extends Promise<ProjectSubscriptionPayload>,
     Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  project: <T = ProjectSubscription>() => T;
-  user: <T = UserSubscription>() => T;
+  mutation: () => Promise<MutationType>;
+  node: <T = ProjectPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = ProjectPreviousValuesPromise>() => T;
 }
 
-export interface LikeNullablePromise
-  extends Promise<Like | null>,
+export interface ProjectSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<ProjectSubscriptionPayload>>,
     Fragmentable {
-  id: () => Promise<ID_Output>;
-  project: <T = ProjectPromise>() => T;
-  user: <T = UserPromise>() => T;
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = ProjectSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = ProjectPreviousValuesSubscription>() => T;
 }
 
 export interface ProjectConnection {
@@ -1678,46 +2341,41 @@ export interface CommentSubscriptionPayloadSubscription
   previousValues: <T = CommentPreviousValuesSubscription>() => T;
 }
 
-export interface UserEdge {
-  node: User;
-  cursor: String;
+export interface AggregateUser {
+  count: Int;
 }
 
-export interface UserEdgePromise extends Promise<UserEdge>, Fragmentable {
-  node: <T = UserPromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface UserEdgeSubscription
-  extends Promise<AsyncIterator<UserEdge>>,
+export interface AggregateUserPromise
+  extends Promise<AggregateUser>,
     Fragmentable {
-  node: <T = UserSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
+  count: () => Promise<Int>;
 }
 
-export interface UserSubscriptionPayload {
-  mutation: MutationType;
-  node: User;
-  updatedFields: String[];
-  previousValues: UserPreviousValues;
-}
-
-export interface UserSubscriptionPayloadPromise
-  extends Promise<UserSubscriptionPayload>,
+export interface AggregateUserSubscription
+  extends Promise<AsyncIterator<AggregateUser>>,
     Fragmentable {
-  mutation: () => Promise<MutationType>;
-  node: <T = UserPromise>() => T;
-  updatedFields: () => Promise<String[]>;
-  previousValues: <T = UserPreviousValuesPromise>() => T;
+  count: () => Promise<AsyncIterator<Int>>;
 }
 
-export interface UserSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<UserSubscriptionPayload>>,
+export interface UserConnection {
+  pageInfo: PageInfo;
+  edges: UserEdge[];
+}
+
+export interface UserConnectionPromise
+  extends Promise<UserConnection>,
     Fragmentable {
-  mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = UserSubscription>() => T;
-  updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = UserPreviousValuesSubscription>() => T;
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<UserEdge>>() => T;
+  aggregate: <T = AggregateUserPromise>() => T;
+}
+
+export interface UserConnectionSubscription
+  extends Promise<AsyncIterator<UserConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<UserEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateUserSubscription>() => T;
 }
 
 export interface LikePreviousValues {
@@ -1761,118 +2419,30 @@ export interface LikeSubscriptionPayloadSubscription
   previousValues: <T = LikePreviousValuesSubscription>() => T;
 }
 
-export interface Project {
+export interface Like {
   id: ID_Output;
-  name: String;
-  private: Boolean;
-  status?: String;
-  wantFeedback?: Boolean;
-  wantAssistance?: Boolean;
-  deploymentURL?: String;
-  frontEndRepoURL?: String;
-  backEndRepoURL?: String;
-  createdAt: DateTimeOutput;
-  lastUpdated: DateTimeOutput;
 }
 
-export interface ProjectPromise extends Promise<Project>, Fragmentable {
+export interface LikePromise extends Promise<Like>, Fragmentable {
   id: () => Promise<ID_Output>;
-  name: () => Promise<String>;
-  private: () => Promise<Boolean>;
-  status: () => Promise<String>;
-  wantFeedback: () => Promise<Boolean>;
-  wantAssistance: () => Promise<Boolean>;
-  deploymentURL: () => Promise<String>;
-  frontEndRepoURL: () => Promise<String>;
-  backEndRepoURL: () => Promise<String>;
-  likes: <T = FragmentableArray<Like>>(args?: {
-    where?: LikeWhereInput;
-    orderBy?: LikeOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  comments: <T = FragmentableArray<Comment>>(args?: {
-    where?: CommentWhereInput;
-    orderBy?: CommentOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  createdAt: () => Promise<DateTimeOutput>;
-  lastUpdated: () => Promise<DateTimeOutput>;
+  project: <T = ProjectPromise>() => T;
+  user: <T = UserPromise>() => T;
 }
 
-export interface ProjectSubscription
-  extends Promise<AsyncIterator<Project>>,
+export interface LikeSubscription
+  extends Promise<AsyncIterator<Like>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
-  name: () => Promise<AsyncIterator<String>>;
-  private: () => Promise<AsyncIterator<Boolean>>;
-  status: () => Promise<AsyncIterator<String>>;
-  wantFeedback: () => Promise<AsyncIterator<Boolean>>;
-  wantAssistance: () => Promise<AsyncIterator<Boolean>>;
-  deploymentURL: () => Promise<AsyncIterator<String>>;
-  frontEndRepoURL: () => Promise<AsyncIterator<String>>;
-  backEndRepoURL: () => Promise<AsyncIterator<String>>;
-  likes: <T = Promise<AsyncIterator<LikeSubscription>>>(args?: {
-    where?: LikeWhereInput;
-    orderBy?: LikeOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  comments: <T = Promise<AsyncIterator<CommentSubscription>>>(args?: {
-    where?: CommentWhereInput;
-    orderBy?: CommentOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  lastUpdated: () => Promise<AsyncIterator<DateTimeOutput>>;
+  project: <T = ProjectSubscription>() => T;
+  user: <T = UserSubscription>() => T;
 }
 
-export interface ProjectNullablePromise
-  extends Promise<Project | null>,
+export interface LikeNullablePromise
+  extends Promise<Like | null>,
     Fragmentable {
   id: () => Promise<ID_Output>;
-  name: () => Promise<String>;
-  private: () => Promise<Boolean>;
-  status: () => Promise<String>;
-  wantFeedback: () => Promise<Boolean>;
-  wantAssistance: () => Promise<Boolean>;
-  deploymentURL: () => Promise<String>;
-  frontEndRepoURL: () => Promise<String>;
-  backEndRepoURL: () => Promise<String>;
-  likes: <T = FragmentableArray<Like>>(args?: {
-    where?: LikeWhereInput;
-    orderBy?: LikeOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  comments: <T = FragmentableArray<Comment>>(args?: {
-    where?: CommentWhereInput;
-    orderBy?: CommentOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  createdAt: () => Promise<DateTimeOutput>;
-  lastUpdated: () => Promise<DateTimeOutput>;
+  project: <T = ProjectPromise>() => T;
+  user: <T = UserPromise>() => T;
 }
 
 export interface CommentPreviousValues {
@@ -1914,99 +2484,20 @@ export interface ProjectEdgeSubscription
   cursor: () => Promise<AsyncIterator<String>>;
 }
 
-export interface User {
-  id: ID_Output;
-  username: String;
-  password: String;
-  name?: String;
-  email?: String;
-  bio?: String;
-  techStack?: String;
-  avatarURL?: String;
-  githubURL?: String;
-  linkedinURL?: String;
-  portfolioURL?: String;
-  twitterURL?: String;
-  createdAt: DateTimeOutput;
+export interface BatchPayload {
+  count: Long;
 }
 
-export interface UserPromise extends Promise<User>, Fragmentable {
-  id: () => Promise<ID_Output>;
-  username: () => Promise<String>;
-  password: () => Promise<String>;
-  name: () => Promise<String>;
-  email: () => Promise<String>;
-  bio: () => Promise<String>;
-  techStack: () => Promise<String>;
-  avatarURL: () => Promise<String>;
-  githubURL: () => Promise<String>;
-  linkedinURL: () => Promise<String>;
-  portfolioURL: () => Promise<String>;
-  twitterURL: () => Promise<String>;
-  projects: <T = FragmentableArray<Project>>(args?: {
-    where?: ProjectWhereInput;
-    orderBy?: ProjectOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  createdAt: () => Promise<DateTimeOutput>;
-}
-
-export interface UserSubscription
-  extends Promise<AsyncIterator<User>>,
+export interface BatchPayloadPromise
+  extends Promise<BatchPayload>,
     Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  username: () => Promise<AsyncIterator<String>>;
-  password: () => Promise<AsyncIterator<String>>;
-  name: () => Promise<AsyncIterator<String>>;
-  email: () => Promise<AsyncIterator<String>>;
-  bio: () => Promise<AsyncIterator<String>>;
-  techStack: () => Promise<AsyncIterator<String>>;
-  avatarURL: () => Promise<AsyncIterator<String>>;
-  githubURL: () => Promise<AsyncIterator<String>>;
-  linkedinURL: () => Promise<AsyncIterator<String>>;
-  portfolioURL: () => Promise<AsyncIterator<String>>;
-  twitterURL: () => Promise<AsyncIterator<String>>;
-  projects: <T = Promise<AsyncIterator<ProjectSubscription>>>(args?: {
-    where?: ProjectWhereInput;
-    orderBy?: ProjectOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  count: () => Promise<Long>;
 }
 
-export interface UserNullablePromise
-  extends Promise<User | null>,
+export interface BatchPayloadSubscription
+  extends Promise<AsyncIterator<BatchPayload>>,
     Fragmentable {
-  id: () => Promise<ID_Output>;
-  username: () => Promise<String>;
-  password: () => Promise<String>;
-  name: () => Promise<String>;
-  email: () => Promise<String>;
-  bio: () => Promise<String>;
-  techStack: () => Promise<String>;
-  avatarURL: () => Promise<String>;
-  githubURL: () => Promise<String>;
-  linkedinURL: () => Promise<String>;
-  portfolioURL: () => Promise<String>;
-  twitterURL: () => Promise<String>;
-  projects: <T = FragmentableArray<Project>>(args?: {
-    where?: ProjectWhereInput;
-    orderBy?: ProjectOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-  createdAt: () => Promise<DateTimeOutput>;
+  count: () => Promise<AsyncIterator<Long>>;
 }
 
 export interface LikeConnection {
@@ -2057,27 +2548,27 @@ DateTime scalar output type, which is always a string
 export type DateTimeOutput = string;
 
 /*
-The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `"4"`) or integer (such as `4`) input value will be accepted as an ID.
-*/
-export type ID_Input = string | number;
-export type ID_Output = string;
-
-export type Long = string;
-
-/*
 The `Boolean` scalar type represents `true` or `false`.
 */
 export type Boolean = boolean;
 
-/*
-The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
-*/
-export type String = string;
+export type Long = string;
 
 /*
 The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1.
 */
 export type Int = number;
+
+/*
+The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `"4"`) or integer (such as `4`) input value will be accepted as an ID.
+*/
+export type ID_Input = string | number;
+export type ID_Output = string;
+
+/*
+The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
+*/
+export type String = string;
 
 /**
  * Model Metadata
