@@ -1,0 +1,45 @@
+type User {
+  id: ID! @id
+  username: String!
+  password: String!
+  name: String
+  bio: String
+  techStack: String
+  avatarURL: String
+  githubURL: String
+  linkedinURL: String
+  portfolioURL: String
+  twitterURL: String
+  projects: [Project!]!
+  createdAt: DateTime! @createdAt
+}
+
+type Project {
+  id: ID! @id
+  name: String!
+  private: Boolean! @default(value: false)
+  status: String
+  wantFeedback: Boolean @default(value: false)
+  wantAssistance: Boolean @default(value: false)
+  deploymentURL: String
+  frontEndRepoURL: String
+  backEndRepoURL: String
+  likes: [Like!]!
+  comments: [Comment!]!
+  createdAt: DateTime! @createdAt
+  lastUpdated: DateTime! @updatedAt
+}
+
+type Like {
+  id: ID! @id
+  project: Project!
+  user: User!
+}
+
+type Comment {
+  id: ID! @id
+  user: User!
+  text: String!
+  project: Project!
+  createdAt: DateTime! @createdAt
+}
