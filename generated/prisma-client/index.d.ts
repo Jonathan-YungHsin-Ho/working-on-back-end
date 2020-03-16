@@ -301,6 +301,8 @@ export type ProjectOrderByInput =
   | "private_DESC"
   | "description_ASC"
   | "description_DESC"
+  | "techStack_ASC"
+  | "techStack_DESC"
   | "status_ASC"
   | "status_DESC"
   | "wantFeedback_ASC"
@@ -515,6 +517,7 @@ export interface ProjectUpdateWithoutPostedByDataInput {
   name?: Maybe<String>;
   private?: Maybe<Boolean>;
   description?: Maybe<String>;
+  techStack?: Maybe<String>;
   status?: Maybe<String>;
   updates?: Maybe<UpdateUpdateManyWithoutProjectInput>;
   wantFeedback?: Maybe<Boolean>;
@@ -735,6 +738,7 @@ export interface ProjectUpdateWithoutStarredByDataInput {
   name?: Maybe<String>;
   private?: Maybe<Boolean>;
   description?: Maybe<String>;
+  techStack?: Maybe<String>;
   status?: Maybe<String>;
   updates?: Maybe<UpdateUpdateManyWithoutProjectInput>;
   wantFeedback?: Maybe<Boolean>;
@@ -827,6 +831,7 @@ export interface ProjectUpdateWithoutTagsDataInput {
   name?: Maybe<String>;
   private?: Maybe<Boolean>;
   description?: Maybe<String>;
+  techStack?: Maybe<String>;
   status?: Maybe<String>;
   updates?: Maybe<UpdateUpdateManyWithoutProjectInput>;
   wantFeedback?: Maybe<Boolean>;
@@ -847,6 +852,7 @@ export interface ProjectUpdateInput {
   name?: Maybe<String>;
   private?: Maybe<Boolean>;
   description?: Maybe<String>;
+  techStack?: Maybe<String>;
   status?: Maybe<String>;
   updates?: Maybe<UpdateUpdateManyWithoutProjectInput>;
   wantFeedback?: Maybe<Boolean>;
@@ -1176,6 +1182,7 @@ export interface ProjectCreateInput {
   name: String;
   private?: Maybe<Boolean>;
   description?: Maybe<String>;
+  techStack?: Maybe<String>;
   status?: Maybe<String>;
   updates?: Maybe<UpdateCreateManyWithoutProjectInput>;
   wantFeedback?: Maybe<Boolean>;
@@ -1791,6 +1798,7 @@ export interface ProjectCreateWithoutPostedByInput {
   name: String;
   private?: Maybe<Boolean>;
   description?: Maybe<String>;
+  techStack?: Maybe<String>;
   status?: Maybe<String>;
   updates?: Maybe<UpdateCreateManyWithoutProjectInput>;
   wantFeedback?: Maybe<Boolean>;
@@ -1947,6 +1955,20 @@ export interface ProjectScalarWhereInput {
   description_not_starts_with?: Maybe<String>;
   description_ends_with?: Maybe<String>;
   description_not_ends_with?: Maybe<String>;
+  techStack?: Maybe<String>;
+  techStack_not?: Maybe<String>;
+  techStack_in?: Maybe<String[] | String>;
+  techStack_not_in?: Maybe<String[] | String>;
+  techStack_lt?: Maybe<String>;
+  techStack_lte?: Maybe<String>;
+  techStack_gt?: Maybe<String>;
+  techStack_gte?: Maybe<String>;
+  techStack_contains?: Maybe<String>;
+  techStack_not_contains?: Maybe<String>;
+  techStack_starts_with?: Maybe<String>;
+  techStack_not_starts_with?: Maybe<String>;
+  techStack_ends_with?: Maybe<String>;
+  techStack_not_ends_with?: Maybe<String>;
   status?: Maybe<String>;
   status_not?: Maybe<String>;
   status_in?: Maybe<String[] | String>;
@@ -2053,6 +2075,7 @@ export interface ProjectCreateWithoutCommentsInput {
   name: String;
   private?: Maybe<Boolean>;
   description?: Maybe<String>;
+  techStack?: Maybe<String>;
   status?: Maybe<String>;
   updates?: Maybe<UpdateCreateManyWithoutProjectInput>;
   wantFeedback?: Maybe<Boolean>;
@@ -2099,6 +2122,7 @@ export interface ProjectUpdateManyDataInput {
   name?: Maybe<String>;
   private?: Maybe<Boolean>;
   description?: Maybe<String>;
+  techStack?: Maybe<String>;
   status?: Maybe<String>;
   wantFeedback?: Maybe<Boolean>;
   wantAssistance?: Maybe<Boolean>;
@@ -2159,6 +2183,20 @@ export interface ProjectWhereInput {
   description_not_starts_with?: Maybe<String>;
   description_ends_with?: Maybe<String>;
   description_not_ends_with?: Maybe<String>;
+  techStack?: Maybe<String>;
+  techStack_not?: Maybe<String>;
+  techStack_in?: Maybe<String[] | String>;
+  techStack_not_in?: Maybe<String[] | String>;
+  techStack_lt?: Maybe<String>;
+  techStack_lte?: Maybe<String>;
+  techStack_gt?: Maybe<String>;
+  techStack_gte?: Maybe<String>;
+  techStack_contains?: Maybe<String>;
+  techStack_not_contains?: Maybe<String>;
+  techStack_starts_with?: Maybe<String>;
+  techStack_not_starts_with?: Maybe<String>;
+  techStack_ends_with?: Maybe<String>;
+  techStack_not_ends_with?: Maybe<String>;
   status?: Maybe<String>;
   status_not?: Maybe<String>;
   status_in?: Maybe<String[] | String>;
@@ -2282,6 +2320,7 @@ export interface ProjectUpdateWithoutUpdatesDataInput {
   name?: Maybe<String>;
   private?: Maybe<Boolean>;
   description?: Maybe<String>;
+  techStack?: Maybe<String>;
   status?: Maybe<String>;
   wantFeedback?: Maybe<Boolean>;
   wantAssistance?: Maybe<Boolean>;
@@ -2319,6 +2358,7 @@ export interface ProjectCreateWithoutTagsInput {
   name: String;
   private?: Maybe<Boolean>;
   description?: Maybe<String>;
+  techStack?: Maybe<String>;
   status?: Maybe<String>;
   updates?: Maybe<UpdateCreateManyWithoutProjectInput>;
   wantFeedback?: Maybe<Boolean>;
@@ -2370,6 +2410,7 @@ export interface ProjectCreateWithoutStarredByInput {
   name: String;
   private?: Maybe<Boolean>;
   description?: Maybe<String>;
+  techStack?: Maybe<String>;
   status?: Maybe<String>;
   updates?: Maybe<UpdateCreateManyWithoutProjectInput>;
   wantFeedback?: Maybe<Boolean>;
@@ -2391,6 +2432,7 @@ export interface ProjectUpdateWithoutCommentsDataInput {
   name?: Maybe<String>;
   private?: Maybe<Boolean>;
   description?: Maybe<String>;
+  techStack?: Maybe<String>;
   status?: Maybe<String>;
   updates?: Maybe<UpdateUpdateManyWithoutProjectInput>;
   wantFeedback?: Maybe<Boolean>;
@@ -2456,6 +2498,7 @@ export interface ProjectUpdateWithoutLikesDataInput {
   name?: Maybe<String>;
   private?: Maybe<Boolean>;
   description?: Maybe<String>;
+  techStack?: Maybe<String>;
   status?: Maybe<String>;
   updates?: Maybe<UpdateUpdateManyWithoutProjectInput>;
   wantFeedback?: Maybe<Boolean>;
@@ -2500,6 +2543,7 @@ export interface ProjectCreateWithoutLikesInput {
   name: String;
   private?: Maybe<Boolean>;
   description?: Maybe<String>;
+  techStack?: Maybe<String>;
   status?: Maybe<String>;
   updates?: Maybe<UpdateCreateManyWithoutProjectInput>;
   wantFeedback?: Maybe<Boolean>;
@@ -2547,6 +2591,7 @@ export interface ProjectUpdateManyMutationInput {
   name?: Maybe<String>;
   private?: Maybe<Boolean>;
   description?: Maybe<String>;
+  techStack?: Maybe<String>;
   status?: Maybe<String>;
   wantFeedback?: Maybe<Boolean>;
   wantAssistance?: Maybe<Boolean>;
@@ -2565,6 +2610,7 @@ export interface ProjectCreateWithoutUpdatesInput {
   name: String;
   private?: Maybe<Boolean>;
   description?: Maybe<String>;
+  techStack?: Maybe<String>;
   status?: Maybe<String>;
   wantFeedback?: Maybe<Boolean>;
   wantAssistance?: Maybe<Boolean>;
@@ -2753,6 +2799,7 @@ export interface Project {
   name: String;
   private: Boolean;
   description?: String;
+  techStack?: String;
   status?: String;
   wantFeedback?: Boolean;
   wantAssistance?: Boolean;
@@ -2781,6 +2828,7 @@ export interface ProjectPromise extends Promise<Project>, Fragmentable {
   name: () => Promise<String>;
   private: () => Promise<Boolean>;
   description: () => Promise<String>;
+  techStack: () => Promise<String>;
   status: () => Promise<String>;
   updates: <T = FragmentableArray<Update>>(args?: {
     where?: UpdateWhereInput;
@@ -2847,6 +2895,7 @@ export interface ProjectSubscription
   name: () => Promise<AsyncIterator<String>>;
   private: () => Promise<AsyncIterator<Boolean>>;
   description: () => Promise<AsyncIterator<String>>;
+  techStack: () => Promise<AsyncIterator<String>>;
   status: () => Promise<AsyncIterator<String>>;
   updates: <T = Promise<AsyncIterator<UpdateSubscription>>>(args?: {
     where?: UpdateWhereInput;
@@ -2913,6 +2962,7 @@ export interface ProjectNullablePromise
   name: () => Promise<String>;
   private: () => Promise<Boolean>;
   description: () => Promise<String>;
+  techStack: () => Promise<String>;
   status: () => Promise<String>;
   updates: <T = FragmentableArray<Update>>(args?: {
     where?: UpdateWhereInput;
@@ -3708,6 +3758,7 @@ export interface ProjectPreviousValues {
   name: String;
   private: Boolean;
   description?: String;
+  techStack?: String;
   status?: String;
   wantFeedback?: Boolean;
   wantAssistance?: Boolean;
@@ -3728,6 +3779,7 @@ export interface ProjectPreviousValuesPromise
   name: () => Promise<String>;
   private: () => Promise<Boolean>;
   description: () => Promise<String>;
+  techStack: () => Promise<String>;
   status: () => Promise<String>;
   wantFeedback: () => Promise<Boolean>;
   wantAssistance: () => Promise<Boolean>;
@@ -3748,6 +3800,7 @@ export interface ProjectPreviousValuesSubscription
   name: () => Promise<AsyncIterator<String>>;
   private: () => Promise<AsyncIterator<Boolean>>;
   description: () => Promise<AsyncIterator<String>>;
+  techStack: () => Promise<AsyncIterator<String>>;
   status: () => Promise<AsyncIterator<String>>;
   wantFeedback: () => Promise<AsyncIterator<Boolean>>;
   wantAssistance: () => Promise<AsyncIterator<Boolean>>;

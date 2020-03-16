@@ -441,6 +441,7 @@ type Project {
   name: String!
   private: Boolean!
   description: String
+  techStack: String
   status: String
   updates(where: UpdateWhereInput, orderBy: UpdateOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Update!]
   wantFeedback: Boolean
@@ -471,6 +472,7 @@ input ProjectCreateInput {
   name: String!
   private: Boolean
   description: String
+  techStack: String
   status: String
   updates: UpdateCreateManyWithoutProjectInput
   wantFeedback: Boolean
@@ -523,6 +525,7 @@ input ProjectCreateWithoutCommentsInput {
   name: String!
   private: Boolean
   description: String
+  techStack: String
   status: String
   updates: UpdateCreateManyWithoutProjectInput
   wantFeedback: Boolean
@@ -544,6 +547,7 @@ input ProjectCreateWithoutLikesInput {
   name: String!
   private: Boolean
   description: String
+  techStack: String
   status: String
   updates: UpdateCreateManyWithoutProjectInput
   wantFeedback: Boolean
@@ -564,6 +568,7 @@ input ProjectCreateWithoutPostedByInput {
   name: String!
   private: Boolean
   description: String
+  techStack: String
   status: String
   updates: UpdateCreateManyWithoutProjectInput
   wantFeedback: Boolean
@@ -585,6 +590,7 @@ input ProjectCreateWithoutStarredByInput {
   name: String!
   private: Boolean
   description: String
+  techStack: String
   status: String
   updates: UpdateCreateManyWithoutProjectInput
   wantFeedback: Boolean
@@ -607,6 +613,7 @@ input ProjectCreateWithoutTagsInput {
   name: String!
   private: Boolean
   description: String
+  techStack: String
   status: String
   updates: UpdateCreateManyWithoutProjectInput
   wantFeedback: Boolean
@@ -628,6 +635,7 @@ input ProjectCreateWithoutUpdatesInput {
   name: String!
   private: Boolean
   description: String
+  techStack: String
   status: String
   wantFeedback: Boolean
   wantAssistance: Boolean
@@ -656,6 +664,8 @@ enum ProjectOrderByInput {
   private_DESC
   description_ASC
   description_DESC
+  techStack_ASC
+  techStack_DESC
   status_ASC
   status_DESC
   wantFeedback_ASC
@@ -685,6 +695,7 @@ type ProjectPreviousValues {
   name: String!
   private: Boolean!
   description: String
+  techStack: String
   status: String
   wantFeedback: Boolean
   wantAssistance: Boolean
@@ -743,6 +754,20 @@ input ProjectScalarWhereInput {
   description_not_starts_with: String
   description_ends_with: String
   description_not_ends_with: String
+  techStack: String
+  techStack_not: String
+  techStack_in: [String!]
+  techStack_not_in: [String!]
+  techStack_lt: String
+  techStack_lte: String
+  techStack_gt: String
+  techStack_gte: String
+  techStack_contains: String
+  techStack_not_contains: String
+  techStack_starts_with: String
+  techStack_not_starts_with: String
+  techStack_ends_with: String
+  techStack_not_ends_with: String
   status: String
   status_not: String
   status_in: [String!]
@@ -866,6 +891,7 @@ input ProjectUpdateInput {
   name: String
   private: Boolean
   description: String
+  techStack: String
   status: String
   updates: UpdateUpdateManyWithoutProjectInput
   wantFeedback: Boolean
@@ -885,6 +911,7 @@ input ProjectUpdateManyDataInput {
   name: String
   private: Boolean
   description: String
+  techStack: String
   status: String
   wantFeedback: Boolean
   wantAssistance: Boolean
@@ -900,6 +927,7 @@ input ProjectUpdateManyMutationInput {
   name: String
   private: Boolean
   description: String
+  techStack: String
   status: String
   wantFeedback: Boolean
   wantAssistance: Boolean
@@ -979,6 +1007,7 @@ input ProjectUpdateWithoutCommentsDataInput {
   name: String
   private: Boolean
   description: String
+  techStack: String
   status: String
   updates: UpdateUpdateManyWithoutProjectInput
   wantFeedback: Boolean
@@ -999,6 +1028,7 @@ input ProjectUpdateWithoutLikesDataInput {
   name: String
   private: Boolean
   description: String
+  techStack: String
   status: String
   updates: UpdateUpdateManyWithoutProjectInput
   wantFeedback: Boolean
@@ -1018,6 +1048,7 @@ input ProjectUpdateWithoutPostedByDataInput {
   name: String
   private: Boolean
   description: String
+  techStack: String
   status: String
   updates: UpdateUpdateManyWithoutProjectInput
   wantFeedback: Boolean
@@ -1038,6 +1069,7 @@ input ProjectUpdateWithoutStarredByDataInput {
   name: String
   private: Boolean
   description: String
+  techStack: String
   status: String
   updates: UpdateUpdateManyWithoutProjectInput
   wantFeedback: Boolean
@@ -1059,6 +1091,7 @@ input ProjectUpdateWithoutTagsDataInput {
   name: String
   private: Boolean
   description: String
+  techStack: String
   status: String
   updates: UpdateUpdateManyWithoutProjectInput
   wantFeedback: Boolean
@@ -1079,6 +1112,7 @@ input ProjectUpdateWithoutUpdatesDataInput {
   name: String
   private: Boolean
   description: String
+  techStack: String
   status: String
   wantFeedback: Boolean
   wantAssistance: Boolean
@@ -1190,6 +1224,20 @@ input ProjectWhereInput {
   description_not_starts_with: String
   description_ends_with: String
   description_not_ends_with: String
+  techStack: String
+  techStack_not: String
+  techStack_in: [String!]
+  techStack_not_in: [String!]
+  techStack_lt: String
+  techStack_lte: String
+  techStack_gt: String
+  techStack_gte: String
+  techStack_contains: String
+  techStack_not_contains: String
+  techStack_starts_with: String
+  techStack_not_starts_with: String
+  techStack_ends_with: String
+  techStack_not_ends_with: String
   status: String
   status_not: String
   status_in: [String!]

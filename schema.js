@@ -33,6 +33,7 @@ typeDefs = gql`
 			name: String!
 			private: Boolean!
 			description: String
+			techStack: String
 			status: String
 			wantFeedback: Boolean
 			wantAssistance: Boolean
@@ -47,6 +48,7 @@ typeDefs = gql`
 			name: String
 			private: Boolean
 			description: String
+			techStack: String
 			status: String
 			wantFeedback: Boolean
 			wantAssistance: Boolean
@@ -90,6 +92,7 @@ typeDefs = gql`
 		name: String!
 		private: Boolean!
 		description: String
+		techStack: String
 		status: String
 		updates: [Update!]!
 		wantFeedback: Boolean
