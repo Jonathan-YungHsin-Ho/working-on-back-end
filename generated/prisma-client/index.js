@@ -13,6 +13,10 @@ var models = [
     embedded: false
   },
   {
+    name: "Update",
+    embedded: false
+  },
+  {
     name: "Like",
     embedded: false
   },

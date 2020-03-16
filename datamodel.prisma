@@ -24,9 +24,13 @@ type Project {
   starredBy: [User!]! @relation(name: "StarredProjects", onDelete: SET_NULL)
   name: String!
   private: Boolean! @default(value: false)
+  description: String
   status: String
+  updates: [Update!]!
   wantFeedback: Boolean @default(value: false)
   wantAssistance: Boolean @default(value: false)
+  completed: Boolean @default(value: false)
+  archived: Boolean @default(value: false)
   deploymentURL: String
   designURL: String
   frontEndRepoURL: String
@@ -36,6 +40,13 @@ type Project {
   tags: [Tag!]!
   createdAt: DateTime! @createdAt
   lastUpdated: DateTime! @updatedAt
+}
+
+type Update {
+  id: ID! @id
+  text: String!
+  project: Project!
+  createdAt: DateTime! @createdAt
 }
 
 type Like {

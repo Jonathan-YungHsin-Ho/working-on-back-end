@@ -19,6 +19,10 @@ type AggregateTag {
   count: Int!
 }
 
+type AggregateUpdate {
+  count: Int!
+}
+
 type AggregateUser {
   count: Int!
 }
@@ -399,6 +403,12 @@ type Mutation {
   upsertTag(where: TagWhereUniqueInput!, create: TagCreateInput!, update: TagUpdateInput!): Tag!
   deleteTag(where: TagWhereUniqueInput!): Tag
   deleteManyTags(where: TagWhereInput): BatchPayload!
+  createUpdate(data: UpdateCreateInput!): Update!
+  updateUpdate(data: UpdateUpdateInput!, where: UpdateWhereUniqueInput!): Update
+  updateManyUpdates(data: UpdateUpdateManyMutationInput!, where: UpdateWhereInput): BatchPayload!
+  upsertUpdate(where: UpdateWhereUniqueInput!, create: UpdateCreateInput!, update: UpdateUpdateInput!): Update!
+  deleteUpdate(where: UpdateWhereUniqueInput!): Update
+  deleteManyUpdates(where: UpdateWhereInput): BatchPayload!
   createUser(data: UserCreateInput!): User!
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
@@ -430,9 +440,13 @@ type Project {
   starredBy(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
   name: String!
   private: Boolean!
+  description: String
   status: String
+  updates(where: UpdateWhereInput, orderBy: UpdateOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Update!]
   wantFeedback: Boolean
   wantAssistance: Boolean
+  completed: Boolean
+  archived: Boolean
   deploymentURL: String
   designURL: String
   frontEndRepoURL: String
@@ -456,9 +470,13 @@ input ProjectCreateInput {
   starredBy: UserCreateManyWithoutStarredProjectsInput
   name: String!
   private: Boolean
+  description: String
   status: String
+  updates: UpdateCreateManyWithoutProjectInput
   wantFeedback: Boolean
   wantAssistance: Boolean
+  completed: Boolean
+  archived: Boolean
   deploymentURL: String
   designURL: String
   frontEndRepoURL: String
@@ -493,15 +511,24 @@ input ProjectCreateOneWithoutLikesInput {
   connect: ProjectWhereUniqueInput
 }
 
+input ProjectCreateOneWithoutUpdatesInput {
+  create: ProjectCreateWithoutUpdatesInput
+  connect: ProjectWhereUniqueInput
+}
+
 input ProjectCreateWithoutCommentsInput {
   id: ID
   postedBy: UserCreateOneWithoutProjectsInput!
   starredBy: UserCreateManyWithoutStarredProjectsInput
   name: String!
   private: Boolean
+  description: String
   status: String
+  updates: UpdateCreateManyWithoutProjectInput
   wantFeedback: Boolean
   wantAssistance: Boolean
+  completed: Boolean
+  archived: Boolean
   deploymentURL: String
   designURL: String
   frontEndRepoURL: String
@@ -516,9 +543,13 @@ input ProjectCreateWithoutLikesInput {
   starredBy: UserCreateManyWithoutStarredProjectsInput
   name: String!
   private: Boolean
+  description: String
   status: String
+  updates: UpdateCreateManyWithoutProjectInput
   wantFeedback: Boolean
   wantAssistance: Boolean
+  completed: Boolean
+  archived: Boolean
   deploymentURL: String
   designURL: String
   frontEndRepoURL: String
@@ -532,9 +563,13 @@ input ProjectCreateWithoutPostedByInput {
   starredBy: UserCreateManyWithoutStarredProjectsInput
   name: String!
   private: Boolean
+  description: String
   status: String
+  updates: UpdateCreateManyWithoutProjectInput
   wantFeedback: Boolean
   wantAssistance: Boolean
+  completed: Boolean
+  archived: Boolean
   deploymentURL: String
   designURL: String
   frontEndRepoURL: String
@@ -549,9 +584,13 @@ input ProjectCreateWithoutStarredByInput {
   postedBy: UserCreateOneWithoutProjectsInput!
   name: String!
   private: Boolean
+  description: String
   status: String
+  updates: UpdateCreateManyWithoutProjectInput
   wantFeedback: Boolean
   wantAssistance: Boolean
+  completed: Boolean
+  archived: Boolean
   deploymentURL: String
   designURL: String
   frontEndRepoURL: String
@@ -567,15 +606,40 @@ input ProjectCreateWithoutTagsInput {
   starredBy: UserCreateManyWithoutStarredProjectsInput
   name: String!
   private: Boolean
+  description: String
   status: String
+  updates: UpdateCreateManyWithoutProjectInput
   wantFeedback: Boolean
   wantAssistance: Boolean
+  completed: Boolean
+  archived: Boolean
   deploymentURL: String
   designURL: String
   frontEndRepoURL: String
   backEndRepoURL: String
   likes: LikeCreateManyWithoutProjectInput
   comments: CommentCreateManyWithoutProjectInput
+}
+
+input ProjectCreateWithoutUpdatesInput {
+  id: ID
+  postedBy: UserCreateOneWithoutProjectsInput!
+  starredBy: UserCreateManyWithoutStarredProjectsInput
+  name: String!
+  private: Boolean
+  description: String
+  status: String
+  wantFeedback: Boolean
+  wantAssistance: Boolean
+  completed: Boolean
+  archived: Boolean
+  deploymentURL: String
+  designURL: String
+  frontEndRepoURL: String
+  backEndRepoURL: String
+  likes: LikeCreateManyWithoutProjectInput
+  comments: CommentCreateManyWithoutProjectInput
+  tags: TagCreateManyWithoutProjectsInput
 }
 
 type ProjectEdge {
@@ -590,12 +654,18 @@ enum ProjectOrderByInput {
   name_DESC
   private_ASC
   private_DESC
+  description_ASC
+  description_DESC
   status_ASC
   status_DESC
   wantFeedback_ASC
   wantFeedback_DESC
   wantAssistance_ASC
   wantAssistance_DESC
+  completed_ASC
+  completed_DESC
+  archived_ASC
+  archived_DESC
   deploymentURL_ASC
   deploymentURL_DESC
   designURL_ASC
@@ -614,9 +684,12 @@ type ProjectPreviousValues {
   id: ID!
   name: String!
   private: Boolean!
+  description: String
   status: String
   wantFeedback: Boolean
   wantAssistance: Boolean
+  completed: Boolean
+  archived: Boolean
   deploymentURL: String
   designURL: String
   frontEndRepoURL: String
@@ -656,6 +729,20 @@ input ProjectScalarWhereInput {
   name_not_ends_with: String
   private: Boolean
   private_not: Boolean
+  description: String
+  description_not: String
+  description_in: [String!]
+  description_not_in: [String!]
+  description_lt: String
+  description_lte: String
+  description_gt: String
+  description_gte: String
+  description_contains: String
+  description_not_contains: String
+  description_starts_with: String
+  description_not_starts_with: String
+  description_ends_with: String
+  description_not_ends_with: String
   status: String
   status_not: String
   status_in: [String!]
@@ -674,6 +761,10 @@ input ProjectScalarWhereInput {
   wantFeedback_not: Boolean
   wantAssistance: Boolean
   wantAssistance_not: Boolean
+  completed: Boolean
+  completed_not: Boolean
+  archived: Boolean
+  archived_not: Boolean
   deploymentURL: String
   deploymentURL_not: String
   deploymentURL_in: [String!]
@@ -774,9 +865,13 @@ input ProjectUpdateInput {
   starredBy: UserUpdateManyWithoutStarredProjectsInput
   name: String
   private: Boolean
+  description: String
   status: String
+  updates: UpdateUpdateManyWithoutProjectInput
   wantFeedback: Boolean
   wantAssistance: Boolean
+  completed: Boolean
+  archived: Boolean
   deploymentURL: String
   designURL: String
   frontEndRepoURL: String
@@ -789,9 +884,12 @@ input ProjectUpdateInput {
 input ProjectUpdateManyDataInput {
   name: String
   private: Boolean
+  description: String
   status: String
   wantFeedback: Boolean
   wantAssistance: Boolean
+  completed: Boolean
+  archived: Boolean
   deploymentURL: String
   designURL: String
   frontEndRepoURL: String
@@ -801,9 +899,12 @@ input ProjectUpdateManyDataInput {
 input ProjectUpdateManyMutationInput {
   name: String
   private: Boolean
+  description: String
   status: String
   wantFeedback: Boolean
   wantAssistance: Boolean
+  completed: Boolean
+  archived: Boolean
   deploymentURL: String
   designURL: String
   frontEndRepoURL: String
@@ -865,14 +966,25 @@ input ProjectUpdateOneRequiredWithoutLikesInput {
   connect: ProjectWhereUniqueInput
 }
 
+input ProjectUpdateOneRequiredWithoutUpdatesInput {
+  create: ProjectCreateWithoutUpdatesInput
+  update: ProjectUpdateWithoutUpdatesDataInput
+  upsert: ProjectUpsertWithoutUpdatesInput
+  connect: ProjectWhereUniqueInput
+}
+
 input ProjectUpdateWithoutCommentsDataInput {
   postedBy: UserUpdateOneRequiredWithoutProjectsInput
   starredBy: UserUpdateManyWithoutStarredProjectsInput
   name: String
   private: Boolean
+  description: String
   status: String
+  updates: UpdateUpdateManyWithoutProjectInput
   wantFeedback: Boolean
   wantAssistance: Boolean
+  completed: Boolean
+  archived: Boolean
   deploymentURL: String
   designURL: String
   frontEndRepoURL: String
@@ -886,9 +998,13 @@ input ProjectUpdateWithoutLikesDataInput {
   starredBy: UserUpdateManyWithoutStarredProjectsInput
   name: String
   private: Boolean
+  description: String
   status: String
+  updates: UpdateUpdateManyWithoutProjectInput
   wantFeedback: Boolean
   wantAssistance: Boolean
+  completed: Boolean
+  archived: Boolean
   deploymentURL: String
   designURL: String
   frontEndRepoURL: String
@@ -901,9 +1017,13 @@ input ProjectUpdateWithoutPostedByDataInput {
   starredBy: UserUpdateManyWithoutStarredProjectsInput
   name: String
   private: Boolean
+  description: String
   status: String
+  updates: UpdateUpdateManyWithoutProjectInput
   wantFeedback: Boolean
   wantAssistance: Boolean
+  completed: Boolean
+  archived: Boolean
   deploymentURL: String
   designURL: String
   frontEndRepoURL: String
@@ -917,9 +1037,13 @@ input ProjectUpdateWithoutStarredByDataInput {
   postedBy: UserUpdateOneRequiredWithoutProjectsInput
   name: String
   private: Boolean
+  description: String
   status: String
+  updates: UpdateUpdateManyWithoutProjectInput
   wantFeedback: Boolean
   wantAssistance: Boolean
+  completed: Boolean
+  archived: Boolean
   deploymentURL: String
   designURL: String
   frontEndRepoURL: String
@@ -934,15 +1058,39 @@ input ProjectUpdateWithoutTagsDataInput {
   starredBy: UserUpdateManyWithoutStarredProjectsInput
   name: String
   private: Boolean
+  description: String
   status: String
+  updates: UpdateUpdateManyWithoutProjectInput
   wantFeedback: Boolean
   wantAssistance: Boolean
+  completed: Boolean
+  archived: Boolean
   deploymentURL: String
   designURL: String
   frontEndRepoURL: String
   backEndRepoURL: String
   likes: LikeUpdateManyWithoutProjectInput
   comments: CommentUpdateManyWithoutProjectInput
+}
+
+input ProjectUpdateWithoutUpdatesDataInput {
+  postedBy: UserUpdateOneRequiredWithoutProjectsInput
+  starredBy: UserUpdateManyWithoutStarredProjectsInput
+  name: String
+  private: Boolean
+  description: String
+  status: String
+  wantFeedback: Boolean
+  wantAssistance: Boolean
+  completed: Boolean
+  archived: Boolean
+  deploymentURL: String
+  designURL: String
+  frontEndRepoURL: String
+  backEndRepoURL: String
+  likes: LikeUpdateManyWithoutProjectInput
+  comments: CommentUpdateManyWithoutProjectInput
+  tags: TagUpdateManyWithoutProjectsInput
 }
 
 input ProjectUpdateWithWhereUniqueWithoutPostedByInput {
@@ -968,6 +1116,11 @@ input ProjectUpsertWithoutCommentsInput {
 input ProjectUpsertWithoutLikesInput {
   update: ProjectUpdateWithoutLikesDataInput!
   create: ProjectCreateWithoutLikesInput!
+}
+
+input ProjectUpsertWithoutUpdatesInput {
+  update: ProjectUpdateWithoutUpdatesDataInput!
+  create: ProjectCreateWithoutUpdatesInput!
 }
 
 input ProjectUpsertWithWhereUniqueWithoutPostedByInput {
@@ -1023,6 +1176,20 @@ input ProjectWhereInput {
   name_not_ends_with: String
   private: Boolean
   private_not: Boolean
+  description: String
+  description_not: String
+  description_in: [String!]
+  description_not_in: [String!]
+  description_lt: String
+  description_lte: String
+  description_gt: String
+  description_gte: String
+  description_contains: String
+  description_not_contains: String
+  description_starts_with: String
+  description_not_starts_with: String
+  description_ends_with: String
+  description_not_ends_with: String
   status: String
   status_not: String
   status_in: [String!]
@@ -1037,10 +1204,17 @@ input ProjectWhereInput {
   status_not_starts_with: String
   status_ends_with: String
   status_not_ends_with: String
+  updates_every: UpdateWhereInput
+  updates_some: UpdateWhereInput
+  updates_none: UpdateWhereInput
   wantFeedback: Boolean
   wantFeedback_not: Boolean
   wantAssistance: Boolean
   wantAssistance_not: Boolean
+  completed: Boolean
+  completed_not: Boolean
+  archived: Boolean
+  archived_not: Boolean
   deploymentURL: String
   deploymentURL_not: String
   deploymentURL_in: [String!]
@@ -1144,6 +1318,9 @@ type Query {
   tag(where: TagWhereUniqueInput!): Tag
   tags(where: TagWhereInput, orderBy: TagOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Tag]!
   tagsConnection(where: TagWhereInput, orderBy: TagOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): TagConnection!
+  update(where: UpdateWhereUniqueInput!): Update
+  updates(where: UpdateWhereInput, orderBy: UpdateOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Update]!
+  updatesConnection(where: UpdateWhereInput, orderBy: UpdateOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UpdateConnection!
   user(where: UserWhereUniqueInput!): User
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
@@ -1155,6 +1332,7 @@ type Subscription {
   like(where: LikeSubscriptionWhereInput): LikeSubscriptionPayload
   project(where: ProjectSubscriptionWhereInput): ProjectSubscriptionPayload
   tag(where: TagSubscriptionWhereInput): TagSubscriptionPayload
+  update(where: UpdateSubscriptionWhereInput): UpdateSubscriptionPayload
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
 }
 
@@ -1340,6 +1518,207 @@ input TagWhereInput {
 input TagWhereUniqueInput {
   id: ID
   name: String
+}
+
+type Update {
+  id: ID!
+  text: String!
+  project: Project!
+  createdAt: DateTime!
+}
+
+type UpdateConnection {
+  pageInfo: PageInfo!
+  edges: [UpdateEdge]!
+  aggregate: AggregateUpdate!
+}
+
+input UpdateCreateInput {
+  id: ID
+  text: String!
+  project: ProjectCreateOneWithoutUpdatesInput!
+}
+
+input UpdateCreateManyWithoutProjectInput {
+  create: [UpdateCreateWithoutProjectInput!]
+  connect: [UpdateWhereUniqueInput!]
+}
+
+input UpdateCreateWithoutProjectInput {
+  id: ID
+  text: String!
+}
+
+type UpdateEdge {
+  node: Update!
+  cursor: String!
+}
+
+enum UpdateOrderByInput {
+  id_ASC
+  id_DESC
+  text_ASC
+  text_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type UpdatePreviousValues {
+  id: ID!
+  text: String!
+  createdAt: DateTime!
+}
+
+input UpdateScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  text: String
+  text_not: String
+  text_in: [String!]
+  text_not_in: [String!]
+  text_lt: String
+  text_lte: String
+  text_gt: String
+  text_gte: String
+  text_contains: String
+  text_not_contains: String
+  text_starts_with: String
+  text_not_starts_with: String
+  text_ends_with: String
+  text_not_ends_with: String
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  AND: [UpdateScalarWhereInput!]
+  OR: [UpdateScalarWhereInput!]
+  NOT: [UpdateScalarWhereInput!]
+}
+
+type UpdateSubscriptionPayload {
+  mutation: MutationType!
+  node: Update
+  updatedFields: [String!]
+  previousValues: UpdatePreviousValues
+}
+
+input UpdateSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: UpdateWhereInput
+  AND: [UpdateSubscriptionWhereInput!]
+  OR: [UpdateSubscriptionWhereInput!]
+  NOT: [UpdateSubscriptionWhereInput!]
+}
+
+input UpdateUpdateInput {
+  text: String
+  project: ProjectUpdateOneRequiredWithoutUpdatesInput
+}
+
+input UpdateUpdateManyDataInput {
+  text: String
+}
+
+input UpdateUpdateManyMutationInput {
+  text: String
+}
+
+input UpdateUpdateManyWithoutProjectInput {
+  create: [UpdateCreateWithoutProjectInput!]
+  delete: [UpdateWhereUniqueInput!]
+  connect: [UpdateWhereUniqueInput!]
+  set: [UpdateWhereUniqueInput!]
+  disconnect: [UpdateWhereUniqueInput!]
+  update: [UpdateUpdateWithWhereUniqueWithoutProjectInput!]
+  upsert: [UpdateUpsertWithWhereUniqueWithoutProjectInput!]
+  deleteMany: [UpdateScalarWhereInput!]
+  updateMany: [UpdateUpdateManyWithWhereNestedInput!]
+}
+
+input UpdateUpdateManyWithWhereNestedInput {
+  where: UpdateScalarWhereInput!
+  data: UpdateUpdateManyDataInput!
+}
+
+input UpdateUpdateWithoutProjectDataInput {
+  text: String
+}
+
+input UpdateUpdateWithWhereUniqueWithoutProjectInput {
+  where: UpdateWhereUniqueInput!
+  data: UpdateUpdateWithoutProjectDataInput!
+}
+
+input UpdateUpsertWithWhereUniqueWithoutProjectInput {
+  where: UpdateWhereUniqueInput!
+  update: UpdateUpdateWithoutProjectDataInput!
+  create: UpdateCreateWithoutProjectInput!
+}
+
+input UpdateWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  text: String
+  text_not: String
+  text_in: [String!]
+  text_not_in: [String!]
+  text_lt: String
+  text_lte: String
+  text_gt: String
+  text_gte: String
+  text_contains: String
+  text_not_contains: String
+  text_starts_with: String
+  text_not_starts_with: String
+  text_ends_with: String
+  text_not_ends_with: String
+  project: ProjectWhereInput
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  AND: [UpdateWhereInput!]
+  OR: [UpdateWhereInput!]
+  NOT: [UpdateWhereInput!]
+}
+
+input UpdateWhereUniqueInput {
+  id: ID
 }
 
 type User {
