@@ -7,9 +7,9 @@ async function projects(parent, _args, context, _info) {
 }
 
 async function followers(parent, _args, context, _info) {
-	return await context.prisma.followers({ where: { id: parent.id } });
+	return await context.prisma.user({ id: parent.id }).followers();
 }
 
 async function following(parent, _args, context, _info) {
-	return await context.prisma.following({ where: { id: parent.id } });
+	return await context.prisma.user({ id: parent.id }).following();
 }
