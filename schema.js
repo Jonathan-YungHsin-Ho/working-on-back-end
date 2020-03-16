@@ -32,9 +32,11 @@ typeDefs = gql`
 		createProject(
 			name: String!
 			private: Boolean!
+			description: String
 			status: String
 			wantFeedback: Boolean
 			wantAssistance: Boolean
+			completed: Boolean
 			designURL: String
 			deploymentURL: String
 			frontEndRepoURL: String
@@ -44,9 +46,12 @@ typeDefs = gql`
 			id: String!
 			name: String
 			private: Boolean
+			description: String
 			status: String
 			wantFeedback: Boolean
 			wantAssistance: Boolean
+			completed: Boolean
+			archived: Boolean
 			designURL: String
 			deploymentURL: String
 			frontEndRepoURL: String
@@ -62,7 +67,6 @@ typeDefs = gql`
 	type User {
 		id: ID!
 		username: String!
-		password: String!
 		name: String
 		email: String
 		bio: String
