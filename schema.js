@@ -85,9 +85,13 @@ typeDefs = gql`
 		starredBy: [User!]!
 		name: String!
 		private: Boolean!
+		description: String
 		status: String
+		updates: [Update!]!
 		wantFeedback: Boolean
 		wantAssistance: Boolean
+		completed: Boolean
+		archived: Boolean
 		deploymentURL: String
 		designURL: String
 		frontEndRepoURL: String
@@ -97,6 +101,13 @@ typeDefs = gql`
 		tags: [Tag!]!
 		createdAt: DateTime!
 		lastUpdated: DateTime!
+	}
+
+	type Update {
+		id: ID!
+		text: String!
+		project: Project!
+		createdAt: DateTime!
 	}
 
 	type Like {
