@@ -25,6 +25,7 @@ type Project {
   name: String!
   private: Boolean! @default(value: false)
   description: String
+  techStack: String
   status: String
   updates: [Update!]!
   wantFeedback: Boolean @default(value: false)
