@@ -6,6 +6,7 @@ module.exports = {
 	me,
 	checkToken,
 	allProjects,
+	projectByID,
 	allUsers,
 };
 
@@ -27,6 +28,10 @@ function checkToken(_parent, _args, context, _info) {
 
 async function allProjects(_parent, _args, context, _info) {
 	return await context.prisma.projects();
+}
+
+async function projectByID(_parent, args, context, _info) {
+	return await context.prisma.project({ id: args.id });
 }
 
 async function allUsers(_parent, _args, context, _info) {
