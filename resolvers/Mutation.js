@@ -37,9 +37,12 @@ async function signup(_parent, args, context, _info) {
 
 async function login(_parent, args, context, _info) {
 	const user = await context.prisma.user({ email: args.email });
+
+	if (!user) throw new Error('Invalid Login');
+
 	const passwordMatch = await bcrypt.compare(args.password, user.password);
 
-	if (!user || !passwordMatch) throw new Error('Invalid Login');
+	if (!passwordMatch) throw new Error('Invalid Login');
 
 	const token = generateToken(user);
 
