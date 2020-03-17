@@ -9,6 +9,7 @@ typeDefs = gql`
 		me: User!
 		checkToken: LoginStatus!
 		allProjects: [Project!]!
+		projectByID(id: String!): Project!
 		allUsers: [User!]!
 	}
 
