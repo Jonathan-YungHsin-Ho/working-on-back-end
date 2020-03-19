@@ -11,6 +11,8 @@ typeDefs = gql`
 		allProjects: [Project!]!
 		projectByID(id: String!): Project!
 		allUsers: [User!]!
+		userByID(id: String!): User!
+		userByUsername(username: String!): User!
 	}
 
 	type Mutation {
