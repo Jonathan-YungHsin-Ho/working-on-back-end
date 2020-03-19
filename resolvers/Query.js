@@ -8,6 +8,8 @@ module.exports = {
 	allProjects,
 	projectByID,
 	allUsers,
+	userByID,
+	userByUsername,
 };
 
 function info() {
@@ -36,4 +38,12 @@ async function projectByID(_parent, args, context, _info) {
 
 async function allUsers(_parent, _args, context, _info) {
 	return await context.prisma.users();
+}
+
+async function userByID(_parent, args, context, _info) {
+	return await context.prisma.user({ id: args.id });
+}
+
+async function userByUsername(_parent, args, context, _info) {
+	return await context.prisma.user({ username: args.username });
 }
