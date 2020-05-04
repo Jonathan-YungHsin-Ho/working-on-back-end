@@ -30,6 +30,7 @@ typeDefs = gql`
 			linkedinURL: String
 			portfolioURL: String
 			twitterURL: String
+			currentlyStudying: String
 		): User!
 		deleteUser: User!
 		createProject(
@@ -85,6 +86,7 @@ typeDefs = gql`
 		starredProjects: [Project!]!
 		followers: [User!]!
 		following: [User!]!
+		currentlyStudying: String
 		createdAt: DateTime!
 	}
 
