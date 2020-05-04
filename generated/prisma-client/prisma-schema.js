@@ -1786,6 +1786,7 @@ type User {
   starredProjects(where: ProjectWhereInput, orderBy: ProjectOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Project!]
   followers(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
   following(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
+  currentlyStudying: String
   createdAt: DateTime!
 }
 
@@ -1812,6 +1813,7 @@ input UserCreateInput {
   starredProjects: ProjectCreateManyWithoutStarredByInput
   followers: UserCreateManyWithoutFollowersInput
   following: UserCreateManyWithoutFollowingInput
+  currentlyStudying: String
 }
 
 input UserCreateManyWithoutFollowersInput {
@@ -1855,6 +1857,7 @@ input UserCreateWithoutFollowersInput {
   projects: ProjectCreateManyWithoutPostedByInput
   starredProjects: ProjectCreateManyWithoutStarredByInput
   following: UserCreateManyWithoutFollowingInput
+  currentlyStudying: String
 }
 
 input UserCreateWithoutFollowingInput {
@@ -1873,6 +1876,7 @@ input UserCreateWithoutFollowingInput {
   projects: ProjectCreateManyWithoutPostedByInput
   starredProjects: ProjectCreateManyWithoutStarredByInput
   followers: UserCreateManyWithoutFollowersInput
+  currentlyStudying: String
 }
 
 input UserCreateWithoutProjectsInput {
@@ -1891,6 +1895,7 @@ input UserCreateWithoutProjectsInput {
   starredProjects: ProjectCreateManyWithoutStarredByInput
   followers: UserCreateManyWithoutFollowersInput
   following: UserCreateManyWithoutFollowingInput
+  currentlyStudying: String
 }
 
 input UserCreateWithoutStarredProjectsInput {
@@ -1909,6 +1914,7 @@ input UserCreateWithoutStarredProjectsInput {
   projects: ProjectCreateManyWithoutPostedByInput
   followers: UserCreateManyWithoutFollowersInput
   following: UserCreateManyWithoutFollowingInput
+  currentlyStudying: String
 }
 
 type UserEdge {
@@ -1941,6 +1947,8 @@ enum UserOrderByInput {
   portfolioURL_DESC
   twitterURL_ASC
   twitterURL_DESC
+  currentlyStudying_ASC
+  currentlyStudying_DESC
   createdAt_ASC
   createdAt_DESC
 }
@@ -1958,6 +1966,7 @@ type UserPreviousValues {
   linkedinURL: String
   portfolioURL: String
   twitterURL: String
+  currentlyStudying: String
   createdAt: DateTime!
 }
 
@@ -2130,6 +2139,20 @@ input UserScalarWhereInput {
   twitterURL_not_starts_with: String
   twitterURL_ends_with: String
   twitterURL_not_ends_with: String
+  currentlyStudying: String
+  currentlyStudying_not: String
+  currentlyStudying_in: [String!]
+  currentlyStudying_not_in: [String!]
+  currentlyStudying_lt: String
+  currentlyStudying_lte: String
+  currentlyStudying_gt: String
+  currentlyStudying_gte: String
+  currentlyStudying_contains: String
+  currentlyStudying_not_contains: String
+  currentlyStudying_starts_with: String
+  currentlyStudying_not_starts_with: String
+  currentlyStudying_ends_with: String
+  currentlyStudying_not_ends_with: String
   createdAt: DateTime
   createdAt_not: DateTime
   createdAt_in: [DateTime!]
@@ -2177,6 +2200,7 @@ input UserUpdateDataInput {
   starredProjects: ProjectUpdateManyWithoutStarredByInput
   followers: UserUpdateManyWithoutFollowersInput
   following: UserUpdateManyWithoutFollowingInput
+  currentlyStudying: String
 }
 
 input UserUpdateInput {
@@ -2195,6 +2219,7 @@ input UserUpdateInput {
   starredProjects: ProjectUpdateManyWithoutStarredByInput
   followers: UserUpdateManyWithoutFollowersInput
   following: UserUpdateManyWithoutFollowingInput
+  currentlyStudying: String
 }
 
 input UserUpdateManyDataInput {
@@ -2209,6 +2234,7 @@ input UserUpdateManyDataInput {
   linkedinURL: String
   portfolioURL: String
   twitterURL: String
+  currentlyStudying: String
 }
 
 input UserUpdateManyMutationInput {
@@ -2223,6 +2249,7 @@ input UserUpdateManyMutationInput {
   linkedinURL: String
   portfolioURL: String
   twitterURL: String
+  currentlyStudying: String
 }
 
 input UserUpdateManyWithoutFollowersInput {
@@ -2295,6 +2322,7 @@ input UserUpdateWithoutFollowersDataInput {
   projects: ProjectUpdateManyWithoutPostedByInput
   starredProjects: ProjectUpdateManyWithoutStarredByInput
   following: UserUpdateManyWithoutFollowingInput
+  currentlyStudying: String
 }
 
 input UserUpdateWithoutFollowingDataInput {
@@ -2312,6 +2340,7 @@ input UserUpdateWithoutFollowingDataInput {
   projects: ProjectUpdateManyWithoutPostedByInput
   starredProjects: ProjectUpdateManyWithoutStarredByInput
   followers: UserUpdateManyWithoutFollowersInput
+  currentlyStudying: String
 }
 
 input UserUpdateWithoutProjectsDataInput {
@@ -2329,6 +2358,7 @@ input UserUpdateWithoutProjectsDataInput {
   starredProjects: ProjectUpdateManyWithoutStarredByInput
   followers: UserUpdateManyWithoutFollowersInput
   following: UserUpdateManyWithoutFollowingInput
+  currentlyStudying: String
 }
 
 input UserUpdateWithoutStarredProjectsDataInput {
@@ -2346,6 +2376,7 @@ input UserUpdateWithoutStarredProjectsDataInput {
   projects: ProjectUpdateManyWithoutPostedByInput
   followers: UserUpdateManyWithoutFollowersInput
   following: UserUpdateManyWithoutFollowingInput
+  currentlyStudying: String
 }
 
 input UserUpdateWithWhereUniqueWithoutFollowersInput {
@@ -2572,6 +2603,20 @@ input UserWhereInput {
   following_every: UserWhereInput
   following_some: UserWhereInput
   following_none: UserWhereInput
+  currentlyStudying: String
+  currentlyStudying_not: String
+  currentlyStudying_in: [String!]
+  currentlyStudying_not_in: [String!]
+  currentlyStudying_lt: String
+  currentlyStudying_lte: String
+  currentlyStudying_gt: String
+  currentlyStudying_gte: String
+  currentlyStudying_contains: String
+  currentlyStudying_not_contains: String
+  currentlyStudying_starts_with: String
+  currentlyStudying_not_starts_with: String
+  currentlyStudying_ends_with: String
+  currentlyStudying_not_ends_with: String
   createdAt: DateTime
   createdAt_not: DateTime
   createdAt_in: [DateTime!]

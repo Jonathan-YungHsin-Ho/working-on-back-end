@@ -15,6 +15,7 @@ type User {
   starredProjects: [Project!]! @relation(name: "StarredProjects", onDelete: CASCADE)
   followers: [User!]! @relation(name: "Followers")
   following: [User!]! @relation(name: "Following")
+  currentlyStudying: String
   createdAt: DateTime! @createdAt
 }
 

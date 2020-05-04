@@ -351,6 +351,8 @@ export type UserOrderByInput =
   | "portfolioURL_DESC"
   | "twitterURL_ASC"
   | "twitterURL_DESC"
+  | "currentlyStudying_ASC"
+  | "currentlyStudying_DESC"
   | "createdAt_ASC"
   | "createdAt_DESC";
 
@@ -391,6 +393,7 @@ export interface UserUpdateWithoutFollowingDataInput {
   projects?: Maybe<ProjectUpdateManyWithoutPostedByInput>;
   starredProjects?: Maybe<ProjectUpdateManyWithoutStarredByInput>;
   followers?: Maybe<UserUpdateManyWithoutFollowersInput>;
+  currentlyStudying?: Maybe<String>;
 }
 
 export type CommentWhereUniqueInput = AtLeastOne<{
@@ -599,6 +602,7 @@ export interface UserUpdateWithoutStarredProjectsDataInput {
   projects?: Maybe<ProjectUpdateManyWithoutPostedByInput>;
   followers?: Maybe<UserUpdateManyWithoutFollowersInput>;
   following?: Maybe<UserUpdateManyWithoutFollowingInput>;
+  currentlyStudying?: Maybe<String>;
 }
 
 export interface TagSubscriptionWhereInput {
@@ -676,6 +680,7 @@ export interface UserUpdateWithoutFollowersDataInput {
   projects?: Maybe<ProjectUpdateManyWithoutPostedByInput>;
   starredProjects?: Maybe<ProjectUpdateManyWithoutStarredByInput>;
   following?: Maybe<UserUpdateManyWithoutFollowingInput>;
+  currentlyStudying?: Maybe<String>;
 }
 
 export interface UserUpdateInput {
@@ -694,6 +699,7 @@ export interface UserUpdateInput {
   starredProjects?: Maybe<ProjectUpdateManyWithoutStarredByInput>;
   followers?: Maybe<UserUpdateManyWithoutFollowersInput>;
   following?: Maybe<UserUpdateManyWithoutFollowingInput>;
+  currentlyStudying?: Maybe<String>;
 }
 
 export interface ProjectUpdateManyWithoutStarredByInput {
@@ -785,6 +791,7 @@ export interface UserUpdateWithoutProjectsDataInput {
   starredProjects?: Maybe<ProjectUpdateManyWithoutStarredByInput>;
   followers?: Maybe<UserUpdateManyWithoutFollowersInput>;
   following?: Maybe<UserUpdateManyWithoutFollowingInput>;
+  currentlyStudying?: Maybe<String>;
 }
 
 export interface UpdateCreateInput {
@@ -1052,6 +1059,20 @@ export interface UserScalarWhereInput {
   twitterURL_not_starts_with?: Maybe<String>;
   twitterURL_ends_with?: Maybe<String>;
   twitterURL_not_ends_with?: Maybe<String>;
+  currentlyStudying?: Maybe<String>;
+  currentlyStudying_not?: Maybe<String>;
+  currentlyStudying_in?: Maybe<String[] | String>;
+  currentlyStudying_not_in?: Maybe<String[] | String>;
+  currentlyStudying_lt?: Maybe<String>;
+  currentlyStudying_lte?: Maybe<String>;
+  currentlyStudying_gt?: Maybe<String>;
+  currentlyStudying_gte?: Maybe<String>;
+  currentlyStudying_contains?: Maybe<String>;
+  currentlyStudying_not_contains?: Maybe<String>;
+  currentlyStudying_starts_with?: Maybe<String>;
+  currentlyStudying_not_starts_with?: Maybe<String>;
+  currentlyStudying_ends_with?: Maybe<String>;
+  currentlyStudying_not_ends_with?: Maybe<String>;
   createdAt?: Maybe<DateTimeInput>;
   createdAt_not?: Maybe<DateTimeInput>;
   createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
@@ -1094,6 +1115,7 @@ export interface UserUpdateManyDataInput {
   linkedinURL?: Maybe<String>;
   portfolioURL?: Maybe<String>;
   twitterURL?: Maybe<String>;
+  currentlyStudying?: Maybe<String>;
 }
 
 export interface UserCreateOneInput {
@@ -1394,6 +1416,7 @@ export interface UserUpdateDataInput {
   starredProjects?: Maybe<ProjectUpdateManyWithoutStarredByInput>;
   followers?: Maybe<UserUpdateManyWithoutFollowersInput>;
   following?: Maybe<UserUpdateManyWithoutFollowingInput>;
+  currentlyStudying?: Maybe<String>;
 }
 
 export interface CommentUpdateManyWithoutProjectInput {
@@ -1610,6 +1633,20 @@ export interface UserWhereInput {
   following_every?: Maybe<UserWhereInput>;
   following_some?: Maybe<UserWhereInput>;
   following_none?: Maybe<UserWhereInput>;
+  currentlyStudying?: Maybe<String>;
+  currentlyStudying_not?: Maybe<String>;
+  currentlyStudying_in?: Maybe<String[] | String>;
+  currentlyStudying_not_in?: Maybe<String[] | String>;
+  currentlyStudying_lt?: Maybe<String>;
+  currentlyStudying_lte?: Maybe<String>;
+  currentlyStudying_gt?: Maybe<String>;
+  currentlyStudying_gte?: Maybe<String>;
+  currentlyStudying_contains?: Maybe<String>;
+  currentlyStudying_not_contains?: Maybe<String>;
+  currentlyStudying_starts_with?: Maybe<String>;
+  currentlyStudying_not_starts_with?: Maybe<String>;
+  currentlyStudying_ends_with?: Maybe<String>;
+  currentlyStudying_not_ends_with?: Maybe<String>;
   createdAt?: Maybe<DateTimeInput>;
   createdAt_not?: Maybe<DateTimeInput>;
   createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
@@ -1864,6 +1901,7 @@ export interface UserCreateWithoutFollowersInput {
   projects?: Maybe<ProjectCreateManyWithoutPostedByInput>;
   starredProjects?: Maybe<ProjectCreateManyWithoutStarredByInput>;
   following?: Maybe<UserCreateManyWithoutFollowingInput>;
+  currentlyStudying?: Maybe<String>;
 }
 
 export interface TagUpdateManyWithWhereNestedInput {
@@ -1887,6 +1925,7 @@ export interface UserCreateWithoutProjectsInput {
   starredProjects?: Maybe<ProjectCreateManyWithoutStarredByInput>;
   followers?: Maybe<UserCreateManyWithoutFollowersInput>;
   following?: Maybe<UserCreateManyWithoutFollowingInput>;
+  currentlyStudying?: Maybe<String>;
 }
 
 export interface TagUpdateManyDataInput {
@@ -2395,6 +2434,7 @@ export interface UserCreateInput {
   starredProjects?: Maybe<ProjectCreateManyWithoutStarredByInput>;
   followers?: Maybe<UserCreateManyWithoutFollowersInput>;
   following?: Maybe<UserCreateManyWithoutFollowingInput>;
+  currentlyStudying?: Maybe<String>;
 }
 
 export interface ProjectUpdateOneRequiredWithoutCommentsInput {
@@ -2480,6 +2520,7 @@ export interface UserUpdateManyMutationInput {
   linkedinURL?: Maybe<String>;
   portfolioURL?: Maybe<String>;
   twitterURL?: Maybe<String>;
+  currentlyStudying?: Maybe<String>;
 }
 
 export interface ProjectUpsertWithoutLikesInput {
@@ -2529,6 +2570,7 @@ export interface UserCreateWithoutStarredProjectsInput {
   projects?: Maybe<ProjectCreateManyWithoutPostedByInput>;
   followers?: Maybe<UserCreateManyWithoutFollowersInput>;
   following?: Maybe<UserCreateManyWithoutFollowingInput>;
+  currentlyStudying?: Maybe<String>;
 }
 
 export interface LikeUpdateInput {
@@ -2585,6 +2627,7 @@ export interface UserCreateWithoutFollowingInput {
   projects?: Maybe<ProjectCreateManyWithoutPostedByInput>;
   starredProjects?: Maybe<ProjectCreateManyWithoutStarredByInput>;
   followers?: Maybe<UserCreateManyWithoutFollowersInput>;
+  currentlyStudying?: Maybe<String>;
 }
 
 export interface ProjectUpdateManyMutationInput {
@@ -2658,6 +2701,7 @@ export interface UserPreviousValues {
   linkedinURL?: String;
   portfolioURL?: String;
   twitterURL?: String;
+  currentlyStudying?: String;
   createdAt: DateTimeOutput;
 }
 
@@ -2676,6 +2720,7 @@ export interface UserPreviousValuesPromise
   linkedinURL: () => Promise<String>;
   portfolioURL: () => Promise<String>;
   twitterURL: () => Promise<String>;
+  currentlyStudying: () => Promise<String>;
   createdAt: () => Promise<DateTimeOutput>;
 }
 
@@ -2694,6 +2739,7 @@ export interface UserPreviousValuesSubscription
   linkedinURL: () => Promise<AsyncIterator<String>>;
   portfolioURL: () => Promise<AsyncIterator<String>>;
   twitterURL: () => Promise<AsyncIterator<String>>;
+  currentlyStudying: () => Promise<AsyncIterator<String>>;
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
 
@@ -3128,6 +3174,7 @@ export interface User {
   linkedinURL?: String;
   portfolioURL?: String;
   twitterURL?: String;
+  currentlyStudying?: String;
   createdAt: DateTimeOutput;
 }
 
@@ -3180,6 +3227,7 @@ export interface UserPromise extends Promise<User>, Fragmentable {
     first?: Int;
     last?: Int;
   }) => T;
+  currentlyStudying: () => Promise<String>;
   createdAt: () => Promise<DateTimeOutput>;
 }
 
@@ -3234,6 +3282,7 @@ export interface UserSubscription
     first?: Int;
     last?: Int;
   }) => T;
+  currentlyStudying: () => Promise<AsyncIterator<String>>;
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
 
@@ -3288,6 +3337,7 @@ export interface UserNullablePromise
     first?: Int;
     last?: Int;
   }) => T;
+  currentlyStudying: () => Promise<String>;
   createdAt: () => Promise<DateTimeOutput>;
 }
 
